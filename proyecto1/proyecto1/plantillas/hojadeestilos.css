@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#cabeceraweb{background-color:#3FC;
+text-align: center;}
+
+
+figure img{background-color:#999;
+padding:4px;
+border-radius:20px;
+-webkit-transition:-webkit-transform 0.3s ease-in-out 0.1s;}
+
+figure img:hover{-webkit-transform:scale(1.1);}
+
+figure{float:left;}
+
+figcaption{font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+text-align:center;
+}
+[name=nosotros]{color:#FFF;
+background-color:#93C;
+display:inline;}/*permite que las etiquetas se acomoden de izquierda a derecha*/
+
+#navegacionprincipal{background-color:#006;}
+
+#barralateral{background-color:#F03;
+float:left;/*permite que las demas etiquetas bajo el se corran a su derecha*/
+height:500px;}
+
+#contenidoprincipal{background-color:#69C;
+margin-left:200px;/*empieza */
+padding-left:15px;
+padding-top:10px}
+
+#pieweb{background-color:#FF0;}
+
+#comentarios{clear:both;}/*limpia de aqui para abajo los float(float:left;) anteriores*/
+
+
+
+
