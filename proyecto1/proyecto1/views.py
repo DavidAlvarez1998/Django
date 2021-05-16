@@ -10,12 +10,8 @@ def saludo(request):
     hora=datetime.datetime.now()
     return render(request,'paginaweb.html',{"hora":hora}) 
 
-
 def busquedaLibro(request):
      return render(request,'paginaweb.html') 
-
-
-
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -31,18 +27,4 @@ def buscar(request):
     cliente.close()
 
     return HttpResponse(buscar) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
