@@ -5,7 +5,6 @@ from django.template.loader import get_template
 import datetime 
 import pymongo
 
-
 def saludo(request):
     hora=datetime.datetime.now()
     return render(request,'paginaweb.html',{"hora":hora}) 
