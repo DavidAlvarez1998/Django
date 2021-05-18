@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,8 +7,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Libreria Los Pollos Hermanos</title>
-	<link rel="stylesheet" href="css\estilos.css">
-	<link rel="icon" href="lph.ico">
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+
+
+	
 </head>
 
 
@@ -16,7 +20,7 @@
 	<header>
 		<div class="header-content">
 			<div class="logo">
-				<img src="lph.ico">
+				<img src="{% static 'lph.ico' %}">
 				<h1>Los <b>Pollos</b> Hermanos</h1>
 			</div>
 
@@ -41,12 +45,16 @@
 	</div>
 
 	<!--Buscador-->
-	<div class="buscar">
-		<input type="text" placeholder="Busca un libro">
-		<div class="btn">
-			<a href="#"><button>Buscar</button></a>
-		</div>
-	</div> 
+	
+
+	<form action="/buscar/" method="GET">
+		<input type="text" name="buscarBD">
+		<input type="submit" value="Buscar">
+		
+	</form>
+
+
+	
 
 	<!--Login-->
 	<div class="login">

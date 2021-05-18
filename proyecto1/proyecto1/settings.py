@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATICFILES_DIRS=['proyecto1/plantillas/static']
+
 
 # Application definition
 

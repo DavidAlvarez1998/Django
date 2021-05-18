@@ -10,7 +10,9 @@ def saludo(request):
     return render(request,'paginaweb.html',{"hora":hora}) 
 
 def busquedaLibro(request):
-     return render(request,'paginaweb.html') 
+     return render(request,'index.html') 
+
+
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
