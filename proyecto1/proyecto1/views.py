@@ -50,8 +50,17 @@ def registrarCliente(request):
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
 
-    cliente=db['cliente']
-    cliente.insert_one({
+    clientes = db['cliente']
+    buscar=clientes.find_one({'correo':correo})
+    if buscar!=None:
+        buscar=buscar['correo']
+    if buscar==correo:
+        cliente.close()
+        return HttpResponse("ERROR: correo no disponible")
+
+
+    clientes=db['cliente']
+    clientes.insert_one({
         'nombre':nombre,
         'apellido':apellido,
         'telefono':telefono,
@@ -64,6 +73,7 @@ def registrarCliente(request):
         'correo':correo,
         'contraseña':contraseña,
         })
+    cliente.close()
     return HttpResponse("listo pai") 
     
     
