@@ -9,17 +9,14 @@ def saludo(request):
     hora=datetime.datetime.now()
     return render(request,'paginaweb.html',{"hora":hora}) 
 
-def busquedaLibro(request):
+def index(request):
      return render(request,'index.html') 
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
-
     db=cliente['Libreria']
-
     mensaje=request.GET["buscarBD"]
-
     libro = db['libro']
     buscar=libro.find_one({'titulo':mensaje})
     buscar=buscar['autor']
@@ -49,6 +46,7 @@ def registrarCliente(request):
     usuario=request.GET["usuario"]
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
+    confcontraseña=request.GET["confcontraseña"]
 
     clientes = db['cliente']
     buscar=clientes.find_one({'correo':correo})
@@ -56,7 +54,11 @@ def registrarCliente(request):
         buscar=buscar['correo']
     if buscar==correo:
         cliente.close()
-        return HttpResponse("ERROR: correo no disponible")
+        return HttpResponse("ERROR: correo ya registrado")
+    if confcontraseña!=contraseña:
+        cliente.close()
+        return HttpResponse("ERROR: contraseña no coincide")
+
 
 
     clientes=db['cliente']
