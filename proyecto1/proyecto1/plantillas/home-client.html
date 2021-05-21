@@ -1,7 +1,9 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Inicio</title>
 </head>
@@ -10,20 +12,27 @@
 	<header>
 		<div class="header-content">
 			<div class="logo">
-				<img src="lph.ico">
+				<img src="{% static 'lph.ico' %}">
 				<h1>Los <b>Pollos</b> Hermanos</h1>
 			</div>
 
 			<div class="navegador-cliente">
 				<nav>
 					<ul>
-						<li><a href="editar-perfil.html">Perfil</a></li>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Perfil">
+						</form>
 						<li><a href="#">Mensajes</a></li>
 						<li><a href="#">Noticias</a></li>
 						<li><a href="#">Compras y reservas</a></li>
 						<li class="buscador-cliente">
-							<input type="search" placeholder="Busca un libro">
-							<input type="submit" value="Buscar">
+							<form action="/buscar/" method="GET">
+								<input type="search" placeholder="Busca un libro" name="buscarBD">
+								<input type="submit" value="Buscar">
+							</form>
+							
+							
+
 						</li>
 					</ul>
 				</nav>

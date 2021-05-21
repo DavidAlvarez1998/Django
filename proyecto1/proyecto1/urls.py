@@ -17,16 +17,18 @@ from django.contrib import admin
 from django.urls import path
 #from django.config import settings
 #from django.config.urls.static import static
-from proyecto1.views import saludo, index, buscar, registrarCliente, registro
+from proyecto1.views import index, buscar, registrarCliente, registro, iniciarSecion, perfil, editarPerfil
 
 urlpatterns = [
     #path(url,views.funcion)
     path('admin/', admin.site.urls),
-    path('saludo/',saludo),
     path('index/',index),  
     path('buscar/',buscar),
     path('registro/',registro),
     path('registrarCliente/',registrarCliente),
+    path('iniciarSecion/',iniciarSecion),
+    path('perfil/',perfil),
+    path('editarPerfil/',editarPerfil),
 ]
 
 

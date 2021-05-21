@@ -10,7 +10,13 @@
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
 
-
+	<form action="/iniciarSecion/" method="GET">
+		<input type="text" placeholder="Correo" name="correo">
+		<input type="password" placeholder="Contraseña"name="contraseña">
+		<input type="submit" value="Entrar">
+		<a href="recuperar-contra.html"><i>¿Has olvidado la contraseña?</i></a>
+		
+	</form>
 	
 </head>
 
@@ -48,7 +54,7 @@
 	
 
 	<form action="/buscar/" method="GET">
-		<input type="text" name="buscarBD">
+		<input type="search" name="buscarBD">
 		<input type="submit" value="Buscar">
 		
 	</form>
@@ -59,12 +65,11 @@
 	<!--Login-->
 	<div class="login">
 		<h1>INICIAR SESIÓN</h1>
-		<input type="text" placeholder="Correo" name=correo>
-		<input type="text" placeholder="Contraseña">
-		<a href="recuperar-contra.html"><i>¿Has olvidado la contraseña?</i></a>
-		<div class="ingresar">
-			<a href="home-client.html"><button>ENTRAR</button></a>
-		</div>
+		<form action="/iniciarSecion/" method="GET">
+			<input type="text" placeholder="Correo" name="correo">
+			<input type="password" placeholder="Contraseña"name="contraseña">
+			<input type="submit" value="Entrar">
+		</form>
 	</div>
 
 	<!--Registrarse-->
