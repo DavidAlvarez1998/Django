@@ -22,7 +22,7 @@ from proyecto1.views import index, buscar, registrarCliente, registro, iniciarSe
 urlpatterns = [
     #path(url,views.funcion)
     path('admin/', admin.site.urls),
-    path('index/',index),  
+    path('',index),  
     path('buscar/',buscar),
     path('registro/',registro),
     path('registrarCliente/',registrarCliente),
