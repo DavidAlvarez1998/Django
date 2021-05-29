@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Agrega un libro</title>
-	<link rel="stylesheet" href="css\estilos.css">
-	<link rel="icon" href="lph.ico">
 </head>
 <body>
 	<form action="/agregarLibro/" method="GET">
-		<input type="text" name="Titulo" placeholder="Titulo">
-		<input type="text" name="Autor" placeholder="Autor">
-		<input type="text" name="PublicA" placeholder="Año de publicación">
-		<input type="text" name="Genero" placeholder="Genero">
-		<input type="text" name="numeropaginas" placeholder="Numero de paginas">
-		<input type="text" name="Editorial" placeholder="Editorial">
-		<input type="text" name="Idioma" placeholder="Idioma">
+		<input type="text" placeholder="Titulo" name="Titulo">
+		<input type="text" placeholder="Autor" name="Autor">
+		<input type="text" placeholder="Año de publicación" name="PublicA">
+		<input type="text" placeholder="Genero" name="Genero">
+		<input type="text" placeholder="Numero de paginas" name="numeropaginas">
+		<input type="text" placeholder="Editorial" name="Editorial">
+		<input type="text" placeholder="Idioma" name="Idioma">
 		<label for="Estado">Estado:</label>
-		<select name="=Estado" id="Estado">
+		<select id="Estado" name="=Estado">
 			<option>Nuevo</option>
 			<option>Usado</option>
 		</select>
 		<label for="fecha-publ">Fecha de publicación:</label>
 		<input type="date" id="fecha-publ" name="fecha-publ">
-		<input type="text" name="Precio" placeholder="Precio">
+		<input type="text" placeholder="Precio" name="Precio">
 		<input type="submit" value="Agregar">
 	</form>
 </body>

@@ -80,7 +80,6 @@ def registrarCliente(request):
     cliente.close()
     return render(request,'index.html')
 
-
 def iniciarSecion(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
@@ -96,6 +95,7 @@ def iniciarSecion(request):
         if contraseña!=contraseñaroot:
             cliente.close()
             return HttpResponse("ERROR: contraseña incorrecta")
+        cliente.close()
         return render(request,'agregar-libro.html') 
 
 
@@ -114,7 +114,6 @@ def iniciarSecion(request):
 
 def perfil(request):
     return render(request,'editar-perfil.html') 
-
 
 def editarPerfil(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -196,12 +195,11 @@ def editarPerfil(request):
     cliente.close()
     return HttpResponse("Informacion actulizada") 
 
-
-
 def paginaAgregarlibro(request):
     return render(request,'Agregar-libro.html')
 
 def agregarLibro(request):
+    return HttpResponse("Libro Agregado") 
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -214,7 +212,7 @@ def agregarLibro(request):
     Editorial=request.GET["Editorial"]
     Idioma=request.GET["Idioma"]
     Estado=request.GET["Estado"]
-    fecha=request.GET["fecha"]
+    fecha=request.GET["fecha-publ"]
     Precio=request.GET["Precio"]
 
     libros=db['libro']
