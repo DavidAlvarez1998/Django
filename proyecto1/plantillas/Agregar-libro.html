@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Agrega un libro</title>
+	<link rel="stylesheet" href="css\estilos.css">
+	<link rel="icon" href="lph.ico">
+</head>
+<body>
+	<form action="/agregarLibro/" method="GET">
+		<input type="text" name="Titulo" placeholder="Titulo">
+		<input type="text" name="Autor" placeholder="Autor">
+		<input type="text" name="PublicA" placeholder="Año de publicación">
+		<input type="text" name="Genero" placeholder="Genero">
+		<input type="text" name="numeropaginas" placeholder="Numero de paginas">
+		<input type="text" name="Editorial" placeholder="Editorial">
+		<input type="text" name="Idioma" placeholder="Idioma">
+		<label for="Estado">Estado:</label>
+		<select name="=Estado" id="Estado">
+			<option>Nuevo</option>
+			<option>Usado</option>
+		</select>
+		<label for="fecha-publ">Fecha de publicación:</label>
+		<input type="date" id="fecha-publ" name="fecha-publ">
+		<input type="text" name="Precio" placeholder="Precio">
+		<input type="submit" value="Agregar">
+	</form>
+</body>
+</html>

@@ -4,8 +4,24 @@ from django.template import Template, Context
 from django.template.loader import get_template
 import pymongo
 
+
+def root():
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    usuarioroot = db['root']
+    buscar=usuarioroot.find_one({'nombre':'root'})
+    if buscar==None:
+        usuarioroot=db['root']
+        usuarioroot.insert_one({
+        'nombre': 'root',
+        'contraseña':"0000",
+    })
+    cliente.close()
+
+
 def index(request):
-     return render(request,'index.html') 
+    root()
+    return render(request,'index.html') 
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -72,6 +88,16 @@ def iniciarSecion(request):
     
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
+
+    if correo=="root":                          #saber si el usuario que ingresa es el root
+        usuarioRoot = db['root']
+        root=usuarioRoot.find_one({'nombre':'root'})
+        contraseñaroot=root['contraseña']
+        if contraseña!=contraseñaroot:
+            cliente.close()
+            return HttpResponse("ERROR: contraseña incorrecta")
+        return render(request,'agregar-libro.html') 
+
 
     clientes = db['cliente']
     usuario=clientes.find_one({'correo':correo})
@@ -167,10 +193,42 @@ def editarPerfil(request):
             }
         })
 
-
-
-
     cliente.close()
     return HttpResponse("Informacion actulizada") 
 
 
+
+def paginaAgregarlibro(request):
+    return render(request,'Agregar-libro.html')
+
+def agregarLibro(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+
+    Titulo=request.GET["Titulo"]
+    Autor=request.GET["Autor"]
+    PublicA=request.GET["PublicA"]
+    Genero=request.GET["Genero"]
+    numeropaginas=request.GET["numeropaginas"]
+    Editorial=request.GET["Editorial"]
+    Idioma=request.GET["Idioma"]
+    Estado=request.GET["Estado"]
+    fecha=request.GET["fecha"]
+    Precio=request.GET["Precio"]
+
+    libros=db['libro']
+    libros.insert_one({
+        'Titulo':Titulo,
+        'Autor':Autor,
+        'PublicA':PublicA,
+        'Genero':Genero,
+        'numeropaginas':numeropaginas,
+        'Editorial':Editorial,
+        'Idioma':Idioma,
+        'Estado':Estado,
+        'fecha-publicacion':fecha,
+        'Precio':Precio,
+        })
+    cliente.close()
+    return HttpResponse("Libro Agregado") 

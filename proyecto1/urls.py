@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 #from django.config import settings
 #from django.config.urls.static import static
-from proyecto1.views import index, buscar, registrarCliente, registro, iniciarSecion, perfil, editarPerfil
+from proyecto1.views import index, buscar, registrarCliente, registro,iniciarSecion, perfil, editarPerfil, paginaAgregarlibro,agregarLibro
 
 urlpatterns = [
     #path(url,views.funcion)
@@ -29,6 +29,8 @@ urlpatterns = [
     path('iniciarSecion/',iniciarSecion),
     path('perfil/',perfil),
     path('editarPerfil/',editarPerfil),
+    path('agregarLibro/',paginaAgregarlibro),
+    path('agrelibro/',agregarLibro),
 ]
 
 

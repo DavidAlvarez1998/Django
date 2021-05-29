@@ -82,7 +82,20 @@ DATABASES = {
     }
 }
 
-
+'''
+DATABASES = {
+    "default": {
+    "ENGINE": "djongo",
+    "CLIENT": {
+        "host":"mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority",
+        "username": "admin",
+        "password": "33sqQMSJRct-Erz",
+        "name": "Libreria",
+        "authMechanism": "SCRAM-SHA-1"
+    },
+}
+}
+'''
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
