@@ -230,7 +230,6 @@ def agregarLibro(request):
     Editorial=request.GET["Editorial"]
     Idioma=request.GET["Idioma"]
     Estado=request.GET["Estado"]
-    fecha=request.GET["fecha-publ"]
     Precio=request.GET["Precio"]
     portada=request.GET["Portada"]
     direccionportada=request.GET[r"direccionportada"]
@@ -254,7 +253,6 @@ def agregarLibro(request):
         'Editorial':Editorial,
         'Idioma':Idioma,
         'Estado':Estado,
-        'fecha-publicacion':fecha,
         'Precio':Precio,
         'Portada':encoded_string,
         })
