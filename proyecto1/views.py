@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.template import Template, Context
 from django.template.loader import get_template
 import pymongo
-
+from PIL import Image
+import base64
 
 def root():
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -199,7 +200,6 @@ def paginaAgregarlibro(request):
     return render(request,'Agregar-libro.html')
 
 def agregarLibro(request):
-    return HttpResponse("Libro Agregado") 
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -214,6 +214,17 @@ def agregarLibro(request):
     Estado=request.GET["Estado"]
     fecha=request.GET["fecha-publ"]
     Precio=request.GET["Precio"]
+    portada=request.GET["portada"]
+    direccionportada=request.GET[r"direccionportada"]
+
+    direccionportada=direccionportada.replace('\\', '/')
+    portada=direccionportada+"/"+portada
+
+    image = portada
+    Image.open(image)
+    with open(image, "rb") as image_file:
+	    encoded_string = base64.b64encode(image_file.read())
+
 
     libros=db['libro']
     libros.insert_one({
@@ -227,6 +238,7 @@ def agregarLibro(request):
         'Estado':Estado,
         'fecha-publicacion':fecha,
         'Precio':Precio,
+        'portada':encoded_string,
         })
     cliente.close()
     return HttpResponse("Libro Agregado") 
