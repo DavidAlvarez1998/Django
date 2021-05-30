@@ -5,6 +5,7 @@ from django.template.loader import get_template
 import pymongo
 from PIL import Image
 import base64
+import os
 
 def root():
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -29,11 +30,28 @@ def buscar(request):
     db = cliente.Libreria
     db=cliente['Libreria']
     mensaje=request.GET["buscarBD"]
-    libro = db['libro']
-    buscar=libro.find_one({'titulo':mensaje})
-    buscar=buscar['autor']
+    libros = db['libro']
+    buscar=libros.find_one({'Titulo':mensaje})
+    if buscar==None:
+        buscar=libros.find_one({'Autor':mensaje})
+        if buscar==None:            
+            return HttpResponse("ERROR: no se encuetran libros ni autores con el nombre "+mensaje) 
+        autor=buscar['Autor']
+        librosAutor=''
+        for documento in libros.find({'Autor':autor}):
+            librosAutor=librosAutor+documento['Titulo']+", "
+        return HttpResponse(librosAutor+"  :  son los libros que tenemos del autor "+autor) 
+        
+    DIR = os.path.dirname(os.path.realpath(r'__file__'))
+    DIR=DIR.replace('\\','/')
+    imagen=buscar['Portada']
+    imagen=base64.b64decode(imagen)
+    archivo=open(DIR+"/proyecto1/plantillas/static/temporal/1.jpg","wb")
+    archivo.write(imagen)
+    archivo.close()
     cliente.close()
-    return HttpResponse(buscar) 
+    mensaje=str(mensaje+".jpg")
+    return render(request,'busqueda.html') 
 
 def registro(request):
     return render(request,'register.html') 
@@ -214,7 +232,7 @@ def agregarLibro(request):
     Estado=request.GET["Estado"]
     fecha=request.GET["fecha-publ"]
     Precio=request.GET["Precio"]
-    portada=request.GET["portada"]
+    portada=request.GET["Portada"]
     direccionportada=request.GET[r"direccionportada"]
 
     direccionportada=direccionportada.replace('\\', '/')
@@ -238,7 +256,7 @@ def agregarLibro(request):
         'Estado':Estado,
         'fecha-publicacion':fecha,
         'Precio':Precio,
-        'portada':encoded_string,
+        'Portada':encoded_string,
         })
     cliente.close()
     return HttpResponse("Libro Agregado") 
