@@ -56,7 +56,7 @@ def buscar(request):
             con=con+1
             
         cliente.close()
-        return render(request,'busqueda.html',{"autor0":autor[0],"autor1":autor[1]})
+        return render(request,'busqueda.html',{"autor0":autor[0],"autor1":autor[1],"autor2":autor[2],"autor3":autor[3],"autor4":autor[4]})
 
 def registro(request):
     return render(request,'register.html') 
@@ -233,7 +233,7 @@ def agregarLibro(request):
             con=[]
             for documento in libros.find({'Titulo':Titulo},{'Autor':Autor}):
                 con.append(documento)
-            con=len(con)
+            con=len(con)+1
             libros.update_many({'Titulo':Titulo},{"$set":{'Ejemplares':con}})
             if portada!='':
                 portada=direccionportada+"/"+portada
