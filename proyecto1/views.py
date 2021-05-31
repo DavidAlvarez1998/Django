@@ -19,11 +19,11 @@ def root():
         'contraseña':"0000",
     })
     cliente.close()
-
+    return buscar['nombre']
 
 def index(request):
-    root()
-    return render(request,'index.html') 
+    mensaje=root() 
+    return render(request,'index.html',{"mensaje":mensaje}) 
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -41,7 +41,6 @@ def buscar(request):
         for documento in libros.find({'Autor':autor}):
             librosAutor=librosAutor+documento['Titulo']+", "
         return HttpResponse(librosAutor+"  :  son los libros que tenemos del autor "+autor) 
-        
     DIR = os.path.dirname(os.path.realpath(r'__file__'))
     DIR=DIR.replace('\\','/')
     imagen=buscar['Portada']
@@ -103,10 +102,8 @@ def iniciarSecion(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
-    
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
-
     if correo=="root":                          #saber si el usuario que ingresa es el root
         usuarioRoot = db['root']
         root=usuarioRoot.find_one({'nombre':'root'})
@@ -116,8 +113,6 @@ def iniciarSecion(request):
             return HttpResponse("ERROR: contraseña incorrecta")
         cliente.close()
         return render(request,'agregar-libro.html') 
-
-
     clientes = db['cliente']
     usuario=clientes.find_one({'correo':correo})
     if usuario==None:
@@ -127,7 +122,6 @@ def iniciarSecion(request):
     if contraseña!=contraseñaInfo:
         cliente.close()
         return HttpResponse("ERROR: contraseña incorrecta") 
-
     cliente.close()
     return render(request,'home-client.html') 
 
@@ -138,7 +132,6 @@ def editarPerfil(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
-
     nombre=request.GET["nombre"]
     apellido=request.GET["apellido"]
     telefono=request.GET["telefono"]
@@ -153,27 +146,21 @@ def editarPerfil(request):
     contraseñaActual=request.GET["contraseñaActual"]
     contraseñaNueva=request.GET["contraseñaNueva"]
     confimarContraseña=request.GET["confimarContraseña"]
-
     clientes = db['cliente']
     buscar=clientes.find_one({'correo':correoActual})
-
     if buscar==None:
         cliente.close()
         return HttpResponse("ERROR: Correo actual no encotrado") 
-    
     buscar1=clientes.find_one({'correo':correoNuevo})
     if buscar1!=None:
         cliente.close()
         return HttpResponse("ERROR: Correo nuevo no disponible") 
-
     if contraseñaActual!=buscar['contraseña']:
         cliente.close()
         return HttpResponse("ERROR: contraseña actual es incorrecta") 
-
     if contraseñaNueva!=confimarContraseña:
         cliente.close()
         return HttpResponse("ERROR: las contraseñas no coinciden") 
-
     if nombre=="":
         nombre=buscar['nombre']
     if apellido=="":
@@ -192,7 +179,6 @@ def editarPerfil(request):
         codigopos=buscar['codigopos']
     if usuario=="":
         usuario=buscar['usuario']
-
     clientes.update_one({
         'correo':correoActual
         },{
@@ -233,28 +219,84 @@ def agregarLibro(request):
     Precio=request.GET["Precio"]
     portada=request.GET["Portada"]
     direccionportada=request.GET[r"direccionportada"]
-
     direccionportada=direccionportada.replace('\\', '/')
-    portada=direccionportada+"/"+portada
-
-    image = portada
-    Image.open(image)
-    with open(image, "rb") as image_file:
-	    encoded_string = base64.b64encode(image_file.read())
-
-
     libros=db['libro']
-    libros.insert_one({
-        'Titulo':Titulo,
-        'Autor':Autor,
-        'PublicA':PublicA,
-        'Genero':Genero,
-        'numeropaginas':numeropaginas,
-        'Editorial':Editorial,
-        'Idioma':Idioma,
-        'Estado':Estado,
-        'Precio':Precio,
-        'Portada':encoded_string,
-        })
+    buscar=libros.find_one({'Titulo':Titulo})
+    if buscar!=None:
+        if buscar['Autor']==Autor:
+            con=[]
+            for documento in libros.find({'Titulo':Titulo},{'Autor':Autor}):
+                con.append(documento)
+            con=len(con)
+            libros.update_many({'Titulo':Titulo},{"$set":{'Ejemplares':con}})
+            if portada!='':
+                portada=direccionportada+"/"+portada
+                image = portada
+                Image.open(image)
+                with open(image, "rb") as image_file:
+                    encoded_string = base64.b64encode(image_file.read())
+                libros.insert_one({
+                    'Titulo':Titulo,
+                    'Autor':Autor,
+                    'PublicA':PublicA,
+                    'Genero':Genero,
+                    'numeropaginas':numeropaginas,
+                    'Editorial':Editorial,
+                    'Idioma':Idioma,
+                    'Estado':Estado,
+                    'Precio':Precio,
+                    'Portada':encoded_string,
+                    'Ejemplares':con,
+                    })
+            else:
+                libros.insert_one({
+                    'Titulo':Titulo,
+                    'Autor':Autor,
+                    'PublicA':PublicA,
+                    'Genero':Genero,
+                    'numeropaginas':numeropaginas,
+                    'Editorial':Editorial,
+                    'Idioma':Idioma,
+                    'Estado':Estado,
+                    'Precio':Precio,
+                    'Portada':'',
+                    'Ejemplares':con,
+                    })
+            cliente.close()
+            return HttpResponse("Libro Agregado")
+
+    if portada!='':
+        portada=direccionportada+"/"+portada
+        image = portada
+        Image.open(image)
+        with open(image, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        libros.insert_one({
+            'Titulo':Titulo,
+            'Autor':Autor,
+            'PublicA':PublicA,
+            'Genero':Genero,
+            'numeropaginas':numeropaginas,
+            'Editorial':Editorial,
+            'Idioma':Idioma,
+            'Estado':Estado,
+            'Precio':Precio,
+            'Portada':encoded_string,
+            'Ejemplares':1,
+            })
+    else:
+        libros.insert_one({
+            'Titulo':Titulo,
+            'Autor':Autor,
+            'PublicA':PublicA,
+            'Genero':Genero,
+            'numeropaginas':numeropaginas,
+            'Editorial':Editorial,
+            'Idioma':Idioma,
+            'Estado':Estado,
+            'Precio':Precio,
+            'Portada':'',
+            'Ejemplares':1,
+            })
     cliente.close()
-    return HttpResponse("Libro Agregado") 
+    return HttpResponse("Libro Agregado")
