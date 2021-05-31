@@ -41,16 +41,22 @@ def buscar(request):
         for documento in libros.find({'Autor':autor}):
             librosAutor=librosAutor+documento['Titulo']+", "
         return HttpResponse(librosAutor+"  :  son los libros que tenemos del autor "+autor) 
-    DIR = os.path.dirname(os.path.realpath(r'__file__'))
-    DIR=DIR.replace('\\','/')
-    imagen=buscar['Portada']
-    imagen=base64.b64decode(imagen)
-    archivo=open(DIR+"/proyecto1/plantillas/static/temporal/1.jpg","wb")
-    archivo.write(imagen)
-    archivo.close()
-    cliente.close()
-    mensaje=str(mensaje+".jpg")
-    return render(request,'busqueda.html') 
+    else:
+        con=0
+        autor=[]
+        for documento in libros.find({'Titulo':mensaje}):
+            autor.append(documento['Autor'])
+            DIR = os.path.dirname(os.path.realpath(r'__file__'))
+            DIR=DIR.replace('\\','/')
+            imagen=documento['Portada']
+            imagen=base64.b64decode(imagen)
+            archivo=open(DIR+"/proyecto1/plantillas/static/temporal/"+str(con)+".jpg","wb")
+            archivo.write(imagen)
+            archivo.close()
+            con=con+1
+            
+        cliente.close()
+        return render(request,'busqueda.html',{"autor0":autor[0],"autor1":autor[1]})
 
 def registro(request):
     return render(request,'register.html') 
