@@ -1,3 +1,4 @@
+from enum import auto
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import Template, Context
@@ -19,11 +20,10 @@ def root():
         'contraseña':"0000",
     })
     cliente.close()
-    return buscar['nombre']
 
 def index(request):
-    mensaje=root() 
-    return render(request,'index.html',{"mensaje":mensaje}) 
+    root() 
+    return render(request,'index.html') 
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -54,7 +54,13 @@ def buscar(request):
             archivo.write(imagen)
             archivo.close()
             con=con+1
-            
+        size=len(autor)
+        if size<5:
+            size=5-size
+            con=5
+            while size<=con:
+                autor.append('') 
+                con-=1
         cliente.close()
         return render(request,'busqueda.html',{"autor0":autor[0],"autor1":autor[1],"autor2":autor[2],"autor3":autor[3],"autor4":autor[4]})
 
@@ -77,6 +83,13 @@ def registrarCliente(request):
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
     confcontraseña=request.GET["confcontraseña"]
+    aux=list(contraseña)
+    if len(aux)==0:
+        return HttpResponse("ERROR: ingrese una contraseña")
+    if '' in aux:
+        return HttpResponse("ERROR: no se permiten espacios en blanco")
+    if len(aux)<8:
+        return HttpResponse("ERROR: la contraseña debe ser por lo menos de 8 caracteres")
     clientes = db['cliente']
     buscar=clientes.find_one({'correo':correo})
     if buscar!=None:
