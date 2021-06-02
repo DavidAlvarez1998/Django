@@ -8,6 +8,43 @@ from PIL import Image
 import base64
 import os
 
+def editarPerfilRoot(request):
+    return render(request,'editar-perfil-root.html')
+
+def perfilRoot(request):
+    return render(request,'principal-root.html')
+
+def editarroot(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    usuarioroot = db['root']
+    buscar=usuarioroot.find_one({'nombre':'root'})
+    contraActual=request.GET["contraActual"]
+    contraNueva=request.GET["contraNueva"]
+    confContra=request.GET["confContra"]
+    aux=list(contraNueva)
+    if len(aux)==0:
+        return HttpResponse("ERROR: ingrese la contraseña actual")
+    if '' in aux:
+        return HttpResponse("ERROR: no se permiten espacios en blanco")
+    if len(aux)<4:
+        return HttpResponse("ERROR: la contraseña nueva debe tener por lo menos de 4 caracteres")
+    if buscar['contraseña']!=contraActual:
+        return HttpResponse("ERROR: contraseña actual incorrecta")
+    if contraNueva!=confContra:
+        return HttpResponse("ERROR: contraseñas no coinciden")
+    usuarioroot.update_one({
+        'nombre':"root"
+        },{
+        "$set":{
+            'contraseña':contraNueva,
+        }
+        })
+
+    cliente.close()
+    return HttpResponse("informacion actualizada")
+
 def root():
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
@@ -20,10 +57,13 @@ def root():
         'contraseña':"0000",
     })
     cliente.close()
+    return(buscar)
 
 def index(request):
-    root() 
-    return render(request,'index.html') 
+    info=root()
+    nombre=info['nombre']
+    contraseña=info['contraseña']
+    return render(request,'index.html',{"nombre":nombre,"contra":contraseña}) 
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -89,7 +129,7 @@ def registrarCliente(request):
     if '' in aux:
         return HttpResponse("ERROR: no se permiten espacios en blanco")
     if len(aux)<8:
-        return HttpResponse("ERROR: la contraseña debe ser por lo menos de 8 caracteres")
+        return HttpResponse("ERROR: la contraseña debe tener por lo menos de 8 caracteres")
     clientes = db['cliente']
     buscar=clientes.find_one({'correo':correo})
     if buscar!=None:
@@ -131,7 +171,7 @@ def iniciarSecion(request):
             cliente.close()
             return HttpResponse("ERROR: contraseña incorrecta")
         cliente.close()
-        return render(request,'agregar-libro.html') 
+        return render(request,'principal-root.html') 
     clientes = db['cliente']
     usuario=clientes.find_one({'correo':correo})
     if usuario==None:
@@ -319,3 +359,35 @@ def agregarLibro(request):
             })
     cliente.close()
     return HttpResponse("Libro Agregado")
+
+def crearAdmin(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    nombre=request.GET["nombre"]
+    contraseña=request.GET["contraseña"]
+    confcontraseña=request.GET["confcontraseña"]
+    aux=list(contraseña)
+    if len(aux)==0:
+        return HttpResponse("ERROR: ingrese una contraseña")
+    if '' in aux:
+        return HttpResponse("ERROR: no se permiten espacios en blanco")
+    if len(aux)<4:
+        return HttpResponse("ERROR: la contraseña debe tener por lo menos de 4 caracteres")
+    if contraseña!=confcontraseña:
+        return HttpResponse("ERROR: las contraseñas no coinciden")
+    admins=db['admin']
+    buscar=admins.find_one({'nombre usuario':nombre})
+    if buscar!=None:
+        return HttpResponse("ERROR: nombre de usuario no disponible")
+    admins.insert_one({
+            'nombre usuario':nombre,
+            'contraseña':contraseña,
+            })
+
+    cliente.close()
+    return HttpResponse("admin creado")
+
+
+
+

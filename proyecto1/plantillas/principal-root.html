@@ -1,0 +1,36 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Root Principal</title>
+	<form action="/index/" method="GET">
+		<a><input type="submit" value="REGRESAR"></a>
+	</form>
+	<form action="/editarPerfilRoot/" method="GET">
+		<a><input type="submit" value="EDITAR PERFIL"></a>
+	</form>
+	
+
+
+</head>
+
+<body>
+	<form action="/crearAdmin/" method="GET">
+		<div class="opciones">
+			<h1>MÓDULO ROOT</h1>
+		</div>
+		
+		<div class="creacion-admin">
+			<h1>Crear usuario Admin</h1>
+			<input type="text" placeholder="Nombre Usuario"name="nombre">
+			<input type="text" placeholder="Contraseña"name="contraseña">
+			<input type="text" placeholder="Confirmar contraseña"name="confcontraseña">
+
+		</div>
+		<input type="submit" value="Enviar y registrar ADMIN">
+		
+	</form>
+</body>
+</html>

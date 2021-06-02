@@ -1,8 +1,6 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="es">
-
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,11 +55,11 @@
 	
 
 	<!--Login-->
-	<div class="login">
+	<div>
 		<h1>INICIAR SESIÓN</h1>
 		<form action="/iniciarSecion/" method="GET">
-			<input type="text" placeholder="Correo" name="correo" >
-			<input type="password" placeholder="Contraseña"name="contraseña">
+			<input type="text" placeholder="Correo" name="correo" value={{nombre}}>
+			<input type="password" placeholder="Contraseña"name="contraseña" value={{contra}}>
 			<input type="submit" value="Entrar">
 		</form>
 	</div>

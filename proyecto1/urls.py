@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path
 #from django.config import settings
 #from django.config.urls.static import static
-from proyecto1.views import index,buscar,registrarCliente,registro,iniciarSecion,perfil,editarPerfil,paginaAgregarlibro,agregarLibro
+from proyecto1.views import index,buscar,registrarCliente,registro,iniciarSecion,perfil,editarPerfil,paginaAgregarlibro,agregarLibro,editarPerfilRoot,editarroot,perfilRoot,crearAdmin
 
 urlpatterns = [
     #path(url,views.funcion)
     path('admin/', admin.site.urls),
-    path('',index),  
+    path('',index),
+    path('index/',index), 
     path('buscar/',buscar),
     path('registro/',registro),
     path('registrarCliente/',registrarCliente),
@@ -31,6 +32,10 @@ urlpatterns = [
     path('editarPerfil/',editarPerfil),
     path('paginaAgregarlibro/',paginaAgregarlibro),
     path('agregarLibro/',agregarLibro),
+    path('editarPerfilRoot/',editarPerfilRoot),
+    path('editarroot/',editarroot),
+    path('perfilRoot/',perfilRoot),
+    path('crearAdmin/',crearAdmin),
     
 ]
 
