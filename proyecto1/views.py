@@ -7,6 +7,8 @@ import pymongo
 from PIL import Image
 import base64
 import os
+from os import remove
+from os import path
 
 def editarPerfilRoot(request):
     return render(request,'editar-perfil-root.html')
@@ -82,27 +84,16 @@ def buscar(request):
             librosAutor=librosAutor+documento['Titulo']+", "
         return HttpResponse(librosAutor+"  :  son los libros que tenemos del autor "+autor) 
     else:
-        con=0
         autor=[]
+        imagen=[]
         for documento in libros.find({'Titulo':mensaje}):
             autor.append(documento['Autor'])
-            DIR = os.path.dirname(os.path.realpath(r'__file__'))
-            DIR=DIR.replace('\\','/')
-            imagen=documento['Portada']
-            imagen=base64.b64decode(imagen)
-            archivo=open(DIR+"/proyecto1/plantillas/static/temporal/"+str(con)+".jpg","wb")
-            archivo.write(imagen)
-            archivo.close()
-            con=con+1
-        size=len(autor)
-        if size<5:
-            size=5-size
-            con=5
-            while size<=con:
-                autor.append('') 
-                con-=1
+            imagen.append(documento['Portada'])
+        while len(imagen)<5:
+            autor.append('')
+            imagen.append('')
         cliente.close()
-        return render(request,'busqueda.html',{"autor0":autor[0],"autor1":autor[1],"autor2":autor[2],"autor3":autor[3],"autor4":autor[4]})
+        return render(request,'home-client.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4]})
 
 def registro(request):
     return render(request,'register.html') 
@@ -180,7 +171,7 @@ def iniciarSecion(request):
             cliente.close()
             return HttpResponse("ERROR: contraseña incorrecta")
         cliente.close()
-        return render(request,'agregar-libro.html')
+        return render(request,'principal-admin.html')
         
 
     clientes = db['cliente']
@@ -277,7 +268,6 @@ def agregarLibro(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
-
     Titulo=request.GET["Titulo"]
     Autor=request.GET["Autor"]
     PublicA=request.GET["PublicA"]
@@ -287,9 +277,7 @@ def agregarLibro(request):
     Idioma=request.GET["Idioma"]
     Estado=request.GET["Estado"]
     Precio=request.GET["Precio"]
-    portada=request.GET["Portada"]
-    direccionportada=request.GET[r"direccionportada"]
-    direccionportada=direccionportada.replace('\\', '/')
+    direccionportada=request.GET["direccionportada"]
     libros=db['libro']
     buscar=libros.find_one({'Titulo':Titulo})
     if buscar!=None:
@@ -299,12 +287,7 @@ def agregarLibro(request):
                 con.append(documento)
             con=len(con)+1
             libros.update_many({'Titulo':Titulo},{"$set":{'Ejemplares':con}})
-            if portada!='':
-                portada=direccionportada+"/"+portada
-                image = portada
-                Image.open(image)
-                with open(image, "rb") as image_file:
-                    encoded_string = base64.b64encode(image_file.read())
+            if direccionportada!='':
                 libros.insert_one({
                     'Titulo':Titulo,
                     'Autor':Autor,
@@ -315,7 +298,7 @@ def agregarLibro(request):
                     'Idioma':Idioma,
                     'Estado':Estado,
                     'Precio':Precio,
-                    'Portada':encoded_string,
+                    'Portada':direccionportada,
                     'Ejemplares':con,
                     })
             else:
@@ -335,12 +318,7 @@ def agregarLibro(request):
             cliente.close()
             return HttpResponse("Libro Agregado")
 
-    if portada!='':
-        portada=direccionportada+"/"+portada
-        image = portada
-        Image.open(image)
-        with open(image, "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
+    if direccionportada!='':
         libros.insert_one({
             'Titulo':Titulo,
             'Autor':Autor,
@@ -351,7 +329,7 @@ def agregarLibro(request):
             'Idioma':Idioma,
             'Estado':Estado,
             'Precio':Precio,
-            'Portada':encoded_string,
+            'Portada':direccionportada,
             'Ejemplares':1,
             })
     else:

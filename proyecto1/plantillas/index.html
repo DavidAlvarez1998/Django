@@ -43,43 +43,50 @@
 	</div>
 
 	<!--Buscador-->
-	
 
-	<form action="/buscar/" method="GET">
-		<input type="search" name="buscarBD">
-		<input type="submit" value="Buscar">
-		
-	</form>
-
-
-	
-
+	<div class="buscar">
+		<form action="/buscar/" method="GET">
+			<input type="search" placeholder="Busca un libro"name="buscarBD">
+			<div class="btn">
+				<a href="#"><input type="submit" value="Buscar"></a>
+			</div>
+		</form>
+	</div> 
+	<img src="{% static 'https://images.app.goo.gl/Gf5GBDCj872h92vSA' %}">
 	<!--Login-->
-	<div>
-		<i>INICIAR SESIÓN</i>
+	<div class="login">
 		<form action="/iniciarSecion/" method="GET">
+			<h1>INICIAR SESIÓN</h1>
 			<input type="text" placeholder="Correo" name="correo" value={{nombre}}>
 			<input type="password" placeholder="contraseña" name="contraseña" value={{contra}}>
-			<input  type="submit" value="Entrar"/>	
+			<a href="recuperar-contra.html"><i>¿Has olvidado la contraseña?</i></a>
+			<div class="ingresar">
+				<a href="home-client.html"><input  type="submit" value="Entrar"></a>
+			</div>
 		</form>
 	</div>
 
 	<!--Registrarse-->
 	
+	<div class="registrar">
 		<i>¿No tienes una cuenta?</i>
-		<form action="/registro/" method="GET">
-			<input type="submit" value="Registrar">
-		</form>
-	
+		<div class="registrarse-btn">
+			<form action="/registro/" method="GET">
+				<a><input type="submit" value="Registrar"></a>
+			</form>
+		</div>
+	</div>
 
 
 	<!--Pie de pagina-->
 	<footer>
-		<h4 id="footer">
+		<div class="foot">
+			<p id="footer">
 			Nuestros contactos
-		</h4>
-		<h6>Tel: (+57) 321 6549870</h6>
-		<h6>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></h6>
+			</p>
+			<p>Tel: (+57) 321 6549870</p>
+			<p>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></p>
+		</div>
 	</footer>
 </body>
 </html>

@@ -1,0 +1,81 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Principal</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+
+</head>
+
+<body>
+	<!--Cabeza-Menu-->
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</header>
+	
+
+
+	
+		<div class="opciones-admin">
+			<form>
+				<h1>MÓDULO ADMINISTRACIÓN LIBRO</h1>
+				<form></form>
+				<form action="/paginaAgregarlibro/" method="GET">
+					<a><input type="submit" value="AGREGAR LIBRO"></a>
+				</form>
+				<form action="/paginaAgregarlibro/" method="GET">
+					<a><input type="submit" value="EDITAR LIBRO"></a>
+				</form>
+				<form action="/paginaAgregarlibro/" method="GET">
+					<a><input type="submit" value="ADMINISTRAR EXISTENCIAS DE LIBROS"></a>
+				</form>
+				<form action="/paginaAgregarlibro/" method="GET">
+					<a><input type="submit" value="ELIMINAR LIBRO"></a>
+				</form>
+			</form>
+		</div>
+		
+		
+
+		
+	
+
+	<div class="botones-volver-editar-perfil-admin1">
+			<a><input type="button" value="REGRESAR"></a>
+	</div>
+
+	<div class="botones-volver-editar-perfil-admin2">
+		<a><input type="button" value="EDITAR PERFIL"></a>
+	</div>
+	
+
+	<footer>
+		<div class="foot">
+			<p id="footer">
+			Nuestros contactos
+			</p>
+			<p>Tel: (+57) 321 6549870</p>
+			<p>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></p>
+		</div>
+	</footer>
+	
+</body>
+</html>

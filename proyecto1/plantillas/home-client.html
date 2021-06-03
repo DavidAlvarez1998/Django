@@ -5,6 +5,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Inicio</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+
 
 </head>
 
@@ -19,17 +22,23 @@
 			<div class="navegador-cliente">
 				<nav>
 					<ul>
-						<br></br>
+					
 						<form action="/perfil/" method="GET">
 							<input type="submit" value="Perfil">
 						</form>
-						<li><a href="#">Mensajes</a></li>
-						<li><a href="#">Noticias</a></li>
-						<li><a href="#">Compras y reservas</a></li>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Mensajes">
+						</form>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Noticias">
+						</form>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Compras y reservas">
+						</form>
 						<li class="buscador-cliente">
 							<form action="/buscar/" method="GET">
-								<input type="search" placeholder="Busca un libro" name="buscarBD">
-								<input type="submit" value="Buscar">
+								<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
+								<input id="btn-search-clietn" type="submit" value="Buscar">
 							</form>
 							
 							
@@ -41,6 +50,38 @@
 		</div>
 	</header>
 
+	<article class="client-home-vista">
+		<div class="1">
+			<img src={{imagen0}}>
+			<a>{{autor0}}</a>
+		</div>
+
+		<div class="1">
+			<img src={{imagen1}}>
+			<a>{{autor1}}</a>
+		</div>
+
+		<div class="1">
+			<img src={{imagen2}}>
+			<a>{{autor2}}</a>
+		</div>
+
+		<div class="1">
+			<img src={{imagen3}}>
+			<a>{{autor3}}</a>
+		</div>
+
+		<div class="1">
+			<img src={{imagen4}}>
+			<a>{{autor4}}</a>
+		</div>
+										
+
+	
+
+
+	</article>
 
 </body>
 </html>
+

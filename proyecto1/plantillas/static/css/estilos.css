@@ -9,30 +9,18 @@
 }
 
 body{
-	background-image: url(../img/Portada.jpg);
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+	min-height: 100vh;
+	background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+	url(../img/Portada.jpg) no-repeat center center fixed;
 	background-size: cover;
+
 }
 
-body:before{
-	content: '';
-	width: 100%;
-	height: 130%;
-	background: rgba(255, 255, 255, 0.5);
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
-}
 
 /*Navegador*/
 
 header{
 	position: fixed;
-	top: 0;
-	left: 0;
 	width: 100%;
 	height: 60px;
 	background: #FFC300;
@@ -50,7 +38,7 @@ header{
 .logo{
 	height: 60px;
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 	align-items: center;
 }
 
@@ -114,18 +102,16 @@ header{
 	color: #0883E3;
 }
 
-.menu .text-menu-selected{
-	color: #0883E3;
-}
-
 
 /*Portada*/
 
 .container-cover{
+	top: 80px;
+	margin: auto;
 	width: 100%;
-	height : 500px;
+	height : 200px;
 	position: relative;
-	top: -120px;
+	
 	/*background-image: url(img/Portada.jpg);
 	box-shadow: 0 4px 25px -12px #000000;
 	background-position: center;
@@ -136,9 +122,8 @@ header{
 
 
 .container-info-cover{
-	max-width: 800px;
-	height: 700px;
-	margin: auto;
+	max-width: 100%;
+	height: 100%;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -159,28 +144,940 @@ header{
 	font-size: 30px;
 }
 
-
+.buscar{
+	top: 110px;
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
 
 .buscar input{
-	width: 55%;
+	width: 500px;
 	height: 40px;
 	padding: 0 20px;
 	font-size: 18px;
 	color: #000;
 	outline: none;
-	border: 1px solid silver;
+	border: 1px solid black;
 	border-radius: 30px;
+
+
 }
 
-.btn{
-	position: relative;
-	top: 0;
-	right: 100;
-	width: 100%;
-	height: 55px;
-	line-height: 55px;
+.btn a button{
+	width: 80px;
+	height: 40px;
 	text-align: center;
+	margin: 20px 0px;
+	color: white;
+	background-color: #FFC000;
+	font-size: 20px;
+	border-radius: 25%
+}
+
+.login{
+	top: 140px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.login h1{
+	margin: 10px;
+}
+
+.login input{
+	margin: 5px 0px;
+	width: 200px;
+	height: 30px;
+	border-radius: 5%;
+}
+
+.login a{
+	margin: 10px 0px;
+
+}
+
+
+
+.ingresar button{
+	width: 130px;
+	height: 50px;
+	color: white;
+	background-color: #0883E3;
+	font-size: 30px;
+	border-radius: 25%;
+	margin: 10px 0px;
+}
+
+.registrar{
+	top: 170px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.foot{
+	top: 250px;
+	position: relative;
+}
+
+
+.registrar i{
+	color: blue;
+}
+
+.registrarse-btn a button{
+	margin: 10px 0px;
+	background-color: #FFC000;
+	color: white;
+	height: 35px;
+	width: 155px;
+	border-radius: 30%;
+	font-size: 20px;
+}
+
+.agg-libro{
+	display: flex;
+	position: relative;
+	top: 80px;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.back-agg-libro{
+	position: relative;
+	top: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: -10px 0px;
+}
+
+.back-agg-libro button{
+	color: white;
+	background-color: #FFC000;
+	font-size: 20px;
+	border-radius: 25%;
+	width: 100px;
+	height: 40px;
+}
+
+.agg-libro input {
+	margin: 5px 0px;
+	border-radius: 10%;
+	font-size: 20px;
+	text-align: center;
+}
+
+.agg-libro select{
+	margin: 5px 0px;
+	border-radius: 10%;
+	font-size: 20px;
+}
+
+.agg-libro label{
+	color: blue;
+	margin: 5px 0px;
+	border-radius: 10%;
+	font-size: 20px;
+	text-shadow: 20%;
+	text-shadow: 1px 4px 5px black;
+}
+
+.agg-libro input#Agregar{
+	margin: 20px 0px;
+	color: white;
+	background-color: #0883E3;
+	font-size: 20px;
+	border-radius: 25%;
+	width: 120px;
+	height: 50px;
+}
+
+.navegador-cliente{
+	height: 60px;
+}
+
+.navegador-cliente nav{
+	height: 100%;
+}
+
+.navegador-cliente nav ul{
+	height: 100%;
+	display: flex;
+	list-style: none;
+}
+
+.navegador-cliente nav ul form{
+	height: 100%;
+	margin: 0px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+
+.navegador-cliente nav ul form input{
+	color: white;
+	background: transparent;
+	border: none;
+	outline: none;
+	transition: color 300ms;
+}
+
+.navegador-cliente nav ul form input:hover{
+	color: #0883E3;
+}
+
+.buscador-cliente input{
+	margin: 0px 5px;
+}
+
+.buscador-cliente input#barra-search-client {
+	color: black;
+	background-color: white;
+	border-radius: 30px;
+	border-width: 2px;
+	text-align: center;
+	height: 30px;
+	width: 280px;
+}
+
+.buscador-cliente input#btn-search-clietn{
+	border-radius: 20px;
+	width: 70px;
+	height: 30px;
+	background-color: #0883E3;
+	color: white;
+	font-size: 15px;
+}
+
+.client-home-vista{
+	top: 80px;
+	position: relative;
+}
+
+.client-home-vista div{
+	height: 100px;
+	width: 200px;
+	background-color: white;
+	border-bottom-width: 5px;
+	border-bottom-color: black;
+	display: flex;
+	align-items: grid;
+}
+
+/* ------------------MODULO ADMIN Y MODULO ROOT -----------------*/
+
+.opciones-root{
+	top:  80px;
+	color: #0883E3;
+	text-shadow: 1px 4px 7px black;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+
+
+.creacion-admin {
+	text-shadow: 1px 4px 7px black;
+	color: black;
+	text-align: center;
+	top:  80px;
+	position: relative;
+}
+
+.creacion-admin form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.creacion-admin form input{
+	width: 200px;
+	height: 35px;
+	font-size: 20px;
+	margin: 5px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.creacion-admin form input#wasd{
+	background: #0883E3;
+	color: white;
+	width: 300px;
+}
+.botones-volver a input{
+	background: #FFC000;
 	color: white;
 	font-size: 20px;
-	border-radius: 50%
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -205px;
+	margin: 0px 20px; 
+	position: relative;
+}
+
+.info-perfil-root {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.info-perfil-root form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.info-perfil-root form input{
+	width: 250px;
+	height: 35px;
+	font-size: 20px;
+	margin: 5px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.info-perfil-root form input#wasd1{
+	background: #0883E3;
+	color: white;
+	width: 300px;
+}
+
+.info-perfil-root form a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.opciones-admin{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.opciones-admin form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.opciones-admin form a input{
+	background: #0883E3;
+	color: white;
+	margin: 9px 0px;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 380px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.botones-volver-editar-perfil-admin1 a input{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -220px;
+	position: relative;
+}
+
+.botones-volver-editar-perfil-admin2 a input{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -200px;
+	position: relative;
+	padding-right: auto;
+}
+
+.info-personal-admin {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.info-perfil-admin {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.info-perfil-admin form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+
+.info-perfil-admin form input{
+	width: 230px;
+	height: 30px;
+	font-size: 18px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.info-personal-admin form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.info-personal-admin form input{
+	width: 230px;
+	height: 30px;
+	font-size: 18px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.volver-editar-admin a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -520px;
+	margin: 0px 20px; 
+	position: relative;
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #FFBF00;
+}
+
+.info-perfil-admin form input#boton-editar-admin-enviar{
+	background: #0883E3;
+	color: white;
+	font-size: 20px;
+	width: 270px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+}
+
+.buscar-codigo-lib{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.buscar-codigo-lib form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.buscar-codigo-lib form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+.buscar-codigo-lib form input#enviar-buscar-editar-l{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 250px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+
+}
+.datos-libro-editar{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.datos-libro-editar form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.datos-libro-editar form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.datos-libro-editar form input#enviar-datos-editar-l{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 250px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+}
+
+.botones-volver-editar-libro a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -1100px;
+	margin: 0px 20px; 
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.opciones-adm-existencias {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 25px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.opciones-adm-existencias form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.opciones-adm-existencias form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.opciones-adm-existencias form input#buscar-existencias-boton{
+	margin: 14px 0px;
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 250px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+}
+
+.datos-existencias-editar{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.datos-existencias-editar form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.datos-existencias-editar form input#boton-añadir-agotado{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 350px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+}
+
+.cant-ejemplares-editar1{
+	margin: 13px 0px;
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.cant-ejemplares-editar1 form{
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.cant-ejemplares-editar1 form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.cant-ejemplares-editar1 form input#boton-editar-exist-libro{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 350px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+}
+
+
+.cant-ejemplares-eliminar1{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.cant-ejemplares-eliminar1 form{
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.cant-ejemplares-eliminar1 form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.cant-ejemplares-eliminar1 form input#boton-eliminar-exist-libro{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 350px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+
+}
+
+.botones-volver-adm-existencias a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -660px;
+	margin: 0px 20px; 
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0px;
+
+}
+
+.eliminar-libro-buscar {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 25px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.eliminar-libro-buscar form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.eliminar-libro-buscar form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.eliminar-libro-buscar form input#boton-buscar-libro-eliminar{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 300px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+
+}
+
+.datos-eliminar-libro{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 25px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.datos-eliminar-libro form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.datos-eliminar-libro form input#boton-eliminar-libro{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 220px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+	margin: 15px 0px;
+}
+
+.botones-volver-adm-eliminar a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -490px;
+	margin: 0px 20px; 
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px 0px;
+
+}
+
+.datos-completar-registro-admin {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 25px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.datos-completar-registro-admin form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.datos-completar-registro-admin form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.datos-cuenta-admin-registro{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 25px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.datos-cuenta-admin-registro form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.datos-cuenta-admin-registro form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.datos-cuenta-admin-registro form input#boton-enviar-registro-admin{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 220px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -160px;
+	margin: 0px 20px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+	margin: 15px 0px;
+}
+
+.botones-volver-adm-comp-perfil a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: -400px;
+	margin: 0px 20px; 
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px 0px;
+
 }
