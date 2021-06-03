@@ -171,7 +171,18 @@ def iniciarSecion(request):
             cliente.close()
             return HttpResponse("ERROR: contraseña incorrecta")
         cliente.close()
-        return render(request,'principal-root.html') 
+        return render(request,'principal-root.html')
+    
+    admins=db['admin']                          #saber su el usuario es un admin
+    admin=admins.find_one({'nombre usuario':correo})
+    if admin!=None:
+        if admin['contraseña']!=contraseña:
+            cliente.close()
+            return HttpResponse("ERROR: contraseña incorrecta")
+        cliente.close()
+        return render(request,'agregar-libro.html')
+        
+
     clientes = db['cliente']
     usuario=clientes.find_one({'correo':correo})
     if usuario==None:
