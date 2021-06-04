@@ -27,14 +27,19 @@ def editarroot(request):
     confContra=request.GET["confContra"]
     aux=list(contraNueva)
     if len(aux)==0:
+        cliente.close()
         return HttpResponse("ERROR: ingrese la contraseña actual")
     if '' in aux:
+        cliente.close()
         return HttpResponse("ERROR: no se permiten espacios en blanco")
     if len(aux)<4:
+        cliente.close()
         return HttpResponse("ERROR: la contraseña nueva debe tener por lo menos de 4 caracteres")
     if buscar['contraseña']!=contraActual:
+        cliente.close()
         return HttpResponse("ERROR: contraseña actual incorrecta")
     if contraNueva!=confContra:
+        cliente.close()
         return HttpResponse("ERROR: contraseñas no coinciden")
     usuarioroot.update_one({
         'nombre':"root"
@@ -114,12 +119,19 @@ def registrarCliente(request):
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
     confcontraseña=request.GET["confcontraseña"]
+    admins=db['admin']
+    buscar=admins.find_one({'correo':correo})
+    if buscar!=None:
+        return HttpResponse("ERROR: correo no disponible")
     aux=list(contraseña)
     if len(aux)==0:
+        cliente.close()
         return HttpResponse("ERROR: ingrese una contraseña")
     if '' in aux:
+        cliente.close()
         return HttpResponse("ERROR: no se permiten espacios en blanco")
     if len(aux)<8:
+        cliente.close()
         return HttpResponse("ERROR: la contraseña debe tener por lo menos de 8 caracteres")
     clientes = db['cliente']
     buscar=clientes.find_one({'correo':correo})
@@ -164,8 +176,17 @@ def iniciarSecion(request):
         cliente.close()
         return render(request,'principal-root.html')
     
-    admins=db['admin']                          #saber su el usuario es un admin
+    admins=db['admin']                          #saber si el usuario es un admin
     admin=admins.find_one({'nombre usuario':correo})
+    if admin!=None:
+        if admin['contraseña']!=contraseña:
+            cliente.close()
+            return HttpResponse("ERROR: contraseña incorrecta")
+        if admin['correo']=='':
+            admins.delete_one({'nombre usuario':correo})
+            cliente.close()
+            return render(request,'registro-admin.html')
+    admin=admins.find_one({'correo':correo})     #admin que ya completo el registro
     if admin!=None:
         if admin['contraseña']!=contraseña:
             cliente.close()
@@ -173,8 +194,7 @@ def iniciarSecion(request):
         cliente.close()
         return render(request,'principal-admin.html')
         
-
-    clientes = db['cliente']
+    clientes = db['cliente']                     #inicio de secion usuario cliente
     usuario=clientes.find_one({'correo':correo})
     if usuario==None:
         cliente.close()
@@ -358,13 +378,24 @@ def crearAdmin(request):
     confcontraseña=request.GET["confcontraseña"]
     aux=list(contraseña)
     if len(aux)==0:
+        cliente.close()
         return HttpResponse("ERROR: ingrese una contraseña")
     if '' in aux:
+        cliente.close()
         return HttpResponse("ERROR: no se permiten espacios en blanco")
     if len(aux)<4:
+        cliente.close()
         return HttpResponse("ERROR: la contraseña debe tener por lo menos de 4 caracteres")
     if contraseña!=confcontraseña:
+        cliente.close()
         return HttpResponse("ERROR: las contraseñas no coinciden")
+    aux=list(nombre)
+    if len(aux)==0:
+        cliente.close()
+        return HttpResponse("ERROR: ingrese un nombre de usuario")
+    if '' in aux[0]:
+        cliente.close()
+        return HttpResponse("ERROR: no se permite iniciar el nombre de usuario con un espacios en blanco")
     admins=db['admin']
     buscar=admins.find_one({'nombre usuario':nombre})
     if buscar!=None:
@@ -372,11 +403,55 @@ def crearAdmin(request):
     admins.insert_one({
             'nombre usuario':nombre,
             'contraseña':contraseña,
+            'correo':'',
             })
 
     cliente.close()
     return HttpResponse("admin creado")
 
+def registroAdmin(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+
+    nombre=request.GET["nombre"]
+    apellido=request.GET["apellido"]
+    telefono=request.GET["telefono"]
+    nacimiento=request.GET["fecha-nacimiento"]
+    correo=request.GET["correo"]
+    contraseña=request.GET["contraseña"]
+    confcontraseña=request.GET["confcontraseña"]
+    clientes=db['cliente']
+    buscar=clientes.find_one({'correo':correo})
+    if buscar!=None:
+        return HttpResponse("ERROR: correo no disponible")
+    aux=list(contraseña)
+    if len(aux)==0:
+        cliente.close()
+        return HttpResponse("ERROR: ingrese una contraseña")
+    if '' in aux:
+        cliente.close()
+        return HttpResponse("ERROR: no se permiten espacios en blanco")
+    if len(aux)<8:
+        cliente.close()
+        return HttpResponse("ERROR: la contraseña debe tener por lo menos de 8 caracteres")
+    if confcontraseña!=contraseña:
+        cliente.close()
+        return HttpResponse("ERROR: contraseña no coincide")
+    admins=db['admin']
+    buscar=admins.find_one({'correo':correo})
+    if buscar!=None:
+        return HttpResponse("ERROR: correo no disponible")
+    admins.insert_one({
+        'nombre':nombre,
+        'apellido':apellido,
+        'telefono':telefono,
+        'fecha de nacimiento':nacimiento,
+        'correo':correo,
+        'contraseña':contraseña,
+        })
+    cliente.close()
+    return render(request,'index.html') 
 
 
 

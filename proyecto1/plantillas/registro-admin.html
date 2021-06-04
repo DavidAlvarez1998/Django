@@ -35,22 +35,16 @@
 	
 	
 		<div class="datos-completar-registro-admin">
-			<form>
+			<form action="/registroAdmin/" method="GET">
 				<h1>COMPLETAR REGISTRO ADMIN</h1>
-				<input type="text" placeholder="Nombres">
-				<input type="text" placeholder="Apellidos">
-				<input type="tel" placeholder="Telefono celular">
+				<input type="text" placeholder="Nombres" name="nombre">
+				<input type="text" placeholder="Apellidos"name="apellido">
+				<input type="tel" placeholder="Telefono celular"name="telefono">
 				<label for="fecha-nacimiento">Fecha de nacimiento:</label>
 				<input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
-			</form>
-		</div>
-
-
-		<div class="datos-cuenta-admin-registro">
-			<form>
-				<input type="email" placeholder="Correo">
-				<input type="text" placeholder="Contraseña nueva">
-				<input type="text" placeholder="Confirmar contraseña">
+				<input type="email" placeholder="Correo"name="correo">
+				<input type="password" placeholder="Contraseña nueva"name="contraseña">
+				<input type="password" placeholder="Confirmar contraseña"name="confcontraseña">
 				<input type="submit" id="boton-enviar-registro-admin"value="Enviar y registrarme">
 			</form>
 		</div>
