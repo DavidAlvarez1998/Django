@@ -9,6 +9,15 @@ import base64
 import os
 from os import remove
 from os import path
+from datetime import date
+
+def calculoFecha(nacimiento):
+    nacimiento=nacimiento.split('-')
+    nacimiento=date(int(nacimiento[0]),int(nacimiento[1]),int(nacimiento[2]))
+    actual=date.today()
+    resultado=actual.year - nacimiento.year
+    resultado-=((actual.month,actual.day)<(nacimiento.month,nacimiento.day))
+    return resultado
 
 def editarPerfilRoot(request):
     return render(request,'editar-perfil-root.html')
@@ -143,6 +152,9 @@ def registrarCliente(request):
     if confcontraseña!=contraseña:
         cliente.close()
         return HttpResponse("ERROR: contraseña no coincide")
+    if calculoFecha(nacimiento)<18:
+        cliente.close()
+        return HttpResponse("ERROR: debes de ser mayor de 18 años")
     clientes=db['cliente']
     clientes.insert_one({
         'nombre':nombre,
@@ -438,6 +450,9 @@ def registroAdmin(request):
     if confcontraseña!=contraseña:
         cliente.close()
         return HttpResponse("ERROR: contraseña no coincide")
+    if calculoFecha(nacimiento)<18:
+        cliente.close()
+        return HttpResponse("ERROR: debes de ser mayor de 18 años")
     admins=db['admin']
     buscar=admins.find_one({'correo':correo})
     if buscar!=None:
@@ -452,6 +467,7 @@ def registroAdmin(request):
         })
     cliente.close()
     return render(request,'index.html') 
+
 
 
 
