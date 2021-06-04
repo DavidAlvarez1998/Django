@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Libreria Los Pollos Hermanos</title>
+	<title>Libreria Los Libros Hermanos</title>
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
 		
@@ -19,7 +19,7 @@
 		<div class="header-content">
 			<div class="logo">
 				<img src="{% static 'lph.ico' %}">
-				<h1>Los <b>Pollos</b> Hermanos</h1>
+				<h1>Los <b>Libros</b> Hermanos</h1>
 			</div>
 
 			<div class="menu">
@@ -37,7 +37,7 @@
 	<!--Portada-->
 	<div class="container-cover">
 		<div class="container-info-cover">
-			<h1>Bienvenido a la Libreria de Los pollos hermanos</h1>
+			<h1>Bienvenido a la Libreria de Los Libros Hermanos</h1>
 			<p>¡Encuentra libros de todo tipo para que te los devores como si estuvieses comiendo pollo!</p>
 		</div>
 	</div>
@@ -52,13 +52,13 @@
 			</div>
 		</form>
 	</div> 
-	<img src="{% static 'https://images.app.goo.gl/Gf5GBDCj872h92vSA' %}">
+
 	<!--Login-->
 	<div class="login">
 		<form action="/iniciarSecion/" method="GET">
 			<h1>INICIAR SESIÓN</h1>
-			<input type="text" placeholder="Correo" name="correo" value={{nombre}}>
-			<input type="password" placeholder="contraseña" name="contraseña" value={{contra}}>
+			<input type="text" placeholder="Correo" name="correo" >
+			<input type="password" placeholder="contraseña" name="contraseña">
 			<a href="recuperar-contra.html"><i>¿Has olvidado la contraseña?</i></a>
 			<div class="ingresar">
 				<a href="home-client.html"><input  type="submit" value="Entrar"></a>

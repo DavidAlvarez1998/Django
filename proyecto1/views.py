@@ -10,6 +10,7 @@ import os
 from os import remove
 from os import path
 from datetime import date
+from bson.objectid import ObjectId
 
 def calculoFecha(nacimiento):
     nacimiento=nacimiento.split('-')
@@ -19,13 +20,13 @@ def calculoFecha(nacimiento):
     resultado-=((actual.month,actual.day)<(nacimiento.month,nacimiento.day))
     return resultado
 
-def editarPerfilRoot(request):
+def editarPerfilRoot(request):#
     return render(request,'editar-perfil-root.html')
 
-def perfilRoot(request):
+def perfilRoot(request):#
     return render(request,'principal-root.html')
 
-def editarroot(request):
+def editarroot(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -61,7 +62,7 @@ def editarroot(request):
     cliente.close()
     return HttpResponse("informacion actualizada")
 
-def root():
+def root():#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     usuarioroot = db['root']
@@ -73,15 +74,12 @@ def root():
         'contraseña':"0000",
     })
     cliente.close()
-    return(buscar)
 
-def index(request):
-    info=root()
-    nombre=info['nombre']
-    contraseña=info['contraseña']
-    return render(request,'index.html',{"nombre":nombre,"contra":contraseña}) 
+def index(request):#
+    root()
+    return render(request,'index.html',{"nombre":'adjuan123@gmail.com',"contra":'3168720993'}) 
 
-def buscar(request):
+def buscar(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -109,21 +107,19 @@ def buscar(request):
         cliente.close()
         return render(request,'home-client.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4]})
 
-def registro(request):
+def registro(request):#
     return render(request,'register.html') 
 
-def registrarCliente(request):
+def registrarCliente(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
     nombre=request.GET["nombre"]
     apellido=request.GET["apellido"]
     telefono=request.GET["telefono"]
-    nacimiento=request.GET["fecha-nacimiento"]
+    nacimiento=request.GET["nacimiento"]
     pais=request.GET["pais"]
-    ciudad=request.GET["ciudad"]
     direccion=request.GET["direccion"]
-    codigopos=request.GET["codigopos"]
     usuario=request.GET["usuario"]
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
@@ -152,19 +148,21 @@ def registrarCliente(request):
     if confcontraseña!=contraseña:
         cliente.close()
         return HttpResponse("ERROR: contraseña no coincide")
-    if calculoFecha(nacimiento)<18:
-        cliente.close()
-        return HttpResponse("ERROR: debes de ser mayor de 18 años")
+    if nacimiento!='':
+        if calculoFecha(nacimiento)<18:
+            cliente.close()
+            return HttpResponse("ERROR: debes de ser mayor de 18 años")
+        if calculoFecha(nacimiento)>90:
+            cliente.close()
+            return HttpResponse("ERROR: fechade nacimiento")
     clientes=db['cliente']
     clientes.insert_one({
         'nombre':nombre,
         'apellido':apellido,
         'telefono':telefono,
-        'fecha de nacimiento':nacimiento,
+        'nacimiento':nacimiento,
         'pais':pais,
-        'ciudad':ciudad,
         'direccion':direccion,
-        'codigopostal':codigopos,
         'usuario':usuario,
         'correo':correo,
         'contraseña':contraseña,
@@ -172,7 +170,7 @@ def registrarCliente(request):
     cliente.close()
     return render(request,'index.html')
 
-def iniciarSecion(request):
+def iniciarSecion(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -218,21 +216,19 @@ def iniciarSecion(request):
     cliente.close()
     return render(request,'home-client.html') 
 
-def perfil(request):
+def perfil(request):#
     return render(request,'editar-perfil.html') 
 
-def editarPerfil(request):
+def editarPerfil(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
     nombre=request.GET["nombre"]
     apellido=request.GET["apellido"]
     telefono=request.GET["telefono"]
-    nacimiento=request.GET["fecha-nacimiento"]
+    nacimiento=request.GET["nacimiento"]
     pais=request.GET["pais"]
-    ciudad=request.GET["ciudad"]
     direccion=request.GET["direccion"]
-    codigopos=request.GET["codigopos"]
     usuario=request.GET["usuario"]
     correoActual=request.GET["correoActual"]
     correoNuevo=request.GET["correoNuevo"]
@@ -243,17 +239,25 @@ def editarPerfil(request):
     buscar=clientes.find_one({'correo':correoActual})
     if buscar==None:
         cliente.close()
-        return HttpResponse("ERROR: Correo actual no encotrado") 
-    buscar1=clientes.find_one({'correo':correoNuevo})
-    if buscar1!=None:
-        cliente.close()
-        return HttpResponse("ERROR: Correo nuevo no disponible") 
+        return HttpResponse("ERROR: Correo actual") 
+    if correoNuevo!='':
+        buscar1=clientes.find_one({'correo':correoNuevo})
+        if buscar1!=None:
+            cliente.close()
+            return HttpResponse("ERROR: nuevo correo no disponible") 
     if contraseñaActual!=buscar['contraseña']:
         cliente.close()
         return HttpResponse("ERROR: contraseña actual es incorrecta") 
     if contraseñaNueva!=confimarContraseña:
         cliente.close()
         return HttpResponse("ERROR: las contraseñas no coinciden") 
+    if nacimiento!='':
+        if calculoFecha(nacimiento)<18:
+            cliente.close()
+            return HttpResponse("ERROR: fecha de nacimiento")
+        if calculoFecha(nacimiento)>90:
+            cliente.close()
+            return HttpResponse("ERROR: fechade nacimiento")
     if nombre=="":
         nombre=buscar['nombre']
     if apellido=="":
@@ -261,17 +265,18 @@ def editarPerfil(request):
     if telefono=="":
         telefono=buscar['telefono']
     if nacimiento=="":
-        nacimiento=buscar['fecha-nacimiento']
+        nacimiento=buscar['nacimiento']
     if pais=="":
         pais=buscar['pais']
-    if ciudad=="":
-        ciudad=buscar['ciudad']
     if direccion=="":
         direccion=buscar['direccion']
-    if codigopos=="":
-        codigopos=buscar['codigopos']
     if usuario=="":
         usuario=buscar['usuario']
+    if contraseñaNueva=='':
+        contraseñaNueva=buscar['contraseñaNueva']
+    if correoNuevo=='':
+        correoNuevo=buscar['correo']
+
     clientes.update_one({
         'correo':correoActual
         },{
@@ -279,11 +284,9 @@ def editarPerfil(request):
                 'nombre':nombre,
                 'apellido':apellido,
                 'telefono':telefono,
-                'fecha de nacimiento':nacimiento,
+                'nacimiento':nacimiento,
                 'pais':pais,
-                'ciudad':ciudad,
                 'direccion':direccion,
-                'codigopostal':codigopos,
                 'usuario':usuario,
                 'correo':correoNuevo,
                 'contraseña':contraseñaNueva,
@@ -293,10 +296,10 @@ def editarPerfil(request):
     cliente.close()
     return HttpResponse("Informacion actulizada") 
 
-def paginaAgregarlibro(request):
+def paginaAgregarlibro(request):#
     return render(request,'Agregar-libro.html')
 
-def agregarLibro(request):
+def agregarLibro(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -381,7 +384,7 @@ def agregarLibro(request):
     cliente.close()
     return HttpResponse("Libro Agregado")
 
-def crearAdmin(request):
+def crearAdmin(request): #
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -405,9 +408,9 @@ def crearAdmin(request):
     if len(aux)==0:
         cliente.close()
         return HttpResponse("ERROR: ingrese un nombre de usuario")
-    if '' in aux[0]:
+    if '' in aux:
         cliente.close()
-        return HttpResponse("ERROR: no se permite iniciar el nombre de usuario con un espacios en blanco")
+        return HttpResponse("ERROR: no se permite espacios en blanco para el usuario admin")
     admins=db['admin']
     buscar=admins.find_one({'nombre usuario':nombre})
     if buscar!=None:
@@ -421,7 +424,7 @@ def crearAdmin(request):
     cliente.close()
     return HttpResponse("admin creado")
 
-def registroAdmin(request):
+def registroAdmin(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -429,7 +432,7 @@ def registroAdmin(request):
     nombre=request.GET["nombre"]
     apellido=request.GET["apellido"]
     telefono=request.GET["telefono"]
-    nacimiento=request.GET["fecha-nacimiento"]
+    nacimiento=request.GET["nacimiento"]
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
     confcontraseña=request.GET["confcontraseña"]
@@ -450,9 +453,13 @@ def registroAdmin(request):
     if confcontraseña!=contraseña:
         cliente.close()
         return HttpResponse("ERROR: contraseña no coincide")
-    if calculoFecha(nacimiento)<18:
-        cliente.close()
-        return HttpResponse("ERROR: debes de ser mayor de 18 años")
+    if nacimiento!='':
+        if calculoFecha(nacimiento)<18:
+            cliente.close()
+            return HttpResponse("ERROR: debes de ser mayor de 18 años")
+        if calculoFecha(nacimiento)>90:
+            cliente.close()
+            return HttpResponse("ERROR: fechade nacimiento")
     admins=db['admin']
     buscar=admins.find_one({'correo':correo})
     if buscar!=None:
@@ -461,13 +468,183 @@ def registroAdmin(request):
         'nombre':nombre,
         'apellido':apellido,
         'telefono':telefono,
-        'fecha de nacimiento':nacimiento,
+        'nacimiento':nacimiento,
         'correo':correo,
         'contraseña':contraseña,
         })
     cliente.close()
     return render(request,'index.html') 
 
+def paginaEditarAdmin(request):#
+    return render(request,'editar-perfil-admin.html')
+
+def paginaprincipalAdmin(request):#
+    return render(request,'principal-admin.html')
+
+def editarPerfilAdmin(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    nombre=request.GET["nombre"]
+    apellido=request.GET["apellido"]
+    telefono=request.GET["telefono"]
+    nacimiento=request.GET["nacimiento"]
+    correoac=request.GET["correoac"]
+    correonu=request.GET["correonu"]
+    contraAc=request.GET["contraAc"]
+    contraNu=request.GET["contraNu"]
+    confcontra=request.GET["confcontra"]
+
+    admins=db['admin']
+    buscar=admins.find_one({'correo':correoac})
+    if buscar==None:
+        return HttpResponse("ERROR: correo actual incorrecto")
+    if correonu!='':
+        clientes = db['cliente']
+        buscar1=clientes.find_one({'correo':correonu})
+        if buscar1!=None:
+            cliente.close()
+            return HttpResponse("ERROR: correo no disponible")
+        buscar1=admins.find_one({'correo':correonu})
+        if buscar1!=None:
+            cliente.close()
+            return HttpResponse("ERROR: correo no disponible")
+    
+    if contraAc!=buscar['contraseña']:
+        cliente.close()
+        return HttpResponse("ERROR: contraseña actual es incorrecta") 
+    if contraNu!=confcontra:
+        cliente.close()
+        return HttpResponse("ERROR: las contraseñas no coinciden")
+    if nacimiento!='':
+        if calculoFecha(nacimiento)<18:
+            cliente.close()
+            return HttpResponse("ERROR: fecha de nacimiento")
+        if calculoFecha(nacimiento)>90:
+            cliente.close()
+            return HttpResponse("ERROR: fechade nacimiento")
+    if nombre=="":
+        nombre=buscar['nombre']
+    if apellido=="":
+        apellido=buscar['apellido']
+    if telefono=="":
+        telefono=buscar['telefono']
+    if nacimiento=="":
+        nacimiento=buscar['nacimiento']
+    if correonu=="":
+        correonu=buscar['correo']
+    if contraNu=="":
+        contraNu=buscar['contraseña']
+    admins.update_one({
+        'correo':correoac
+        },{
+            "$set":{
+                'nombre':nombre,
+                'apellido':apellido,
+                'telefono':telefono,
+                'nacimiento':nacimiento,
+                'correo':correonu,
+                'contraseña':contraNu,
+            }
+        })
+    cliente.close()
+    return HttpResponse("informacion actualizada") 
+
+def paginaEditarLibro(request):
+    return render(request,'editar-libro.html')
+
+def Rellenareditarlibro(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    codigo=request.GET["codigo"]
+    libros=db['libro']
+    ObjectIdistance=ObjectId(codigo)
+    buscar=libros.find_one({'_id':ObjectIdistance})
+    if buscar==None:
+        cliente.close()
+        return HttpResponse("ERROR: ISSN no existe") 
+    Titulo=buscar['Titulo']
+    Autor=buscar['Autor']
+    PublicA=buscar['PublicA']
+    Genero=buscar['Genero']
+    numeropaginas=buscar['numeropaginas']
+    Editorial=buscar['Editorial']
+    Idioma=buscar['Idioma']
+    Estado=buscar['Estado']
+    Precio=buscar['Precio']
+    Portada=buscar['Portada']
+    cliente.close()
+    return render(request,'editar-libro.html',{'Titulo':Titulo,'Autor':Autor,'PublicA':PublicA,'Genero':Genero,'numeropaginas':numeropaginas,'Editorial':Editorial,'Idioma':Idioma,'Estado':Estado,'Precio':Precio,'Portada':Portada,})
 
 
+def editarlibro(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    nombre=request.GET["nombre"]
+    apellido=request.GET["apellido"]
+    telefono=request.GET["telefono"]
+    nacimiento=request.GET["nacimiento"]
+    correoac=request.GET["correoac"]
+    correonu=request.GET["correonu"]
+    contraAc=request.GET["contraAc"]
+    contraNu=request.GET["contraNu"]
+    confcontra=request.GET["confcontra"]
 
+    admins=db['admin']
+    buscar=admins.find_one({'correo':correoac})
+    if buscar==None:
+        return HttpResponse("ERROR: correo actual incorrecto")
+    if correonu!='':
+        clientes = db['cliente']
+        buscar1=clientes.find_one({'correo':correonu})
+        if buscar1!=None:
+            cliente.close()
+            return HttpResponse("ERROR: correo no disponible")
+        buscar1=admins.find_one({'correo':correonu})
+        if buscar1!=None:
+            cliente.close()
+            return HttpResponse("ERROR: correo no disponible")
+    
+    if contraAc!=buscar['contraseña']:
+        cliente.close()
+        return HttpResponse("ERROR: contraseña actual es incorrecta") 
+    if contraNu!=confcontra:
+        cliente.close()
+        return HttpResponse("ERROR: las contraseñas no coinciden")
+    if nacimiento!='':
+        if calculoFecha(nacimiento)<18:
+            cliente.close()
+            return HttpResponse("ERROR: fecha de nacimiento")
+        if calculoFecha(nacimiento)>90:
+            cliente.close()
+            return HttpResponse("ERROR: fechade nacimiento")
+    if nombre=="":
+        nombre=buscar['nombre']
+    if apellido=="":
+        apellido=buscar['apellido']
+    if telefono=="":
+        telefono=buscar['telefono']
+    if nacimiento=="":
+        nacimiento=buscar['nacimiento']
+    if correonu=="":
+        correonu=buscar['correo']
+    if contraNu=="":
+        contraNu=buscar['contraseña']
+    admins.update_one({
+        'correo':correoac
+        },{
+            "$set":{
+                'nombre':nombre,
+                'apellido':apellido,
+                'telefono':telefono,
+                'nacimiento':nacimiento,
+                'correo':correonu,
+                'contraseña':contraNu,
+            }
+        })
+    cliente.close()
+    return HttpResponse("informacion actualizada") 
+
+    

@@ -9,6 +9,25 @@
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
 </head>
 <body>
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</header>
+	<div class="agg-libro">
 	<form action="/agregarLibro/" method="GET" enctype="multipart/form-data">
 		{% csrf_token %}
 		<input type="text" placeholder="Titulo" name="Titulo">
@@ -18,11 +37,21 @@
 		<input type="text" placeholder="Numero de paginas" name="numeropaginas">
 		<input type="text" placeholder="Editorial" name="Editorial">
 		<input type="text" placeholder="Idioma" name="Idioma">
-		<input type="text" placeholder="Estado" name="Estado">
+		<label for="Estado">Estado:</label>
+		<select id="Estado" name="Estado">
+			<option value="Nuevo">Nuevo</option>
+			<option value="Usado">Usado</option>
+		</select>
 		<input type="text" placeholder="Precio" name="Precio">
 		<label for="portada">portada:</label>
 		<input type="text" placeholder="direccion portada" name="direccionportada">
 		<input type="submit" value="Agregar">
 	</form>
+</div>
+<div class="back-agg-libro">
+	<form action="/paginaprincipalAdmin/" method="GET">
+		<input type="submit" value="Regresar">
+</form>
+</div>
 </body>
 </html>  

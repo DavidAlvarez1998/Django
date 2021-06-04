@@ -5,33 +5,74 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Root Principal</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
-	<form action="/index/" method="GET">
-		<a><input type="submit" value="REGRESAR"></a>
-	</form>
-	<form action="/editarPerfilRoot/" method="GET">
-		<a><input type="submit" value="EDITAR PERFIL"></a>
-	</form>
+
 	
-
-
 </head>
 
 <body>
-	<form action="/crearAdmin/" method="GET">
-		<div class="opciones">
+	<!--Cabeza-Menu-->
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</header>
+
+
+	
+		<div class="opciones-root">
 			<h1>MÓDULO ROOT</h1>
 		</div>
 		
 		<div class="creacion-admin">
 			<h1>Crear usuario Admin</h1>
-			<input type="text" placeholder="Nombre Usuario"name="nombre">
-			<input type="text" placeholder="Contraseña"name="contraseña">
-			<input type="text" placeholder="Confirmar contraseña"name="confcontraseña">
-
+			<form action="/crearAdmin/" method="GET">
+				<input type="text" placeholder="Nombre Usuario"name="nombre">
+				<input type="text" placeholder="Contraseña"name="contraseña">
+				<input type="text" placeholder="Confirmar contraseña"name="confcontraseña">
+				<input type="submit" id="wasd" value="Enviar y registrar ADMIN">
+			</form>
 		</div>
-		<input type="submit" value="Enviar y registrar ADMIN">
+			
 		
-	</form>
+
+		
+		
+		<div class="botones-volver">
+			<form action="/index/" method="GET">
+				<a><input type="submit" value="SALIR"></a>
+			</form>
+		</div>
+		<div class="botones-volver1">
+			<form action="/editarPerfilRoot/" method="GET">
+				<a><input type="submit" value="EDITAR PERFIL"></a>
+			</form>
+		</div>
+
+		<!--Pie de pagina-->
+	<footer>
+		<div class="foot">
+			<p id="footer">
+			Nuestros contactos
+			</p>
+			<p>Tel: (+57) 321 6549870</p>
+			<p>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></p>
+		</div>
+	</footer>
+	
 </body>
 </html>

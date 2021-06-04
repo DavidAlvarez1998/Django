@@ -1,0 +1,73 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Editar Perfil Admin</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+</head>
+
+<body>
+	<!--Cabeza-Menu-->
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</header>
+	
+		<div class="info-personal-admin">
+			<form action="/editarPerfilAdmin/" method="GET">
+				<h1>EDITAR PERFIL ADMIN</h1>
+				<input type="text" placeholder="Nombres"name="nombre">
+				<input type="text" placeholder="Apellidos"name="apellido">
+				<input type="tel" placeholder="Telefono celular"name="telefono">
+				<label for="fecha-nacimiento">Fecha de nacimiento:</label>
+				<input type="date" id="fecha-nacimiento" name="nacimiento">
+		
+				<h1>Cambiar información de perfil ADMIN</h1>
+				<input type="text" placeholder="Contraseña actual"name="contraAc">
+				<input type="text" placeholder="Contraseña nueva"name="contraNu">
+				<input type="text" placeholder="Confirmar contraseña nueva"name="confcontra">
+				<input type="text" placeholder="Correo electronico actual"name="correoac">
+				<input type="text" placeholder="Correo electronico nuevo"name="correonu">
+				<input type="submit" id="boton-editar-admin-enviar" value="ACTUALIZAR INFORMACIÓN">
+			</form>
+		</div>
+
+		
+	
+
+	<div class="volver-editar-admin">
+		<form action="/paginaprincipalAdmin/" method="GET">
+			<a href="principal-admin.html"><input type="submit" value="REGRESAR"></a>
+		</form>
+	</div>
+
+	<footer>
+		<div class="foot">
+			<p id="footer">
+			Nuestros contactos
+			</p>
+			<p>Tel: (+57) 321 6549870</p>
+			<p>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></p>
+		</div>
+	</footer>
+
+
+</body>
+</html>

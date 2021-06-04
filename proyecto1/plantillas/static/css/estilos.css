@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 *{
 	margin: 0;
@@ -83,15 +83,6 @@ header{
 	position: relative;
 }
 
-.menu-selected:before{
-	content: '';
-	width: 100%;
-	height: 4px;
-	background: #0883E3;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
 
 .menu nav ul li a{
 	color: #FFF;
@@ -111,12 +102,6 @@ header{
 	width: 100%;
 	height : 200px;
 	position: relative;
-	
-	/*background-image: url(img/Portada.jpg);
-	box-shadow: 0 4px 25px -12px #000000;
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;*/
 }
 
 
@@ -144,30 +129,40 @@ header{
 	font-size: 30px;
 }
 
+/*de aqui*/
+
 .buscar{
 	top: 110px;
 	position: relative;
 	width: 100%;
 	display: flex;
+	padding: 20px 0px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 }
 
-.buscar input{
+.buscar form input{
+	text-align: center;
 	width: 500px;
 	height: 40px;
-	padding: 0 20px;
 	font-size: 18px;
 	color: #000;
 	outline: none;
 	border: 1px solid black;
 	border-radius: 30px;
-
-
 }
 
-.btn a button{
+
+.btn{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn a input{
+	display: flex;
+	justify-content: center;
 	width: 80px;
 	height: 40px;
 	text-align: center;
@@ -175,36 +170,42 @@ header{
 	color: white;
 	background-color: #FFC000;
 	font-size: 20px;
-	border-radius: 25%
+	border-radius: 25%;
+	transition: color 300ms;
 }
 
-.login{
-	top: 140px;
+.btn a input:hover{
+	color: black;
+}
+
+.login form{
+	top: 120px;
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 }
-.login h1{
+.login form h1{
 	margin: 10px;
 }
 
-.login input{
+.login form input{
+	text-align: center;
 	margin: 5px 0px;
-	width: 200px;
+	width: 300px;
 	height: 30px;
-	border-radius: 5%;
+	border-radius: 30px;
 }
 
-.login a{
+.login form a{
 	margin: 10px 0px;
 
 }
 
 
 
-.ingresar button{
+.ingresar a input{
 	width: 130px;
 	height: 50px;
 	color: white;
@@ -212,6 +213,11 @@ header{
 	font-size: 30px;
 	border-radius: 25%;
 	margin: 10px 0px;
+	transition: color 300ms;
+}
+
+.ingresar a input:hover{
+	color: black;
 }
 
 .registrar{
@@ -233,7 +239,7 @@ header{
 	color: blue;
 }
 
-.registrarse-btn a button{
+.registrarse-btn a input{
 	margin: 10px 0px;
 	background-color: #FFC000;
 	color: white;
@@ -241,7 +247,15 @@ header{
 	width: 155px;
 	border-radius: 30%;
 	font-size: 20px;
+	transition: color 300ms;
 }
+
+.registrarse-btn a input:hover{
+	color: black;
+}
+
+
+/*hasta aqui*/
 
 .agg-libro{
 	display: flex;
@@ -268,7 +282,13 @@ header{
 	border-radius: 25%;
 	width: 100px;
 	height: 40px;
+	transition: color 300ms;
 }
+
+.back-agg-libro button:hover{
+	color: black;
+}
+
 
 .agg-libro input {
 	margin: 5px 0px;
@@ -300,7 +320,13 @@ header{
 	border-radius: 25%;
 	width: 120px;
 	height: 50px;
+	transition: color 300ms;
 }
+
+.agg-libro input#Agregar:hover{
+	color: black;
+}
+
 
 .navegador-cliente{
 	height: 60px;
@@ -359,6 +385,11 @@ header{
 	background-color: #0883E3;
 	color: white;
 	font-size: 15px;
+	transition: color 300ms;
+}
+
+.buscador-cliente input#btn-search-clietn:hover{
+	color: black;
 }
 
 .client-home-vista{
@@ -398,7 +429,7 @@ header{
 	position: relative;
 }
 
-.creacion-admin form{
+.creacion-admin form {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -415,12 +446,20 @@ header{
 	box-shadow: 0 4px 25px -12px #000000;
 }
 
+
+
 .creacion-admin form input#wasd{
 	background: #0883E3;
 	color: white;
 	width: 300px;
+	transition: color 300ms;
 }
-.botones-volver a input{
+
+.creacion-admin form input#wasd:hover{
+	color: black;
+}
+
+.botones-volver form a input{
 	background: #FFC000;
 	color: white;
 	font-size: 20px;
@@ -428,9 +467,32 @@ header{
 	width: 160px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
-	top: -205px;
-	margin: 0px 20px; 
-	position: relative;
+	top: 70px;
+	margin: 10px 20px; 
+	position: fixed;
+	transition: color 300ms;
+}
+
+.botones-volver form a input:hover{
+	color: #0883E3;
+}
+
+.botones-volver1 form a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: 120px;
+	margin: 10px 20px; 
+	position: fixed;
+	transition: color 300ms;
+}
+
+.botones-volver1 form a input:hover{
+	color: #0883E3;
 }
 
 .info-perfil-root {
@@ -503,6 +565,10 @@ header{
 	width: 380px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
+	transition: color 300ms;
+}
+.opciones-admin form a input:hover{
+	color: black;
 }
 
 .botones-volver-editar-perfil-admin1 a input{
@@ -516,8 +582,14 @@ header{
 	width: 160px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
-	top: -220px;
-	position: relative;
+	top: 70px;
+	position: fixed;
+	transition: color 300ms;
+
+}
+
+.botones-volver-editar-perfil-admin1 a input:hover{
+	color: #0883E3;
 }
 
 .botones-volver-editar-perfil-admin2 a input{
@@ -531,9 +603,14 @@ header{
 	width: 160px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
-	top: -200px;
-	position: relative;
+	top: 120px;
+	position: fixed;
 	padding-right: auto;
+	transition: color 300ms;
+}
+
+.botones-volver-editar-perfil-admin2 a input:hover{
+	color: #0883E3;
 }
 
 .info-personal-admin {
@@ -598,16 +675,21 @@ header{
 	width: 160px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
-	top: -520px;
+	top: 70px;
 	margin: 0px 20px; 
-	position: relative;
 	border: none;
 	outline: none;
 	border-radius: 20px;
 	border-bottom: 3px solid #FFBF00;
+	position: fixed;
+	transition: color 300ms;
 }
 
-.info-perfil-admin form input#boton-editar-admin-enviar{
+.volver-editar-admin a input:hover{
+	color: #0883E3;
+}
+
+.info-personal-admin form input#boton-editar-admin-enviar{
 	background: #0883E3;
 	color: white;
 	font-size: 20px;
@@ -620,6 +702,11 @@ header{
 	outline: none;
 	border-radius: 20px;
 	border-bottom: 3px solid #0883E3;
+	transition: color 300ms;
+}
+
+.info-personal-admin form input#boton-editar-admin-enviar:hover{
+	color: black;
 }
 
 .buscar-codigo-lib{
@@ -1048,7 +1135,7 @@ header{
 	box-shadow: 0 4px 25px -12px #000000;
 }
 
-.datos-cuenta-admin-registro form input#boton-enviar-registro-admin{
+.datos-completar-registro-admin form input#boton-enviar-registro-admin{
 	background: #0883E3;
 	color: white;
 	font-size: 18px;
@@ -1062,7 +1149,13 @@ header{
 	border-radius: 20px;
 	border-bottom: 3px solid #0883E3;
 	margin: 15px 0px;
+	transition: color 300ms;
 }
+
+.datos-completar-registro-admin form input#boton-enviar-registro-admin:hover{
+	color: black;
+}
+
 
 .botones-volver-adm-comp-perfil a input{
 	background: #FFC000;
@@ -1072,12 +1165,473 @@ header{
 	width: 160px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
-	top: -400px;
+	top: 70px;
 	margin: 0px 20px; 
-	position: relative;
+	position: fixed;
 	justify-content: center;
 	align-items: center;
 	justify-content: space-between;
 	margin: 15px 0px;
+	transition: color 300ms;
+}
+
+.botones-volver-adm-comp-perfil a input:hover{
+	color: #0883E3;
+}
+
+
+/*Registrarse*/
+
+.formulario-registro form{
+	top: 80px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.datos-personales{
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.datos-personales input{
+	margin: 5px 0px;
+	border-radius: 30px;
+	height: 25px;
+	width: 250px;
+	text-align: center;
+}
+
+.datos-personales label{
+	font-size: 20px;
+	color: blue;
+	text-shadow: 1px 4px 7px black;
+}
+
+.datos-ubicacion{
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.datos-ubicacion select{
+	margin: 5px 0px;
+	border-radius: 30px;
+	height: 25px;
+	width: 250px;
+	text-align: center;
+}
+
+.datos-ubicacion input{
+	margin: 5px 0px;
+	border-radius: 30px;
+	height: 25px;
+	width: 250px;
+	text-align: center;
+}
+
+.datos-cuenta{
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.datos-cuenta input{
+	margin: 5px 0px;
+	border-radius: 30px;
+	height: 25px;
+	width: 250px;
+	text-align: center;
+}
+
+.formulario-registro form input#enviar-registro{
+	margin: 20px 0px;
+	width: 140px;
+	height: 40px;
+	border-radius: 30px;
+	color: white;
+	font-size: 20px;
+	background-color: #0883E3;
+	transition: color 300ms;
+}
+.formulario-registro form input#enviar-registro:hover{
+	color: black;
+}
+
+.boton-volver-registro-cliente form a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: 70px;
+	margin: 0px 20px; 
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px 0px;
+	transition: color 300ms;
+}
+
+.boton-volver-registro-cliente form a input:hover{
+	color: #0883E3;
+}
+
+/*Agregar libro*/
+
+.agg-libro{
+	top: 80px;
+	position: relative;
+}
+
+.agg-libro form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.back-agg-libro{
+	position: relative;
+	top: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: -10px 0px;
+}
+
+.back-agg-libro button{
+	color: white;
+	background-color: #FFC000;
+	font-size: 20px;
+	border-radius: 25%;
+	width: 100px;
+	height: 40px;
+	margin: 20px 0px;
+	transition: color 300ms;
+}
+
+.back-agg-libro button:hover{
+	color: #0883E3;
+}
+
+
+.agg-libro input {
+	margin: 5px 0px;
+	border-radius: 30px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.agg-libro select{
+	margin: 5px 0px;
+	border-radius: 10%;
+	font-size: 20px;
+}
+
+.agg-libro label{
+	color: blue;
+	margin: 5px 0px;
+	border-radius: 10%;
+	font-size: 20px;
+	text-shadow: 20%;
+	text-shadow: 1px 4px 5px black;
+}
+
+.agg-libro input#Agregar{
+	margin: 20px 0px;
+	color: white;
+	background-color: #0883E3;
+	font-size: 20px;
+	border-radius: 25%;
+	width: 120px;
+	height: 50px;
+	transition: color 300ms;
+}
+
+.agg-libro input#Agregar:hover{
+	color: black;
+}
+
+/* editar perfil*/
+/*acomoda el bloque de info-personal en el centro*/
+.info-personal{
+ 	width: 90%;
+ 	max-width: 1000px;
+ 	padding: 60px 0;
+ 	margin: auto;
+ 	overflow: hidden;
+
+ }
+/* h1 centrado y editado*/
+ .info-personal h1{
+ 	margin: 0;
+ 	width: 50%;
+	height: 50%;
+	background: transparent;
+	color: #000;
+	top: 40%;
+	left: 45%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 10px 10px 20px;
+	text-align: center;
+	font-size: 22px;
+ }
+/* configuracion del bloque de las entradas*/
+ .info-personal .input{
+ 	width: 100%;
+	height: 100%;
+	background: transparent;
+	color: #fff;
+	top: 70%;
+	left: 55%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	text-align: left;
+	color: #000;
+ }
+/* configuracion de las entradas*/
+ .info-personal input{
+ 	width: 65%;
+ 	border: none;
+	border-bottom: 1px solid #000;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	display: block;
+
+
+ }
+/*config del bloque de funciones*/
+ .funciones{
+ 	width: 90%;
+ 	max-width: 1000px;
+
+ 	padding: 60px 0;
+ 	margin: auto;
+ 	overflow: hidden;
+ }
+/*config de h1*/
+.funciones h1{
+	display: flex;
+	height: 30%;
+	width: 25%;
+	top: 70%;
+	left: 48%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;;
+	color: #000;
+
+	
+}
+/* config label1*/
+.funciones #label1{
+	width: 18%;
+	height: auto;
+	top: 90%;
+	left: 47.2%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	text-align: right;
+	color: #000;
+}
+/*config label2*/
+.funciones #label2{
+	width: 20%;
+	height: auto;
+	top: 100%;
+	left: 45%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	text-align: right;
+	color: #000;
+}
+
+	
+/*config checkbox 1*/
+.funciones #cb1{
+ 	width: 18%;
+ 	height: auto;
+	top: 90%;
+	left: 40%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	
+	
+}
+
+/*config checkbox 2*/
+ .funciones #cb2{
+ 	width: 18%;
+	height: auto;
+	top: 100%;
+	left: 40%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+
+/* irrelebante*/
+
+/*.funciones input{
+	border: none;
+	border-bottom: 1px solid #000;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: black;
+	font-size: 16px;
+}
+*/
+
+/* config bloque de info-perfil*/
+ .info-perfil{
+ 	width: 90%;
+ 	height: 50%;
+ 	max-width: 1000px;
+ 	max-height: 1000px;
+ 	padding: 60px 30px;
+ 	margin: auto;
+ 	overflow: hidden;
+ }
+
+/* config h1*/
+ .info-perfil h1{
+ 	display: flex;
+	height: 100%;
+	width: 100%;
+ 	top: 120%;
+	left: 40%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+ }
+
+/* config bloque de entradas*/
+.info-perfil .input2{
+ 	width: 28%;
+	height: 100%;
+	background: transparent;
+	color: #fff;
+	top: 180%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;;
+	color: #000;
+}
+
+
+/* config entradas */
+ .info-perfil input{
+ 	width: 100%;
+ 	border: none;
+	border-bottom: 1px solid #000;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	display: block;
+ }
+
+
+/*config bloque sudmit*/
+.boton{
+	width: 20%;
+	height: 100%;
+	top: 220%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-40%, -50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	align-items: center;
+	justify-content: center;
+ 	
+}
+
+/*config sudmit*/
+.boton input{
+	position: absolute;
+	border: none;
+	outline: none;
+	height: 40px;
+	background: #FFFF00;
+	border-radius: 20px;
+	border-bottom: 3px solid #FFBF00;
+	outline: none;
+	color: #lightblue;
+	font-size: 16px;
+	
+}
+
+@media screen and (max-width: 1300px) {
+	.funciones #label2{
+		width: 29%;
+	}
+	.funciones #label1{
+		width: 29%;
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.funciones #label2{
+		width: 45%;
+	}
+	.funciones #label1{
+		width: 45%;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.funciones #label2{
+		width: 70%;
+	}
+	.funciones #label1{
+		width: 77%;
+	}
 
 }

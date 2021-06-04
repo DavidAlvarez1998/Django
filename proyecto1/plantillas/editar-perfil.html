@@ -3,45 +3,76 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun.scale=1.0, minimun-scale=1.0">
 	<title>Editar Perfil</title>
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
+	<style type="text/css">
+		input::placeholder
+		{
+			color: black;
+		}
+	</style>
 </head>
 
 <body>
-	<form action="/editarPerfil/" method="GET">
+
+	<!--Cabeza-Menu-->
+	<div class="contenedor">
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</header>
+
+	<form class="info" action="/editarPerfil/" method="GET">
 		<div class="info-personal">
 			<h1>Cambiar información personal</h1>
 			<input type="text" placeholder="Nombres"name="nombre">
 			<input type="text" placeholder="Apellidos"name="apellido">
 			<input type="tel" placeholder="Telefono celular"name="telefono">
 			<label for="fecha-nacimiento">Fecha de nacimiento:</label>
-			<input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+			<input type="date" id="fecha-nacimiento" name="nacimiento">
 			<input type="text" placeholder="País" name="pais">
-			<input type="text" placeholder="Ciudad / provincia"name="ciudad">
 			<input type="text" placeholder="Dirección"name="direccion">
-			<input type="text" placeholder="Codigo postal"name=codigopos>
 		</div>
 		
 		<div class="funciones">
 			<h1>Activar o desactivar funciones</h1>
-			<label><input type="checkbox" id="cb1" value="mensajeria-check">Activar mensajeria instatanea</label>
-			<label><input type="checkbox" id="cb2" value="mod-noticias-check">Activar modulo de noticias</label>
+			<label id="label1" for="checkbox">  Activar mensajeria instantanea</label>
+			<input type="checkbox" id="cb1" value="mensajeria-check">
+			<label id="label2" for="checkbox">  Activar modulo noticias</label>
+			<input type="checkbox" id="cb2" value="mod-noticias-check">
 		</div>
 
 		<div class="info-perfil">
 			<h1>Cambiar información de perfil</h1>
+			<div class="input2">
 			<input type="text" placeholder="Correo actual"name="correoActual">
 			<input type="text" placeholder="Nuevo correo"name="correoNuevo">
 			<input type="text" placeholder="Nombre de usuario"name="usuario">
 			<input type="text" placeholder="Contraseña actual"name="contraseñaActual">
 			<input type="text" placeholder="Contraseña nueva"name="contraseñaNueva">
 			<input type="text" placeholder="Confirmar contraseña nueva"name="confimarContraseña">
-			
 		</div>
-
+		</div>
+		<div class="boton">
 		<input type="submit" value="ACTUALIZAR INFORMACIÓN">
+		</div>
 	</form>
+</div>
 </body>
 </html>

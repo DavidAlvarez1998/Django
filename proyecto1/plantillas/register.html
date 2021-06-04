@@ -3,21 +3,40 @@
 <html lang="es">
 <head>
 	<title>Registrarse</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
 	<meta charset="utf-8">
 	
 </head>
 <body>
-	<header><h1>Registrate</h1></header>
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
 
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
 
+		</div>
+	</header>
+
+	<div class="formulario-registro">
 	<form action="/registrarCliente/" method="GET">
-
 		<div class="datos-personales">
 			<input type="text" placeholder="Nombres" name="nombre">
 			<input type="text" placeholder="Apellidos"name="apellido">
 			<input type="tel" placeholder="Telefono celular"name="telefono">
 			<label for="fecha-nacimiento">Fecha de nacimiento:</label>
-			<input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+			<input type="date" id="fecha-nacimiento" name="nacimiento">
 		</div>
 
 		<div class="datos-ubicacion">
@@ -257,9 +276,8 @@
 				<option value="Zambia">Zambia</option>
 				<option value="Zimbabue">Zimbabue</option>
 			</select>
-			<input type="text" placeholder="Ciudad / provincia"name="ciudad">
+
 			<input type="text" placeholder="Dirección"name="direccion">
-			<input type="text" placeholder="Codigo postal"name=codigopos>
 		</div>
 
 		<div class="datos-cuenta">
@@ -272,6 +290,11 @@
 		<input type="submit" value="Enviar y registrarme">
 
 	</form>
-
+</div>
+<div class="boton-volver-registro-cliente">
+	<form action="/index/" method="GET">
+		<a><input type="submit" value="REGRESAR"></a>
+	</form>
+</div>
 </body>
 </html>

@@ -1,0 +1,98 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Editar Libro</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+	
+</head>
+
+<body>
+
+	<!--Cabeza-Menu-->
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</header>
+	
+		<div class="buscar-codigo-lib">
+			<form action="/Rellenareditarlibro/" method="GET"> 
+				<h1>EDITAR LIBRO</h1>
+				<input type="text" placeholder="Código libro" name="codigo">
+				<input type="submit" id="enviar-buscar-editar-l" value="BUSCAR">
+			</form>
+
+		</div>
+	
+		<div class="datos-libro-editar">
+			<form action="/editarlibro/" method="GET">
+				<h1>DATOS LIBRO</h1>
+				<p>Titulo actual:<FONT COLOR="blue">{{Titulo}}</FONT></p>
+				<input type="text" name="Titulo" placeholder="Cambiar Titulo">
+				<p>Autor actual:<FONT COLOR="blue">{{Autor}}</FONT></p>
+				<input type="text" name="Autor" placeholder="Cambiar Autor">
+				<p>Año publicacion actual:<FONT COLOR="blue">{{PublicA}}</FONT> </p>
+				<input type="text" name="PublicA" placeholder="Cambiar Año de publicación">
+				<p>Genero actual:<FONT COLOR="blue">{{Genero}}</FONT> </p>
+				<input type="text" name="Genero" placeholder="Cambiar Genero">
+				<p>Nro Paginas actual:<FONT COLOR="blue">{{numeropaginas}}</FONT> </p>
+				<input type="number" name="numeropaginas" placeholder="Cambiar Numero de paginas">
+				<p>Editorial actual:<FONT COLOR="blue">{{Editorial}}</FONT> </p>
+				<input type="text" name="Editorial" placeholder="Cambiar Editorial">
+				<p>Idioma actual:<FONT COLOR="blue">{{Idioma}}</FONT> </p>
+				<input type="text" name="Idioma" placeholder="Cambiar Idioma">
+				<p>Estado actual:<FONT COLOR="blue">{{Estado}}</FONT> </p>
+				<label for="Estado">Cambiar Estado:</label>
+				<select name="=Estado" id="Estado">
+					<option>Nuevo</option>
+					<option>Usado</option>
+				</select>
+				<p>Fecha publicación actual:<FONT COLOR="blue">{{PublicA}}</FONT> </p>
+				<label for="fecha-publ">Cambiar Fecha de publicación:</label>
+				<input type="date" id="fecha-publ" name="PublicA">
+				<p>Precio actual:<FONT COLOR="blue">{{Precio}}</FONT> </p>
+				<input type="text" name="Precio" placeholder="Cambiar Precio">
+				<p>Direccion Portada actual:<FONT COLOR="blue">{{Portada}}</FONT> </p>
+				<input type="text" name="Portada" placeholder="Cambiar Portada">
+				<input type="submit" id="enviar-datos-editar-l" value="Confirmar cambios">
+				
+			</form>	
+		</div>
+
+		<div class="botones-volver-editar-libro">
+			<form action="/paginaprincipalAdmin/" method="GET">
+				<a><input type="submit" value="REGRESAR"></a>
+			</form>
+		</div>
+		
+		<footer>
+			<div class="foot">
+				<p id="footer">
+				Nuestros contactos
+				</p>
+				<p>Tel: (+57) 321 6549870</p>
+				<p>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></p>
+			</div>
+		</footer>
+
+	
+
+</body>
+</html>
