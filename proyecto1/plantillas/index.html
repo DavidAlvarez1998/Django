@@ -45,7 +45,7 @@
 	<!--Buscador-->
 
 	<div class="buscar">
-		<form action="/buscar/" method="GET">
+		<form action="/buscarInvitado/" method="GET">
 			<input type="search" placeholder="Busca un libro"name="buscarBD">
 			<div class="btn">
 				<a href="#"><input type="submit" value="Buscar"></a>
@@ -55,7 +55,9 @@
 
 	<!--Login-->
 	<div class="login">
+		
 		<form action="/iniciarSecion/" method="GET">
+			<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
 			<h1>INICIAR SESIÓN</h1>
 			<input type="text" placeholder="Correo" name="correo" >
 			<input type="password" placeholder="contraseña" name="contraseña">

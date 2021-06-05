@@ -43,6 +43,7 @@
 	
 		<div class="datos-libro-editar">
 			<form action="/editarlibro/" method="GET">
+				<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
 				<h1>DATOS LIBRO</h1>
 				<p>Titulo actual:<FONT COLOR="blue">{{Titulo}}</FONT></p>
 				<input type="text" name="Titulo" placeholder="Cambiar Titulo">
@@ -60,9 +61,9 @@
 				<input type="text" name="Idioma" placeholder="Cambiar Idioma">
 				<p>Estado actual:<FONT COLOR="blue">{{Estado}}</FONT> </p>
 				<label for="Estado">Cambiar Estado:</label>
-				<select name="=Estado" id="Estado">
-					<option>Nuevo</option>
-					<option>Usado</option>
+				<select name="Estado" id="Estado">
+					<option value="Nuevo">Nuevo</option>
+					<option value="Usado">Usado</option>
 				</select>
 				<p>Fecha publicación actual:<FONT COLOR="blue">{{PublicA}}</FONT> </p>
 				<label for="fecha-publ">Cambiar Fecha de publicación:</label>
@@ -71,7 +72,10 @@
 				<input type="text" name="Precio" placeholder="Cambiar Precio">
 				<p>Direccion Portada actual:<FONT COLOR="blue">{{Portada}}</FONT> </p>
 				<input type="text" name="Portada" placeholder="Cambiar Portada">
+				<p>Codigo actual:</p>
+				<input type="text" name="codigo" placeholder="Codigo actual" value={{codigo}} readonly="">
 				<input type="submit" id="enviar-datos-editar-l" value="Confirmar cambios">
+				
 				
 			</form>	
 		</div>

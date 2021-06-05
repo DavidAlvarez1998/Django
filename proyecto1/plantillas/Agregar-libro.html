@@ -7,6 +7,8 @@
 	<title>Agrega un libro</title>
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
+
+	
 </head>
 <body>
 	<header>
@@ -27,31 +29,50 @@
 
 		</div>
 	</header>
+
+	
+
+
 	<div class="agg-libro">
-	<form action="/agregarLibro/" method="GET" enctype="multipart/form-data">
-		{% csrf_token %}
-		<input type="text" placeholder="Titulo" name="Titulo">
-		<input type="text" placeholder="Autor" name="Autor">
-		<input type="text" placeholder="Año de publicación" name="PublicA">
-		<input type="text" placeholder="Genero" name="Genero">
-		<input type="text" placeholder="Numero de paginas" name="numeropaginas">
-		<input type="text" placeholder="Editorial" name="Editorial">
-		<input type="text" placeholder="Idioma" name="Idioma">
-		<label for="Estado">Estado:</label>
-		<select id="Estado" name="Estado">
-			<option value="Nuevo">Nuevo</option>
-			<option value="Usado">Usado</option>
-		</select>
-		<input type="text" placeholder="Precio" name="Precio">
-		<label for="portada">portada:</label>
-		<input type="text" placeholder="direccion portada" name="direccionportada">
-		<input type="submit" value="Agregar">
-	</form>
-</div>
-<div class="back-agg-libro">
-	<form action="/paginaprincipalAdmin/" method="GET">
-		<input type="submit" value="Regresar">
-</form>
-</div>
+		<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
+		<form action="/agregarLibro/" method="GET" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="text" placeholder="Titulo" name="Titulo">
+			<input type="text" placeholder="Autor" name="Autor">
+			<input type="text" placeholder="Año de publicación" name="PublicA">
+			<input type="text" placeholder="Genero" name="Genero">
+			<input type="text" placeholder="Numero de paginas" name="numeropaginas">
+			<input type="text" placeholder="Editorial" name="Editorial">
+			<input type="text" placeholder="Idioma" name="Idioma">
+			<label for="Estado">Estado:</label>
+			<select id="Estado" name="Estado">
+				<option value="Nuevo">Nuevo</option>
+				<option value="Usado">Usado</option>
+			</select>
+			<input type="text" placeholder="Precio" name="Precio">
+			<label for="portada">Portada:</label>
+			<input type="text" placeholder="direccion portada" name="direccionportada">
+			<input type="submit" id="boton-agregar-libro" value="Agregar">
+		</form>
+	</div>
+	
+	<div class="back-agg-libro">
+		<form action="/paginaprincipalAdmin/" method="GET">
+			<input type="submit" value="Regresar">
+		</form>
+	</div>
+
+<!--Pie de pagina-->
+	<footer>
+		<div class="foot">
+			<p id="footer">
+			Nuestros contactos
+			</p>
+			<p>Tel: (+57) 321 6549870</p>
+			<p>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></p>
+		</div>
+	</footer>
+
 </body>
 </html>  
+

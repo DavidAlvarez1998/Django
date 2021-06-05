@@ -8,7 +8,6 @@
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
 
-
 </head>
 
 <body>
@@ -18,42 +17,23 @@
 				<img src="{% static 'lph.ico' %}">
 				<h1>Los <b>Libros</b> Hermanos</h1>
 			</div>
-
-			<div class="navegador-cliente">
-				<nav>
-					<ul>
-						
-						<form action="/perfil/" method="GET">
-							<input type="submit" value="Perfil">
-						</form>
-						<form action="/perfil/" method="GET">
-							<input type="submit" value="Mensajes">
-						</form>
-						<form action="/perfil/" method="GET">
-							<input type="submit" value="Noticias">
-						</form>
-						<form action="/perfil/" method="GET">
-							<input type="submit" value="Compras y reservas">
-						</form>
-						<li class="buscador-cliente">
-							<form action="/buscar/" method="GET">
-								<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
-								<input id="btn-search-clietn" type="submit" value="Buscar">
-							</form>
-							
-							
-
-						</li>
-					</ul>
-					<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
-				</nav>
-			</div>
+			<li class="buscador-cliente">
+				<form action="/buscarInvitado/" method="GET">
+					<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
+					<input id="btn-search-clietn" type="submit" value="Buscar">
+					
+				</form>
+				
+			</li>
+			
 		</div>
+		
 	</header>
+	
 
 	<div class="client-home-vista">
-		
-		<div class="elemeto1">
+		<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
+		<div class="elemeto1"size:coverage >
 			<img src={{imagen0}}>
 			<a>{{autor0}}</a>
 		</div>
@@ -77,7 +57,9 @@
 			<img src={{imagen4}}>
 			<a>{{autor4}}</a>
 		</div>
-										
+</div>
+
+<div class="barra-inf"></div>
 
 </body>
 </html>

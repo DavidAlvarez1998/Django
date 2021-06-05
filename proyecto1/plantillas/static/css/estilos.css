@@ -266,16 +266,14 @@ header{
 	flex-direction: column;
 }
 
-.back-agg-libro{
-	position: relative;
-	top: 100px;
+.back-agg-libro form{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: -10px 0px;
+	margin: 0px 0px;
 }
 
-.back-agg-libro button{
+.back-agg-libro form input{
 	color: white;
 	background-color: #FFC000;
 	font-size: 20px;
@@ -283,9 +281,10 @@ header{
 	width: 100px;
 	height: 40px;
 	transition: color 300ms;
+	top: 450px;
 }
 
-.back-agg-libro button:hover{
+.back-agg-libro input:hover{
 	color: black;
 }
 
@@ -312,7 +311,7 @@ header{
 	text-shadow: 1px 4px 5px black;
 }
 
-.agg-libro input#Agregar{
+.agg-libro input#boton-agregar-libro{
 	margin: 20px 0px;
 	color: white;
 	background-color: #0883E3;
@@ -323,7 +322,7 @@ header{
 	transition: color 300ms;
 }
 
-.agg-libro input#Agregar:hover{
+.agg-libro input#boton-agregar-libro:hover{
 	color: black;
 }
 
@@ -526,9 +525,15 @@ header{
 	background: #0883E3;
 	color: white;
 	width: 300px;
+	transition: color 300ms;
 }
 
-.info-perfil-root form a input{
+.info-perfil-root form input#wasd1:hover{
+	color: black;
+}
+
+
+.regresar-editar-perfil-root form input{
 	background: #FFC000;
 	color: white;
 	font-size: 20px;
@@ -536,7 +541,17 @@ header{
 	width: 160px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
+	top: 85px;
+	position: fixed;
+	transition: color 300ms;
+	margin: 0px 10px;
+
 }
+
+.regresar-editar-perfil-root form input:hover{
+	color: #0883E3;
+}
+
 
 .opciones-admin{
 	top:  80px;
@@ -748,7 +763,11 @@ header{
 	outline: none;
 	border-radius: 20px;
 	border-bottom: 3px solid #0883E3;
+	transition: color 300ms;
+}
 
+.buscar-codigo-lib form input#enviar-buscar-editar-l:hover{
+	color: black;
 }
 .datos-libro-editar{
 	top:  80px;
@@ -790,6 +809,11 @@ header{
 	outline: none;
 	border-radius: 20px;
 	border-bottom: 3px solid #0883E3;
+	transition: color 300ms;
+}
+
+.datos-libro-editar form input#enviar-datos-editar-l:hover{
+	color: black;
 }
 
 .botones-volver-editar-libro a input{
@@ -800,13 +824,18 @@ header{
 	width: 160px;
 	height: 40px;
 	box-shadow: 0 4px 25px -12px #000000;
-	top: -1100px;
+	top: 90px;
 	margin: 0px 20px; 
-	position: relative;
+	position: fixed;
 	justify-content: center;
 	align-items: center;
 	justify-content: space-between;
+	transition: color 300ms;
 
+}
+
+.botones-volver-editar-libro a input:hover{
+	color: #0883E3;
 }
 
 .opciones-adm-existencias {
@@ -1189,6 +1218,7 @@ header{
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+
 }
 
 .datos-personales{
@@ -1205,12 +1235,13 @@ header{
 	height: 25px;
 	width: 250px;
 	text-align: center;
+	font-size: 17px;
 }
 
 .datos-personales label{
 	font-size: 20px;
 	color: blue;
-	text-shadow: 1px 4px 7px black;
+	text-shadow: 1px 4px 7px white;
 }
 
 .datos-ubicacion{
@@ -1227,6 +1258,7 @@ header{
 	height: 25px;
 	width: 250px;
 	text-align: center;
+	font-size: 17px;
 }
 
 .datos-ubicacion input{
@@ -1235,6 +1267,7 @@ header{
 	height: 25px;
 	width: 250px;
 	text-align: center;
+	font-size: 17px;
 }
 
 .datos-cuenta{
@@ -1243,6 +1276,7 @@ header{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
 }
 
 .datos-cuenta input{
@@ -1251,11 +1285,12 @@ header{
 	height: 25px;
 	width: 250px;
 	text-align: center;
+	font-size: 17px;
 }
 
 .formulario-registro form input#enviar-registro{
 	margin: 20px 0px;
-	width: 140px;
+	width: 200px;
 	height: 40px;
 	border-radius: 30px;
 	color: white;
@@ -1319,7 +1354,7 @@ header{
 	border-radius: 25%;
 	width: 100px;
 	height: 40px;
-	margin: 20px 0px;
+	margin: 10px 0px;
 	transition: color 300ms;
 }
 
@@ -1634,4 +1669,88 @@ header{
 		width: 77%;
 	}
 
+}
+
+/*Inicio Cliente*/
+.navegador-cliente{
+	height: 60px;
+}
+
+.navegador-cliente nav{
+	height: 100%;
+}
+
+.navegador-cliente nav ul{
+	height: 100%;
+	display: flex;
+	list-style: none;
+}
+
+.navegador-cliente nav ul form{
+	height: 100%;
+	margin: 0px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+
+.navegador-cliente nav ul form input{
+	color: white;
+	background: transparent;
+	border: none;
+	outline: none;
+	transition: color 300ms;
+}
+
+.navegador-cliente nav ul form input:hover{
+	color: #0883E3;
+}
+
+.buscador-cliente input{
+	margin: 0px 5px;
+}
+
+.buscador-cliente input#barra-search-client {
+	color: black;
+	background-color: white;
+	border-radius: 30px;
+	border-width: 2px;
+	text-align: center;
+	height: 30px;
+	width: 280px;
+}
+
+.buscador-cliente input#btn-search-clietn{
+	border-radius: 20px;
+	width: 70px;
+	height: 30px;
+	background-color: #0883E3;
+	color: white;
+	font-size: 15px;
+	transition: color 300ms;
+}
+
+.buscador-cliente input#btn-search-clietn:hover{
+	color: black;
+}
+
+.client-home-vista{
+	top: 80px;
+	margin: 0px 30px;
+	position: relative;
+	display: grid;
+	grid-gap: 80px;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+}
+
+.client-home-vista div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+	width: 250px;
+	height: 300px;
 }

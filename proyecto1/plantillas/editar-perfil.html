@@ -40,7 +40,8 @@
 
 	<form class="info" action="/editarPerfil/" method="GET">
 		<div class="info-personal">
-			<h1>Cambiar información personal</h1>
+			
+		
 			<input type="text" placeholder="Nombres"name="nombre">
 			<input type="text" placeholder="Apellidos"name="apellido">
 			<input type="tel" placeholder="Telefono celular"name="telefono">
@@ -60,17 +61,22 @@
 
 		<div class="info-perfil">
 			<h1>Cambiar información de perfil</h1>
+			
 			<div class="input2">
+			</div><p><FONT COLOR="red">{{mensaje}}</FONT> </p>
 			<input type="text" placeholder="Correo actual"name="correoActual">
 			<input type="text" placeholder="Nuevo correo"name="correoNuevo">
 			<input type="text" placeholder="Nombre de usuario"name="usuario">
 			<input type="text" placeholder="Contraseña actual"name="contraseñaActual">
 			<input type="text" placeholder="Contraseña nueva"name="contraseñaNueva">
 			<input type="text" placeholder="Confirmar contraseña nueva"name="confimarContraseña">
+		
 		</div>
-		</div>
+		
 		<div class="boton">
+			
 		<input type="submit" value="ACTUALIZAR INFORMACIÓN">
+		
 		</div>
 	</form>
 </div>

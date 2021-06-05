@@ -38,19 +38,19 @@ def editarroot(request):#
     aux=list(contraNueva)
     if len(aux)==0:
         cliente.close()
-        return HttpResponse("ERROR: ingrese la contraseña actual")
+        return render(request,'editar-perfil-root.html',{'mensaje':'ERROR: ingrese la contraseña actual'})
     if '' in aux:
         cliente.close()
-        return HttpResponse("ERROR: no se permiten espacios en blanco")
+        return render(request,'editar-perfil-root.html',{'mensaje':'ERROR: no se permiten espacios en blanco'})
     if len(aux)<4:
         cliente.close()
-        return HttpResponse("ERROR: la contraseña nueva debe tener por lo menos de 4 caracteres")
+        return render(request,'editar-perfil-root.html',{'mensaje':'ERROR: la contraseña nueva debe tener por lo menos de 4 caracteres'})
     if buscar['contraseña']!=contraActual:
         cliente.close()
-        return HttpResponse("ERROR: contraseña actual incorrecta")
+        return render(request,'editar-perfil-root.html',{'mensaje':'ERROR: contraseña actual incorrecta'})
     if contraNueva!=confContra:
         cliente.close()
-        return HttpResponse("ERROR: contraseñas no coinciden")
+        return render(request,'editar-perfil-root.html',{'mensaje':'ERROR: contraseñas no coinciden'})
     usuarioroot.update_one({
         'nombre':"root"
         },{
@@ -60,7 +60,7 @@ def editarroot(request):#
         })
 
     cliente.close()
-    return HttpResponse("informacion actualizada")
+    return render(request,'editar-perfil-root.html',{'mensaje':'informacion actualizada'})
 
 def root():#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -88,13 +88,14 @@ def buscar(request):#
     buscar=libros.find_one({'Titulo':mensaje})
     if buscar==None:
         buscar=libros.find_one({'Autor':mensaje})
-        if buscar==None:            
-            return HttpResponse("ERROR: no se encuetran libros ni autores con el nombre "+mensaje) 
+        if buscar==None:
+            cliente.close()
+            return render(request,'home-client.html',{'mensaje':'ERROR: no se encuetran libros ni autores con el nombre '+mensaje})       
         autor=buscar['Autor']
         librosAutor=''
         for documento in libros.find({'Autor':autor}):
             librosAutor=librosAutor+documento['Titulo']+", "
-        return HttpResponse(librosAutor+"  :  son los libros que tenemos del autor "+autor) 
+        return render(request,'home-client.html',{'mensaje':librosAutor+'  :  son los libros que tenemos del autor '+autor})
     else:
         autor=[]
         imagen=[]
@@ -106,6 +107,36 @@ def buscar(request):#
             imagen.append('')
         cliente.close()
         return render(request,'home-client.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4]})
+
+def buscarInvitado(request):#
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    mensaje=request.GET["buscarBD"]
+    libros = db['libro']
+    buscar=libros.find_one({'Titulo':mensaje})
+    if buscar==None:
+        buscar=libros.find_one({'Autor':mensaje})
+        if buscar==None:  
+            cliente.close()          
+            return render(request,'mostrar-libro.html',{'mensaje':'ERROR: no se encuetran libros ni autores con el nombre '+mensaje})  
+        autor=buscar['Autor']
+        librosAutor=''
+        for documento in libros.find({'Autor':autor}):
+            librosAutor=librosAutor+documento['Titulo']+", "
+        return render(request,'mostrar-libro.html',{'mensaje':librosAutor+'  :  son los libros que tenemos del autor '+autor})
+    else:
+        autor=[]
+        imagen=[]
+        for documento in libros.find({'Titulo':mensaje}):
+            autor.append(documento['Autor'])
+            imagen.append(documento['Portada'])
+        while len(imagen)<5:
+            autor.append('')
+            imagen.append('')
+        cliente.close()
+        return render(request,'mostrar-libro.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4]})
+
 
 def registro(request):#
     return render(request,'register.html') 
@@ -127,34 +158,35 @@ def registrarCliente(request):#
     admins=db['admin']
     buscar=admins.find_one({'correo':correo})
     if buscar!=None:
-        return HttpResponse("ERROR: correo no disponible")
+        cliente.close()
+        return render(request,'register.html',{'mensaje':'ERROR: correo no disponible'})
     aux=list(contraseña)
     if len(aux)==0:
         cliente.close()
-        return HttpResponse("ERROR: ingrese una contraseña")
+        return render(request,'register.html',{'mensaje':'ERROR: ingrese una contraseña'})
     if '' in aux:
         cliente.close()
-        return HttpResponse("ERROR: no se permiten espacios en blanco")
+        return render(request,'register.html',{'mensaje':'ERROR: no se permiten espacios en blanco'})
     if len(aux)<8:
         cliente.close()
-        return HttpResponse("ERROR: la contraseña debe tener por lo menos de 8 caracteres")
+        return render(request,'register.html',{'mensaje':'ERROR: la contraseña debe tener por lo menos de 8 caracteres'})
     clientes = db['cliente']
     buscar=clientes.find_one({'correo':correo})
     if buscar!=None:
         buscar=buscar['correo']
     if buscar==correo:
         cliente.close()
-        return HttpResponse("ERROR: correo ya registrado")
+        return render(request,'register.html',{'mensaje':'ERROR: correo ya registrado'})
     if confcontraseña!=contraseña:
         cliente.close()
-        return HttpResponse("ERROR: contraseña no coincide")
+        return render(request,'register.html',{'mensaje':'ERROR: contraseña no coincide'})
     if nacimiento!='':
         if calculoFecha(nacimiento)<18:
             cliente.close()
-            return HttpResponse("ERROR: debes de ser mayor de 18 años")
+            return render(request,'register.html',{'mensaje':'ERROR: debes de ser mayor de 18 años'})
         if calculoFecha(nacimiento)>90:
             cliente.close()
-            return HttpResponse("ERROR: fechade nacimiento")
+            return render(request,'register.html',{'mensaje':'ERROR: fechade nacimiento'})
     clientes=db['cliente']
     clientes.insert_one({
         'nombre':nombre,
@@ -191,7 +223,7 @@ def iniciarSecion(request):#
     if admin!=None:
         if admin['contraseña']!=contraseña:
             cliente.close()
-            return HttpResponse("ERROR: contraseña incorrecta")
+            return render(request,'index.html',{'mensaje':'ERROR: contraseña incorrecta'})
         if admin['correo']=='':
             admins.delete_one({'nombre usuario':correo})
             cliente.close()
@@ -200,7 +232,7 @@ def iniciarSecion(request):#
     if admin!=None:
         if admin['contraseña']!=contraseña:
             cliente.close()
-            return HttpResponse("ERROR: contraseña incorrecta")
+            return render(request,'index.html',{'mensaje':'ERROR: contraseña incorrecta'})
         cliente.close()
         return render(request,'principal-admin.html')
         
@@ -208,11 +240,11 @@ def iniciarSecion(request):#
     usuario=clientes.find_one({'correo':correo})
     if usuario==None:
         cliente.close()
-        return HttpResponse("ERROR: no existe ninguna cuenta con esa direccion de correo") 
+        return render(request,'index.html',{'mensaje':'ERROR: no existe ninguna cuenta con esa direccion de correo'})
     contraseñaInfo=usuario['contraseña']
     if contraseña!=contraseñaInfo:
         cliente.close()
-        return HttpResponse("ERROR: contraseña incorrecta") 
+        return render(request,'index.html',{'mensaje':'ERROR: contraseña incorrecta'})
     cliente.close()
     return render(request,'home-client.html') 
 
@@ -236,28 +268,26 @@ def editarPerfil(request):#
     contraseñaNueva=request.GET["contraseñaNueva"]
     confimarContraseña=request.GET["confimarContraseña"]
     clientes = db['cliente']
-    buscar=clientes.find_one({'correo':correoActual})
+    buscar=clientes.find_one({'correo':correoActual,'contraseña':contraseñaActual})
     if buscar==None:
         cliente.close()
-        return HttpResponse("ERROR: Correo actual") 
+        return render(request,'editar-perfil.html',{'mensaje':'ERROR: datos actuales'})
     if correoNuevo!='':
         buscar1=clientes.find_one({'correo':correoNuevo})
         if buscar1!=None:
             cliente.close()
-            return HttpResponse("ERROR: nuevo correo no disponible") 
-    if contraseñaActual!=buscar['contraseña']:
-        cliente.close()
-        return HttpResponse("ERROR: contraseña actual es incorrecta") 
+            return render(request,'editar-perfil.html',{'mensaje':'ERROR: nuevo correo no disponible'})
     if contraseñaNueva!=confimarContraseña:
         cliente.close()
-        return HttpResponse("ERROR: las contraseñas no coinciden") 
+        return render(request,'editar-perfil.html',{'mensaje':'ERROR: las contraseñas no coinciden'})
     if nacimiento!='':
         if calculoFecha(nacimiento)<18:
             cliente.close()
-            return HttpResponse("ERROR: fecha de nacimiento")
+            return render(request,'editar-perfil.html',{'mensaje':'ERROR: fecha de nacimiento'})
         if calculoFecha(nacimiento)>90:
             cliente.close()
-            return HttpResponse("ERROR: fechade nacimiento")
+            return render(request,'editar-perfil.html',{'mensaje':'ERROR: fechade nacimiento'})
+
     if nombre=="":
         nombre=buscar['nombre']
     if apellido=="":
@@ -294,7 +324,7 @@ def editarPerfil(request):#
         })
 
     cliente.close()
-    return HttpResponse("Informacion actulizada") 
+    return render(request,'editar-perfil.html',{'mensaje':'Informacion actulizada'})
 
 def paginaAgregarlibro(request):#
     return render(request,'Agregar-libro.html')
@@ -351,7 +381,7 @@ def agregarLibro(request):#
                     'Ejemplares':con,
                     })
             cliente.close()
-            return HttpResponse("Libro Agregado")
+            return render(request,'Agregar-libro.html',{'mensaje':'Libro Agregado'})
 
     if direccionportada!='':
         libros.insert_one({
@@ -382,7 +412,7 @@ def agregarLibro(request):#
             'Ejemplares':1,
             })
     cliente.close()
-    return HttpResponse("Libro Agregado")
+    return render(request,'Agregar-libro.html',{'mensaje':'Libro Agregado'})
 
 def crearAdmin(request): #
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -394,27 +424,27 @@ def crearAdmin(request): #
     aux=list(contraseña)
     if len(aux)==0:
         cliente.close()
-        return HttpResponse("ERROR: ingrese una contraseña")
+        return render(request,'principal-root.html',{'mensaje':'ERROR: ingrese una contraseña'})
     if '' in aux:
         cliente.close()
-        return HttpResponse("ERROR: no se permiten espacios en blanco")
+        return render(request,'principal-root.html',{'mensaje':'ERROR: contraseña no permite espacios en blanco'})
     if len(aux)<4:
         cliente.close()
-        return HttpResponse("ERROR: la contraseña debe tener por lo menos de 4 caracteres")
+        return render(request,'principal-root.html',{'mensaje':'ERROR: la contraseña debe tener por lo menos de 4 caracteres'})
     if contraseña!=confcontraseña:
         cliente.close()
-        return HttpResponse("ERROR: las contraseñas no coinciden")
+        return render(request,'principal-root.html',{'mensaje':'ERROR: las contraseñas no coinciden'})
     aux=list(nombre)
     if len(aux)==0:
         cliente.close()
-        return HttpResponse("ERROR: ingrese un nombre de usuario")
+        return render(request,'principal-root.html',{'mensaje':'ERROR: ingrese un nombre de usuario'})
     if '' in aux:
         cliente.close()
-        return HttpResponse("ERROR: no se permite espacios en blanco para el usuario admin")
+        return render(request,'principal-root.html',{'mensaje':'ERROR: no se permite espacios en blanco para el usuario admin'})
     admins=db['admin']
     buscar=admins.find_one({'nombre usuario':nombre})
     if buscar!=None:
-        return HttpResponse("ERROR: nombre de usuario no disponible")
+        return render(request,'principal-root.html',{'mensaje':'ERROR: nombre de usuario no disponible'})
     admins.insert_one({
             'nombre usuario':nombre,
             'contraseña':contraseña,
@@ -422,7 +452,7 @@ def crearAdmin(request): #
             })
 
     cliente.close()
-    return HttpResponse("admin creado")
+    return render(request,'principal-root.html',{'mensaje':'admin creado'})
 
 def registroAdmin(request):#
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -439,31 +469,32 @@ def registroAdmin(request):#
     clientes=db['cliente']
     buscar=clientes.find_one({'correo':correo})
     if buscar!=None:
-        return HttpResponse("ERROR: correo no disponible")
+        return render(request,'registro-admin.html',{'mensaje':'ERROR: correo no disponible'})
     aux=list(contraseña)
     if len(aux)==0:
         cliente.close()
-        return HttpResponse("ERROR: ingrese una contraseña")
+        return render(request,'registro-admin.html',{'mensaje':'ERROR: ingrese una contraseña'})
     if '' in aux:
         cliente.close()
-        return HttpResponse("ERROR: no se permiten espacios en blanco")
+        return render(request,'registro-admin.html',{'mensaje':'ERROR: no se permiten espacios en blanco'})
     if len(aux)<8:
         cliente.close()
-        return HttpResponse("ERROR: la contraseña debe tener por lo menos de 8 caracteres")
+        return render(request,'registro-admin.html',{'mensaje':'ERROR: la contraseña debe tener por lo menos de 8 caracteres'})
     if confcontraseña!=contraseña:
         cliente.close()
-        return HttpResponse("ERROR: contraseña no coincide")
+        return render(request,'registro-admin.html',{'mensaje':'ERROR: contraseña no coincide'})
     if nacimiento!='':
         if calculoFecha(nacimiento)<18:
             cliente.close()
-            return HttpResponse("ERROR: debes de ser mayor de 18 años")
+            return render(request,'registro-admin.html',{'mensaje':'ERROR: debes de ser mayor de 18 años'})
         if calculoFecha(nacimiento)>90:
             cliente.close()
-            return HttpResponse("ERROR: fechade nacimiento")
+            return render(request,'registro-admin.html',{'mensaje':'ERROR: fechade nacimiento'})
     admins=db['admin']
     buscar=admins.find_one({'correo':correo})
     if buscar!=None:
-        return HttpResponse("ERROR: correo no disponible")
+        cliente.close()
+        return render(request,'registro-admin.html',{'mensaje':'ERROR: correo no disponible'})
     admins.insert_one({
         'nombre':nombre,
         'apellido':apellido,
@@ -498,31 +529,31 @@ def editarPerfilAdmin(request):
     admins=db['admin']
     buscar=admins.find_one({'correo':correoac})
     if buscar==None:
-        return HttpResponse("ERROR: correo actual incorrecto")
+        cliente.close()
+        return render(request,'editar-perfil-admin.html',{'mensaje':'ERROR: correo actual incorrecto'})
     if correonu!='':
         clientes = db['cliente']
         buscar1=clientes.find_one({'correo':correonu})
         if buscar1!=None:
             cliente.close()
-            return HttpResponse("ERROR: correo no disponible")
+            return render(request,'editar-perfil-admin.html',{'mensaje':'ERROR: correo no disponible'})
         buscar1=admins.find_one({'correo':correonu})
         if buscar1!=None:
             cliente.close()
-            return HttpResponse("ERROR: correo no disponible")
-    
+            return render(request,'editar-perfil-admin.html',{'mensaje':'ERROR: correo no disponible'})
     if contraAc!=buscar['contraseña']:
         cliente.close()
-        return HttpResponse("ERROR: contraseña actual es incorrecta") 
+        return render(request,'editar-perfil-admin.html',{'mensaje':'ERROR: contraseña actual es incorrecta'})
     if contraNu!=confcontra:
         cliente.close()
-        return HttpResponse("ERROR: las contraseñas no coinciden")
+        return render(request,'editar-perfil-admin.html',{'mensaje':'ERROR: las contraseñas no coinciden'})
     if nacimiento!='':
         if calculoFecha(nacimiento)<18:
             cliente.close()
-            return HttpResponse("ERROR: fecha de nacimiento")
+            return render(request,'editar-perfil-admin.html',{'mensaje':'ERROR: fecha de nacimiento'})
         if calculoFecha(nacimiento)>90:
             cliente.close()
-            return HttpResponse("ERROR: fechade nacimiento")
+            return render(request,'editar-perfil-admin.html',{'mensaje':'ERROR: fechade nacimiento'})
     if nombre=="":
         nombre=buscar['nombre']
     if apellido=="":
@@ -548,7 +579,7 @@ def editarPerfilAdmin(request):
             }
         })
     cliente.close()
-    return HttpResponse("informacion actualizada") 
+    return render(request,'editar-perfil-admin.html',{'mensaje':'informacion actualizada'})
 
 def paginaEditarLibro(request):
     return render(request,'editar-libro.html')
@@ -559,11 +590,15 @@ def Rellenareditarlibro(request):
     db=cliente['Libreria']
     codigo=request.GET["codigo"]
     libros=db['libro']
-    ObjectIdistance=ObjectId(codigo)
+    try:
+        ObjectIdistance=ObjectId(codigo)
+    except:
+        cliente.close()
+        return render(request,'editar-libro.html',{'mensaje':'ERROR: codigo libro no existe'})
     buscar=libros.find_one({'_id':ObjectIdistance})
     if buscar==None:
         cliente.close()
-        return HttpResponse("ERROR: ISSN no existe") 
+        return render(request,'editar-libro.html',{'mensaje':'ERROR: codigo libro no existe'})
     Titulo=buscar['Titulo']
     Autor=buscar['Autor']
     PublicA=buscar['PublicA']
@@ -575,76 +610,70 @@ def Rellenareditarlibro(request):
     Precio=buscar['Precio']
     Portada=buscar['Portada']
     cliente.close()
-    return render(request,'editar-libro.html',{'Titulo':Titulo,'Autor':Autor,'PublicA':PublicA,'Genero':Genero,'numeropaginas':numeropaginas,'Editorial':Editorial,'Idioma':Idioma,'Estado':Estado,'Precio':Precio,'Portada':Portada,})
+    return render(request,'editar-libro.html',{'codigo':codigo,'Titulo':Titulo,'Autor':Autor,'PublicA':PublicA,'Genero':Genero,'numeropaginas':numeropaginas,'Editorial':Editorial,'Idioma':Idioma,'Estado':Estado,'Precio':Precio,'Portada':Portada,})
 
 
 def editarlibro(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
-    nombre=request.GET["nombre"]
-    apellido=request.GET["apellido"]
-    telefono=request.GET["telefono"]
-    nacimiento=request.GET["nacimiento"]
-    correoac=request.GET["correoac"]
-    correonu=request.GET["correonu"]
-    contraAc=request.GET["contraAc"]
-    contraNu=request.GET["contraNu"]
-    confcontra=request.GET["confcontra"]
+    codigo=request.GET['codigo']
+    Titulo=request.GET['Titulo']
+    Autor=request.GET['Autor']
+    PublicA=request.GET['PublicA']
+    Genero=request.GET['Genero']
+    numeropaginas=request.GET['numeropaginas']
+    Editorial=request.GET['Editorial']
+    Idioma=request.GET['Idioma']
+    Estado=request.GET['Estado']
+    Precio=request.GET['Precio']
+    Portada=request.GET['Portada']
 
-    admins=db['admin']
-    buscar=admins.find_one({'correo':correoac})
-    if buscar==None:
-        return HttpResponse("ERROR: correo actual incorrecto")
-    if correonu!='':
-        clientes = db['cliente']
-        buscar1=clientes.find_one({'correo':correonu})
-        if buscar1!=None:
-            cliente.close()
-            return HttpResponse("ERROR: correo no disponible")
-        buscar1=admins.find_one({'correo':correonu})
-        if buscar1!=None:
-            cliente.close()
-            return HttpResponse("ERROR: correo no disponible")
-    
-    if contraAc!=buscar['contraseña']:
-        cliente.close()
-        return HttpResponse("ERROR: contraseña actual es incorrecta") 
-    if contraNu!=confcontra:
-        cliente.close()
-        return HttpResponse("ERROR: las contraseñas no coinciden")
-    if nacimiento!='':
-        if calculoFecha(nacimiento)<18:
-            cliente.close()
-            return HttpResponse("ERROR: fecha de nacimiento")
-        if calculoFecha(nacimiento)>90:
-            cliente.close()
-            return HttpResponse("ERROR: fechade nacimiento")
-    if nombre=="":
-        nombre=buscar['nombre']
-    if apellido=="":
-        apellido=buscar['apellido']
-    if telefono=="":
-        telefono=buscar['telefono']
-    if nacimiento=="":
-        nacimiento=buscar['nacimiento']
-    if correonu=="":
-        correonu=buscar['correo']
-    if contraNu=="":
-        contraNu=buscar['contraseña']
-    admins.update_one({
-        'correo':correoac
+    libros=db['libro']
+    ObjectIdistance=ObjectId(codigo)
+    buscar=libros.find_one({'_id':ObjectIdistance})
+    if Titulo=='':
+        Titulo=buscar['Titulo']
+    if Autor=='': 
+        Autor=buscar['Autor']
+    if PublicA=='': 
+        PublicA=buscar['PublicA']
+    if Genero=='': 
+        Genero=buscar['Genero']
+    if numeropaginas=='': 
+        numeropaginas=buscar['numeropaginas']
+    if Editorial=='': 
+        Editorial=buscar['Editorial']
+    if Idioma=='': 
+        Idioma=buscar['Idioma']
+    if Estado=='': 
+        Estado=buscar['Estado']
+    if Precio=='': 
+        Precio=buscar['Precio']
+    if Portada=='': 
+        Portada=buscar['Portada']
+
+    libros.update_one({
+        '_id':ObjectId(codigo)
         },{
             "$set":{
-                'nombre':nombre,
-                'apellido':apellido,
-                'telefono':telefono,
-                'nacimiento':nacimiento,
-                'correo':correonu,
-                'contraseña':contraNu,
+                'Titulo':Titulo,
+                'Autor':Autor,
+                'PublicA':PublicA,
+                'Genero':Genero,
+                'numeropaginas':numeropaginas,
+                'Editorial':Editorial,
+                'Idioma':Idioma,
+                'Estado':Estado,
+                'Precio':Precio,
+                'Portada':Portada,
             }
         })
     cliente.close()
-    return HttpResponse("informacion actualizada") 
+    return render(request,'editar-libro.html',{'mensaje':'informacion actualizada'})
+    
+
+
+
 
     

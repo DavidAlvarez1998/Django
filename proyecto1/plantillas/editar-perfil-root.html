@@ -7,24 +7,51 @@
 	<title>Editar Perfil Root</title>
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
-	<form action="/perfilRoot/" method="GET">
-		<div>
-			<input type="submit" value="REGRESAR">
-		</div>
-	</form>
+
+	
+		
+	
 </head>
 
 <body>
-	<form action="/editarroot/" method="GET">
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
 
-		<div class="info-perfil">
+			<div class="menu">
+				<nav>
+					<ul>
+						<li ><a href="#">Información</a></li>
+						<li ><a href="#footer" >Contacto</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</header>
+
+
+	<div class="info-perfil-root">
+		<form action="/editarroot/" method="GET">
+
+		
 			<h1>Cambiar información de perfil ROOT</h1>
+			<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
 			<input type="text" placeholder="Contraseña actual"name="contraActual">
 			<input type="text" placeholder="Contraseña nueva"name="contraNueva">
 			<input type="text" placeholder="Confirmar contraseña nueva"name="confContra">
-		</div>
+			<input type="submit" id="wasd1" value="ACTUALIZAR INFORMACIÓN">
+		</form>
+	</div>
 
-		<input type="submit" value="ACTUALIZAR INFORMACIÓN">
-	</form>
+	<div class="regresar-editar-perfil-root">
+			<form action="/perfilRoot/" method="GET">
+				<input type="submit" value="REGRESAR">
+			</form>
+	</div>	
+	
 </body>
 </html>
