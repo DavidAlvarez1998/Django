@@ -1,11 +1,12 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Eliminar libro</title>
-	<link rel="stylesheet" href="css\estilos.css">
-	<link rel="icon" href="lph.ico">
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
 	
 </head>
 
@@ -15,7 +16,7 @@
 	<header>
 		<div class="header-content">
 			<div class="logo">
-				<img src="lph.ico">
+				<img src="{% static 'lph.ico' %}">
 				<h1>Los <b>Libros</b> Hermanos</h1>
 			</div>
 
@@ -34,45 +35,42 @@
 
 	
 		<div class="eliminar-libro-buscar">
-			<form>
+			<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
+			<form action="/rellenarEliminarLibro/" method="GET">
 				<h1>ELIMINAR LIBRO</h1>
-				<input type="text" placeholder="Código libro">
+				<input type="text" placeholder="Código libro" name="codigo">
 				<input type="submit" id="boton-buscar-libro-eliminar" value="BUSCAR">
 			</form>
 
 		</div>
 		
-
-	
-		
-
-	
-
 	
 		<div class="datos-eliminar-libro">
-			<form>
+			<form action="/eliminarlibro/" method="GET">
 				<h1>Datos libro</h1>
-				<p>Cantidad de ejemplares: </p>
-				<p>Titulo: </p>
-				<p>Autor: </p>
-				<p>Editorial: </p>
-				<p>Nro paginas: </p>
-				<p>Genero: </p>
-				<p>ISSN: </p>
-				<p>Idioma: </p>
-				<p>Fecha publicación: </p>
-				<p>Precio: </p>
+				<p>Cantidad de ejemplares: {{Ejemplares}}</p>
+				<p>Titulo:{{Titulo}} </p>
+				<p>Autor:{{Autor}} </p>
+				<p>Editorial:{{Editorial}} </p>
+				<p>Nro paginas:{{numeropaginas}} </p>
+				<p>Genero:{{Genero}} </p>
+				<p>Idioma:{{Idioma}} </p>
+				<p>Fecha publicación:{{PublicA}} </p>
+				<p>Precio:{{Precio}} </p>
+				<input type="text" name="codigo" placeholder="Codigo actual" readonly=""value={{codigo}} >
 				<input type="submit" id="boton-eliminar-libro" value="Eliminar libro">
 			</form>
+			<img src={{Portada}}>
 		</div>
 
 		
 	
 
-	<div class="botones-volver-adm-eliminar">
-		<a href="principal-admin.html"><input type="button" value="REGRESAR"></a>
-		<a href="editar-perfil-admin.html"><input type="button" value="EDITAR PERFIL"></a>
-	</div>
+		<div class="botones-volver-editar-libro">
+			<form action="/paginaprincipalAdmin/" method="GET">
+				<a><input type="submit" value="REGRESAR"></a>
+			</form>
+		</div>
 
 
 	<footer>

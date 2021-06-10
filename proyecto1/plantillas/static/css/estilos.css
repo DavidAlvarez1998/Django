@@ -1400,276 +1400,6 @@ header{
 	color: black;
 }
 
-/* editar perfil*/
-/*acomoda el bloque de info-personal en el centro*/
-.info-personal{
- 	width: 90%;
- 	max-width: 1000px;
- 	padding: 60px 0;
- 	margin: auto;
- 	overflow: hidden;
-
- }
-/* h1 centrado y editado*/
- .info-personal h1{
- 	margin: 0;
- 	width: 50%;
-	height: 50%;
-	background: transparent;
-	color: #000;
-	top: 40%;
-	left: 45%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 10px 10px 20px;
-	text-align: center;
-	font-size: 22px;
- }
-/* configuracion del bloque de las entradas*/
- .info-personal .input{
- 	width: 100%;
-	height: 100%;
-	background: transparent;
-	color: #fff;
-	top: 70%;
-	left: 55%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	text-align: left;
-	color: #000;
- }
-/* configuracion de las entradas*/
- .info-personal input{
- 	width: 65%;
- 	border: none;
-	border-bottom: 1px solid #000;
-	background: transparent;
-	outline: none;
-	height: 40px;
-	font-size: 16px;
-	margin: 0;
-	padding: 0;
-	font-weight: bold;
-	display: block;
-
-
- }
-/*config del bloque de funciones*/
- .funciones{
- 	width: 90%;
- 	max-width: 1000px;
-
- 	padding: 60px 0;
- 	margin: auto;
- 	overflow: hidden;
- }
-/*config de h1*/
-.funciones h1{
-	display: flex;
-	height: 30%;
-	width: 25%;
-	top: 70%;
-	left: 48%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	align-items: center;
-	justify-content: center;
-	font-size: 22px;;
-	color: #000;
-
-	
-}
-/* config label1*/
-.funciones #label1{
-	width: 18%;
-	height: auto;
-	top: 90%;
-	left: 47.2%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	text-align: right;
-	color: #000;
-}
-/*config label2*/
-.funciones #label2{
-	width: 20%;
-	height: auto;
-	top: 100%;
-	left: 45%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	text-align: right;
-	color: #000;
-}
-
-	
-/*config checkbox 1*/
-.funciones #cb1{
- 	width: 18%;
- 	height: auto;
-	top: 90%;
-	left: 40%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	
-	
-}
-
-/*config checkbox 2*/
- .funciones #cb2{
- 	width: 18%;
-	height: auto;
-	top: 100%;
-	left: 40%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-}
-
-/* irrelebante*/
-
-/*.funciones input{
-	border: none;
-	border-bottom: 1px solid #000;
-	background: transparent;
-	outline: none;
-	height: 40px;
-	color: black;
-	font-size: 16px;
-}
-*/
-
-/* config bloque de info-perfil*/
- .info-perfil{
- 	width: 90%;
- 	height: 50%;
- 	max-width: 1000px;
- 	max-height: 1000px;
- 	padding: 60px 30px;
- 	margin: auto;
- 	overflow: hidden;
- }
-
-/* config h1*/
- .info-perfil h1{
- 	display: flex;
-	height: 100%;
-	width: 100%;
- 	top: 120%;
-	left: 40%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	align-items: center;
-	justify-content: center;
-	font-size: 22px;
- }
-
-/* config bloque de entradas*/
-.info-perfil .input2{
- 	width: 28%;
-	height: 100%;
-	background: transparent;
-	color: #fff;
-	top: 180%;
-	left: 50%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	align-items: center;
-	justify-content: center;
-	font-size: 22px;;
-	color: #000;
-}
-
-
-/* config entradas */
- .info-perfil input{
- 	width: 100%;
- 	border: none;
-	border-bottom: 1px solid #000;
-	background: transparent;
-	outline: none;
-	height: 40px;
-	font-size: 16px;
-	margin: 0;
-	padding: 0;
-	font-weight: bold;
-	display: block;
- }
-
-
-/*config bloque sudmit*/
-.boton{
-	width: 20%;
-	height: 100%;
-	top: 220%;
-	left: 50%;
-	position: absolute;
-	transform: translate(-40%, -50%);
-	box-sizing: border-box;
-	padding: 70px 30px;
-	align-items: center;
-	justify-content: center;
- 	
-}
-
-/*config sudmit*/
-.boton input{
-	position: absolute;
-	border: none;
-	outline: none;
-	height: 40px;
-	background: #FFFF00;
-	border-radius: 20px;
-	border-bottom: 3px solid #FFBF00;
-	outline: none;
-	color: #lightblue;
-	font-size: 16px;
-	
-}
-
-@media screen and (max-width: 1300px) {
-	.funciones #label2{
-		width: 29%;
-	}
-	.funciones #label1{
-		width: 29%;
-	}
-}
-
-@media screen and (max-width: 1000px) {
-	.funciones #label2{
-		width: 45%;
-	}
-	.funciones #label1{
-		width: 45%;
-	}
-}
-
-@media screen and (max-width: 700px) {
-	.funciones #label2{
-		width: 70%;
-	}
-	.funciones #label1{
-		width: 77%;
-	}
-
-}
 
 /*Inicio Cliente*/
 .navegador-cliente{
@@ -1753,4 +1483,301 @@ header{
 	border: 1px solid black;
 	width: 250px;
 	height: 300px;
+}
+
+
+/* Comprar o Reservar libro */
+
+
+.info-precio-cantidad{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.info-precio-cantidad{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.info-precio-cantidad p{
+	width: 230px;
+	height: 30px;
+	font-size: 20px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.comprar-libro-info{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 30px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.comprar-libro-info{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.comprar-libro-info p{
+	width: 230px;
+	height: 30px;
+	font-size: 20px;
+	margin: 8px 0px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.seleccionar-cantidad-y-compra{
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 20px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.seleccionar-cantidad-y-compra form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.seleccionar-cantidad-y-compra form input{
+	width: 230px;
+	height: 30px;
+	font-size: 15px;
+	margin: 8px 10px;
+	border-radius: 9%;
+	box-shadow: 0 4px 25px -12px #000000;
+}
+
+.seleccionar-cantidad-y-compra form input#boton-comprar-libro{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 250px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	margin: 10px 0px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+	transition: color 300ms;
+}
+
+.seleccionar-cantidad-y-compra form input#boton-comprar-libro:hover{
+	color: black;
+}
+
+.seleccionar-cantidad-y-compra form input#boton-reservar-libro{
+	background: #0883E3;
+	color: white;
+	font-size: 18px;
+	width: 250px;
+	height: 30px;
+	box-shadow: 0 4px 25px -12px #000000;
+	margin: 0px 0px; 
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	border-bottom: 3px solid #0883E3;
+	transition: color 300ms;
+}
+
+.seleccionar-cantidad-y-compra form input#boton-reservar-libro:hover{
+	color: black;
+}
+
+.botones-volver-comprar-libro a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 10%;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: 90px;
+	margin: 0px 20px; 
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	transition: color 300ms;
+
+}
+
+.botones-volver-comprar-libro a input:hover{
+	color: #0883E3;
+}
+
+/* Editar perfil cliente */
+
+.info-personal-editar-perf-cliente {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 20px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.info-personal-editar-perf-cliente form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.info-personal-editar-perf-cliente form input{
+	width: 260px;
+	height: 60px;
+	font-size: 15px;
+	margin: 8px 10px;
+	border-radius: 0%;
+	box-shadow: 0 4px 25px -12px #000000;
+	border: none;
+	border-bottom: 1px solid #000;
+	outline: none;
+	height: 40px;
+	color: black;
+	font-size: 16px;
+
+}
+
+.info-personal-editar-perf-cliente form .datos-ubicacion-perfil-cliente select{
+	width: 260px;
+	height: 30px;
+	font-size: 20px;
+	margin: 8px 10px;
+	border-radius: 0%;
+	box-shadow: 0 4px 25px -12px #000000;
+	outline: none;
+	border: none;
+	color: black;
+	font-size: 16px;
+}
+
+.funciones-editar-perfil-cliente {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 20px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.funciones-editar-perfil-cliente form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+
+}
+
+.funciones-editar-perfil-cliente form input{
+	width: 260px;
+	font-size: 15px;
+	margin: 8px 10px;
+	border-radius: 0%;
+	box-shadow: 0 4px 25px -12px #000000;
+	height: 20px;
+
+}
+
+.info-perfil-editar-cliente {
+	top:  80px;
+	color: black;
+	text-shadow: 1px 4px 7px white;
+	text-align: center;
+	font-size: 20px;
+	position: relative;
+	justify-content: space-between;
+}
+
+.info-perfil-editar-cliente form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.info-perfil-editar-cliente form input{
+	width: 260px;
+	font-size: 15px;
+	margin: 8px 10px;
+	border-radius: 0%;
+	box-shadow: 0 4px 25px -12px #000000;
+	border: none;
+	border-bottom: 1px solid #000;
+	outline: none;
+	height: 40px;
+	color: black;
+	font-size: 16px;
+}
+
+.info-perfil-editar-cliente form input#boton-actualizar-editar-cliente{
+	background: #0883E3;
+	color: white;
+	font-size: 20px;
+	border-radius: 20px;
+	width: 300px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	margin: 0px 0px; 
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	transition: color 300ms;
+}
+
+.info-perfil-editar-cliente form input#boton-actualizar-editar-cliente:hover{
+	color: black;
+}
+
+.boton-regresar-editar-perfil a input{
+	background: #FFC000;
+	color: white;
+	font-size: 20px;
+	border-radius: 20px;
+	width: 160px;
+	height: 40px;
+	box-shadow: 0 4px 25px -12px #000000;
+	top: 90px;
+	margin: 0px 20px; 
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+	transition: color 300ms;
+
+}
+
+.boton-regresar-editar-perfil a input:hover{
+	color: #0883E3;
 }

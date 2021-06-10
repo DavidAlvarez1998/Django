@@ -33,6 +33,7 @@
 	</header>
 
 	<div class="formulario-registro">
+		
 	<form action="/registrarCliente/" method="GET">
 		<div class="datos-personales">
 			<input type="text" placeholder="Nombres" name="nombre">
@@ -289,10 +290,12 @@
 			<input type="text" placeholder="Contraseña"name="contraseña">
 			<input type="text" placeholder="Confirmar contraseña"name="confcontraseña">
 		</div>
+		<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
 
 		<input type="submit" id="enviar-registro" value="Enviar y registrarme">
 
 	</form>
+	
 </div>
 <div class="boton-volver-registro-cliente">
 	<form action="/index/" method="GET">

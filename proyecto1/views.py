@@ -20,13 +20,13 @@ def calculoFecha(nacimiento):
     resultado-=((actual.month,actual.day)<(nacimiento.month,nacimiento.day))
     return resultado
 
-def editarPerfilRoot(request):#
+def editarPerfilRoot(request):
     return render(request,'editar-perfil-root.html')
 
-def perfilRoot(request):#
+def perfilRoot(request):
     return render(request,'principal-root.html')
 
-def editarroot(request):#
+def editarroot(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -62,7 +62,7 @@ def editarroot(request):#
     cliente.close()
     return render(request,'editar-perfil-root.html',{'mensaje':'informacion actualizada'})
 
-def root():#
+def root():
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     usuarioroot = db['root']
@@ -75,11 +75,11 @@ def root():#
     })
     cliente.close()
 
-def index(request):#
+def index(request):
     root()
     return render(request,'index.html',{"nombre":'adjuan123@gmail.com',"contra":'3168720993'}) 
 
-def buscar(request):#
+def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -97,18 +97,21 @@ def buscar(request):#
             librosAutor=librosAutor+documento['Titulo']+", "
         return render(request,'home-client.html',{'mensaje':librosAutor+'  :  son los libros que tenemos del autor '+autor})
     else:
+        titulo=[]
         autor=[]
         imagen=[]
         for documento in libros.find({'Titulo':mensaje}):
+            titulo.append(documento['Titulo'])
             autor.append(documento['Autor'])
             imagen.append(documento['Portada'])
         while len(imagen)<5:
+            titulo.append('')
             autor.append('')
             imagen.append('')
         cliente.close()
-        return render(request,'home-client.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4]})
+        return render(request,'home-client.html',{"titulo0":titulo[0],"autor0":autor[0],"imagen0":imagen[0],"titulo1":titulo[1],"autor1":autor[1],"imagen1":imagen[1],"titulo2":titulo[2],"autor2":autor[2],"imagen2":imagen[2],"titulo3":titulo[3],"autor3":autor[3],"imagen3":imagen[3],"titulo4":titulo[4],"autor4":autor[4],"imagen4":imagen[4]})
 
-def buscarInvitado(request):#
+def buscarInvitado(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -137,11 +140,10 @@ def buscarInvitado(request):#
         cliente.close()
         return render(request,'mostrar-libro.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4]})
 
-
-def registro(request):#
+def registro(request):
     return render(request,'register.html') 
 
-def registrarCliente(request):#
+def registrarCliente(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -155,6 +157,9 @@ def registrarCliente(request):#
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
     confcontraseña=request.GET["confcontraseña"]
+    if nombre or apellido or telefono or nacimiento or pais or direccion or usuario or correo:
+        cliente.close()
+        return render(request,'register.html',{'mensaje':'ERROR: debe de completar todos los campos'})
     admins=db['admin']
     buscar=admins.find_one({'correo':correo})
     if buscar!=None:
@@ -202,19 +207,23 @@ def registrarCliente(request):#
     cliente.close()
     return render(request,'index.html')
 
-def iniciarSecion(request):#
+def iniciarSecion(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
+    if correo=='':
+        return render(request,'index.html',{'mensaje':'ERROR: digite correo'})
+    if contraseña=='':
+        return render(request,'index.html',{'mensaje':'ERROR: digite contraseña'})
     if correo=="root":                          #saber si el usuario que ingresa es el root
         usuarioRoot = db['root']
         root=usuarioRoot.find_one({'nombre':'root'})
         contraseñaroot=root['contraseña']
         if contraseña!=contraseñaroot:
             cliente.close()
-            return HttpResponse("ERROR: contraseña incorrecta")
+            return render(request,'index.html',{'mensaje':'ERROR: contraseña incorrecta'})
         cliente.close()
         return render(request,'principal-root.html')
     
@@ -248,10 +257,10 @@ def iniciarSecion(request):#
     cliente.close()
     return render(request,'home-client.html') 
 
-def perfil(request):#
+def perfil(request):
     return render(request,'editar-perfil.html') 
 
-def editarPerfil(request):#
+def editarPerfil(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -326,10 +335,10 @@ def editarPerfil(request):#
     cliente.close()
     return render(request,'editar-perfil.html',{'mensaje':'Informacion actulizada'})
 
-def paginaAgregarlibro(request):#
+def paginaAgregarlibro(request):
     return render(request,'Agregar-libro.html')
 
-def agregarLibro(request):#
+def agregarLibro(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -348,7 +357,7 @@ def agregarLibro(request):#
     if buscar!=None:
         if buscar['Autor']==Autor:
             con=[]
-            for documento in libros.find({'Titulo':Titulo},{'Autor':Autor}):
+            for documento in libros.find({'Titulo':Titulo},{'Autor':Autor}):################################################
                 con.append(documento)
             con=len(con)+1
             libros.update_many({'Titulo':Titulo},{"$set":{'Ejemplares':con}})
@@ -414,7 +423,7 @@ def agregarLibro(request):#
     cliente.close()
     return render(request,'Agregar-libro.html',{'mensaje':'Libro Agregado'})
 
-def crearAdmin(request): #
+def crearAdmin(request): 
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -454,7 +463,7 @@ def crearAdmin(request): #
     cliente.close()
     return render(request,'principal-root.html',{'mensaje':'admin creado'})
 
-def registroAdmin(request):#
+def registroAdmin(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
     db=cliente['Libreria']
@@ -506,10 +515,10 @@ def registroAdmin(request):#
     cliente.close()
     return render(request,'index.html') 
 
-def paginaEditarAdmin(request):#
+def paginaEditarAdmin(request):
     return render(request,'editar-perfil-admin.html')
 
-def paginaprincipalAdmin(request):#
+def paginaprincipalAdmin(request):
     return render(request,'principal-admin.html')
 
 def editarPerfilAdmin(request):
@@ -525,7 +534,6 @@ def editarPerfilAdmin(request):
     contraAc=request.GET["contraAc"]
     contraNu=request.GET["contraNu"]
     confcontra=request.GET["confcontra"]
-
     admins=db['admin']
     buscar=admins.find_one({'correo':correoac})
     if buscar==None:
@@ -612,7 +620,6 @@ def Rellenareditarlibro(request):
     cliente.close()
     return render(request,'editar-libro.html',{'codigo':codigo,'Titulo':Titulo,'Autor':Autor,'PublicA':PublicA,'Genero':Genero,'numeropaginas':numeropaginas,'Editorial':Editorial,'Idioma':Idioma,'Estado':Estado,'Precio':Precio,'Portada':Portada,})
 
-
 def editarlibro(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
     db = cliente.Libreria
@@ -628,8 +635,9 @@ def editarlibro(request):
     Estado=request.GET['Estado']
     Precio=request.GET['Precio']
     Portada=request.GET['Portada']
-
     libros=db['libro']
+    if codigo=='':
+        return render(request,'editar-libro.html',{'mensaje':'ERROR: primero debe de buscar un libro por su codigo libro'})
     ObjectIdistance=ObjectId(codigo)
     buscar=libros.find_one({'_id':ObjectIdistance})
     if Titulo=='':
@@ -652,7 +660,6 @@ def editarlibro(request):
         Precio=buscar['Precio']
     if Portada=='': 
         Portada=buscar['Portada']
-
     libros.update_one({
         '_id':ObjectId(codigo)
         },{
@@ -671,9 +678,56 @@ def editarlibro(request):
         })
     cliente.close()
     return render(request,'editar-libro.html',{'mensaje':'informacion actualizada'})
+
+def paginaEliminarLibro(request):
+    return render(request,'eliminar-libro.html')
+
+def rellenarEliminarLibro(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    codigo=request.GET["codigo"]
+    if codigo=='':
+        return render(request,'eliminar-libro.html',{'mensaje':'ERROR: primero debe de buscar un libro por su codigo libro'})
+    try:
+        ObjectIdistance=ObjectId(codigo)
+    except:
+        cliente.close()
+        return render(request,'eliminar-libro.html',{'mensaje':'ERROR: codigo libro no existe'})
+    libros=db['libro']
+    buscar=libros.find_one({'_id':ObjectIdistance})
+    Titulo=buscar['Titulo']
+    Autor=buscar['Autor']
+    PublicA=buscar['PublicA']
+    Genero=buscar['Genero']
+    numeropaginas=buscar['numeropaginas']
+    Editorial=buscar['Editorial']
+    Idioma=buscar['Idioma']
+    Estado=buscar['Estado']
+    Precio=buscar['Precio']
+    Portada=buscar['Portada']
+    Ejemplares=buscar['Ejemplares']
+    cliente.close()
+    return render(request,'eliminar-libro.html',{'Titulo':Titulo,'Autor':Autor,'PublicA':PublicA,'Genero':Genero,'numeropaginas':numeropaginas,'Editorial':Editorial,'Idioma':Idioma,'Estado':Estado,'Precio':Precio,'Portada':Portada,'Ejemplares':Ejemplares,'codigo':codigo})
     
+def eliminarlibro(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    codigo=request.GET["codigo"]
+    ObjectIdistance=ObjectId(codigo)
+    libros=db['libro']
+    libros.delete_one({'_id':ObjectIdistance})
+    cliente.close()
+    return render(request,'eliminar-libro.html',{'mensaje':'Libro Eliminado'})
 
-
-
-
+def paginaComprarLibro(request):
+    return render(request,'comprar-reservar-libro.html')
     
+def paginaHomeClient(request):
+    return render(request,'home-client.html')
+
+
+
+
+

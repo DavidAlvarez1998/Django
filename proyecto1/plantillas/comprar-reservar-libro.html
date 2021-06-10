@@ -1,0 +1,112 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Comprar libro</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+</head>
+
+
+<body>
+	<!--Cabeza-Menu-->
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="navegador-cliente">
+				<nav>
+					<ul>
+					
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Perfil">
+						</form>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Mensajes">
+						</form>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Noticias">
+						</form>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Compras y reservas">
+						</form>
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Cerrar sesión">
+						</form>
+
+						<li class="buscador-cliente">
+							<form action="/buscar/" method="GET">
+								<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
+								<input id="btn-search-clietn" type="submit" value="Buscar">
+							</form>
+							
+							
+
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+
+	<div class="info-precio-cantidad">
+		<h1>COMPRAR LIBRO</h1>
+
+		<img src="https://i.pinimg.com/236x/72/a8/7f/72a87f18c6aa0ae668ec174c8cca8f6f.jpg">
+
+		<p>Precio: <FONT COLOR="green">texto</FONT></p>
+		<p>Cantidad disponible: <FONT COLOR="green">texto</FONT></p>
+	</div>
+
+	<div class="comprar-libro-info">
+		
+		<p>Titulo: <FONT COLOR="blue">texto</FONT></p>
+		<p>Autor: <FONT COLOR="blue">texto</FONT></p>
+		<p>Año publicacion: <FONT COLOR="blue">texto</FONT></p>
+		<p>Genero: <FONT COLOR="blue">texto</FONT></p>
+		<p>Nro Paginas: <FONT COLOR="blue">texto</FONT></p>
+		<p>Editorial: <FONT COLOR="blue">texto</FONT></p>
+		<p>Idioma: <FONT COLOR="blue">texto</FONT></p>
+		<p>Estado: <FONT COLOR="blue">texto</FONT></p>
+		<p>Fecha publicación: <FONT COLOR="blue">texto</FONT></p>
+		
+	</div>
+
+	<div class="seleccionar-cantidad-y-compra">
+		<p>Dinero disponible: <FONT COLOR="green">texto</FONT></p>
+		<form>
+			<input type="number" name="Cantidad" placeholder="Indique la cantidad a comprar">
+			<input type="submit" id="boton-comprar-libro" value="Comprar Libro">
+			<input type="submit" id="boton-reservar-libro" value="Reservar Libro">
+		</form>
+	</div>
+
+
+	<div class="botones-volver-comprar-libro">
+		<form action="/paginaHomeClient/" method="GET">
+			<a><input type="submit" value="REGRESAR"></a>
+		</form>
+	</div>
+
+
+
+	<!--Pie de pagina-->
+	<footer>
+		<div class="foot">
+			<p id="footer">
+			Nuestros contactos
+			</p>
+			<p>Tel: (+57) 321 6549870</p>
+			<p>Correo: <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=polloshermanoslib@melos.com" target="_BLANK">polloshermanoslib@melos.com</a></p>
+		</div>
+	</footer>
+
+</body>
+</html>
