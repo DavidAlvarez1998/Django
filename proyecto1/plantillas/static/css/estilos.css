@@ -1689,7 +1689,7 @@ header{
 	justify-content: space-between;
 }
 
-.funciones-editar-perfil-cliente form{
+.funciones-editar-perfil-cliente{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -1698,13 +1698,23 @@ header{
 
 }
 
-.funciones-editar-perfil-cliente form input{
-	width: 260px;
-	font-size: 15px;
+.funciones-editar-perfil-cliente input#cb1{
+	width: 300px;
+	font-size: 20px;
 	margin: 8px 10px;
 	border-radius: 0%;
 	box-shadow: 0 4px 25px -12px #000000;
-	height: 20px;
+	height: 26px;
+
+}
+
+.funciones-editar-perfil-cliente input#cb2{
+	width: 300px;
+	font-size: 20px;
+	margin: 8px 10px;
+	border-radius: 0%;
+	box-shadow: 0 4px 25px -12px #000000;
+	height: 26px;
 
 }
 
@@ -1718,7 +1728,7 @@ header{
 	justify-content: space-between;
 }
 
-.info-perfil-editar-cliente form{
+.info-perfil-editar-cliente {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -1726,7 +1736,7 @@ header{
 	position: relative;
 }
 
-.info-perfil-editar-cliente form input{
+.info-perfil-editar-cliente input{
 	width: 260px;
 	font-size: 15px;
 	margin: 8px 10px;
@@ -1740,7 +1750,7 @@ header{
 	font-size: 16px;
 }
 
-.info-perfil-editar-cliente form input#boton-actualizar-editar-cliente{
+.info-perfil-editar-cliente input#boton-actualizar-editar-cliente{
 	background: #0883E3;
 	color: white;
 	font-size: 20px;
@@ -1756,11 +1766,11 @@ header{
 	transition: color 300ms;
 }
 
-.info-perfil-editar-cliente form input#boton-actualizar-editar-cliente:hover{
+.info-perfil-editar-cliente input#boton-actualizar-editar-cliente:hover{
 	color: black;
 }
 
-.boton-regresar-editar-perfil a input{
+.boton-regresar-editar-perfil form input{
 	background: #FFC000;
 	color: white;
 	font-size: 20px;
@@ -1778,6 +1788,6 @@ header{
 
 }
 
-.boton-regresar-editar-perfil a input:hover{
+.boton-regresar-editar-perfil form input:hover{
 	color: #0883E3;
 }

@@ -7,6 +7,8 @@
 	<title>Editar Perfil</title>
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
+	
+
 </head>
 
 <body>
@@ -301,6 +303,7 @@
 					</select>
 			</div>
 				<input type="text" placeholder="Dirección"name="direccion">
+			</div>
 		
 		
 		<div class="funciones-editar-perfil-cliente">
@@ -311,7 +314,7 @@
 				<input type="checkbox" id="cb2" value="mod-noticias-check">
 		</div>
 
-		<div class="info-perfil-editar-cliente"></div>
+		<div class="info-perfil-editar-cliente">
 			<h1>Cambiar información de perfil</h1>
 				
 				<input type="text" placeholder="Correo actual"name="correoActual">
@@ -321,20 +324,23 @@
 				<input type="text" placeholder="Contraseña nueva"name="contraseñaNueva">
 				<input type="text" placeholder="Confirmar contraseña nueva"name="confimarContraseña">
 				<input type="submit" id= "boton-actualizar-editar-cliente" value="ACTUALIZAR INFORMACIÓN">
+		</div>
 			</form>
 		
-		</div>
-	</div>
+
+
+
+
+			<div class="boton-regresar-editar-perfil">
+				<form action="/paginaHomeClient/" method="GET">
+					<input type="submit" value="REGRESAR">
+				</form>
+			</div>
+	
 		
-		
+	
 
-
-
-	<div class="boton-regresar-editar-perfil">
-		<form action="/paginaHomeClient/" method="GET">
-			<a><input type="submit" value="REGRESAR"></a>
-		</form>
-	</div>
+	
 
 
 	<footer>

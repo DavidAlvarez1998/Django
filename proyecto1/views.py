@@ -77,7 +77,7 @@ def root():
 
 def index(request):
     root()
-    return render(request,'index.html',{"nombre":'adjuan123@gmail.com',"contra":'3168720993'}) 
+    return render(request,'index.html') 
 
 def buscar(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -157,7 +157,7 @@ def registrarCliente(request):
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
     confcontraseña=request.GET["confcontraseña"]
-    if nombre or apellido or telefono or nacimiento or pais or direccion or usuario or correo:
+    if nombre=='' or apellido=='' or telefono=='' or nacimiento=='' or pais=='' or direccion=='' or usuario=='' or correo=='':
         cliente.close()
         return render(request,'register.html',{'mensaje':'ERROR: debe de completar todos los campos'})
     admins=db['admin']
@@ -186,12 +186,13 @@ def registrarCliente(request):
         cliente.close()
         return render(request,'register.html',{'mensaje':'ERROR: contraseña no coincide'})
     if nacimiento!='':
-        if calculoFecha(nacimiento)<18:
+        años=calculoFecha(nacimiento)
+        if años<18:
             cliente.close()
             return render(request,'register.html',{'mensaje':'ERROR: debes de ser mayor de 18 años'})
         if calculoFecha(nacimiento)>90:
             cliente.close()
-            return render(request,'register.html',{'mensaje':'ERROR: fechade nacimiento'})
+            return render(request,'register.html',{'mensaje':'ERROR: fecha de nacimiento no puedes tener '+años+' años'})
     clientes=db['cliente']
     clientes.insert_one({
         'nombre':nombre,
@@ -214,6 +215,7 @@ def iniciarSecion(request):
     correo=request.GET["correo"]
     contraseña=request.GET["contraseña"]
     if correo=='':
+        cliente.close()
         return render(request,'index.html',{'mensaje':'ERROR: digite correo'})
     if contraseña=='':
         return render(request,'index.html',{'mensaje':'ERROR: digite contraseña'})
