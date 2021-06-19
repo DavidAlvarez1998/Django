@@ -1,0 +1,42 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Información</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+</head>
+<body>
+
+		<header>
+			<div class="header-content">
+				<div class="logo">
+					<img src="{% static 'lph.ico' %}">
+					<h1>Los <b>Libros</b> Hermanos</h1>
+				</div>
+			</div>
+		</header>
+
+		<div class="cont">
+			<h1>¿Quienes somos?</h1>
+			<p>Los libros hermanos es una libreria virtual que ofrece una 
+			amplia variedad de libros para todo tipo de lectores.</p>
+
+			<h1>¿Como funciona?</h1>
+			<p>Solo tienes que crear una cuenta de manera facil y rapida, iniciar sesión, y ya podras acceder a la biblioteca.</p>
+
+
+		</div>
+		<div class="msg-info">
+				<h2>¡Que disfrutes cada lectura!</h2>
+		</div>
+
+		<div class="boton-volver-registro-cliente">
+			<form action="/index/" method="GET">
+				<a><input type="submit" value="REGRESAR"></a>
+			</form>
+		</div>
+</body>
+</html>

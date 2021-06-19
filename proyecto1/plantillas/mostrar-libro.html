@@ -21,7 +21,7 @@
 				<form action="/buscarInvitado/" method="GET">
 					<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
 					<input id="btn-search-clietn" type="submit" value="Buscar">
-					
+					<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
 				</form>
 				
 			</li>
@@ -32,32 +32,85 @@
 	
 
 	<div class="client-home-vista">
-		<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
-		<div class="elemeto1"size:coverage >
-			<img src={{imagen0}}>
-			<a>{{autor0}}</a>
+	
+		
+		<div class="elemeto1">
+			
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen0}} type="image">
+				<a>{{autor0}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>
 		</div>
 
 		<div class="elemeto2">
-			<img src={{imagen1}}>
-			<a>{{autor1}}</a>
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen1}} type="image">
+				<a>{{autor1}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>
+			
 		</div>
 
 		<div class="elemeto3">
-			<img src={{imagen2}}>
-			<a>{{autor2}}</a>
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen2}} type="image">
+				<a>{{autor2}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>	
 		</div>
 
 		<div class="elemeto4">
-			<img src={{imagen3}}>
-			<a>{{autor3}}</a>
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen3}} type="image">
+				<a>{{autor3}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>	
 		</div>
 
 		<div class="elemeto5">
-			<img src={{imagen4}}>
-			<a>{{autor4}}</a>
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen4}} type="image">
+				<a>{{autor4}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>	
 		</div>
-</div>
+
+		<div class="elemeto6">
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen5}} type="image">
+				<a>{{autor5}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>	
+		</div>
+
+		<div class="elemeto7">
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen6}} type="image">
+				<a>{{autor6}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>	
+		</div>
+
+		<div class="elemeto8">
+			<form action="/mensajeMostrarLibro/" method="GET">
+				<input src={{imagen7}} type="image">
+				<a>{{autor7}}</a><br>
+				<input type="submit" value="" disabled="disabled">
+				
+			</form>		
+		</div>
+
+	</div>
+		
+
 
 <div class="barra-inf"></div>
 

@@ -100,16 +100,19 @@ def buscar(request):
         titulo=[]
         autor=[]
         imagen=[]
+        id=[]
         for documento in libros.find({'Titulo':mensaje}):
             titulo.append(documento['Titulo'])
             autor.append(documento['Autor'])
             imagen.append(documento['Portada'])
-        while len(imagen)<5:
+            id.append(documento['_id'])
+        while len(imagen)<8:
             titulo.append('')
             autor.append('')
             imagen.append('')
+            id.append('')
         cliente.close()
-        return render(request,'home-client.html',{"titulo0":titulo[0],"autor0":autor[0],"imagen0":imagen[0],"titulo1":titulo[1],"autor1":autor[1],"imagen1":imagen[1],"titulo2":titulo[2],"autor2":autor[2],"imagen2":imagen[2],"titulo3":titulo[3],"autor3":autor[3],"imagen3":imagen[3],"titulo4":titulo[4],"autor4":autor[4],"imagen4":imagen[4]})
+        return render(request,'home-client.html',{"titulo0":titulo[0],"autor0":autor[0],"imagen0":imagen[0],"id0":id[0],"titulo1":titulo[1],"autor1":autor[1],"imagen1":imagen[1],"id1":id[1],"titulo2":titulo[2],"autor2":autor[2],"imagen2":imagen[2],"id2":id[2],"titulo3":titulo[3],"autor3":autor[3],"imagen3":imagen[3],"id3":id[3],"titulo4":titulo[4],"autor4":autor[4],"imagen4":imagen[4],"id4":id[4],"titulo5":titulo[5],"autor5":autor[5],"imagen5":imagen[5],"id5":id[5],"titulo6":titulo[6],"autor6":autor[6],"imagen6":imagen[6],"id6":id[6],"titulo7":titulo[7],"autor7":autor[7],"imagen7":imagen[7],"id7":id[7]})
 
 def buscarInvitado(request):
     cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
@@ -134,11 +137,11 @@ def buscarInvitado(request):
         for documento in libros.find({'Titulo':mensaje}):
             autor.append(documento['Autor'])
             imagen.append(documento['Portada'])
-        while len(imagen)<5:
+        while len(imagen)<8:
             autor.append('')
             imagen.append('')
         cliente.close()
-        return render(request,'mostrar-libro.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4]})
+        return render(request,'mostrar-libro.html',{"autor0":autor[0],"imagen0":imagen[0],"autor1":autor[1],"imagen1":imagen[1],"autor2":autor[2],"imagen2":imagen[2],"autor3":autor[3],"imagen3":imagen[3],"autor4":autor[4],"imagen4":imagen[4],"autor5":autor[5],"imagen5":imagen[5],"autor6":autor[6],"imagen6":imagen[6],"autor7":autor[7],"imagen7":imagen[7]})
 
 def registro(request):
     return render(request,'register.html') 
@@ -724,11 +727,34 @@ def eliminarlibro(request):
     return render(request,'eliminar-libro.html',{'mensaje':'Libro Eliminado'})
 
 def paginaComprarLibro(request):
-    return render(request,'comprar-reservar-libro.html')
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    id=request.GET['id']
+    libros=db['libro']
+    ObjectIdistance=ObjectId(id)
+    buscar=libros.find_one({'_id':ObjectIdistance})
+    titulo=buscar['Titulo']
+    autor=buscar['Autor']
+    año=buscar['PublicA']
+    genero=buscar['Genero']
+    numeropaginas=buscar['numeropaginas']
+    editorial=buscar['Editorial']
+    estado=buscar['Estado']
+    precio=buscar['Precio']
+    idioma=buscar['Idioma']
+    portada=buscar['Portada']
+    return render(request,'comprar-reservar-libro.html',{'titulo':titulo,'autor':autor,'año':año,'genero':genero,'numeropaginas':numeropaginas,'estado':estado,'precio':precio,'portada':portada,'idioma':idioma,'editorial':editorial})
     
 def paginaHomeClient(request):
     return render(request,'home-client.html')
 
+def infoIndex(request):
+     return render(request,'info.html')
+    
+def mensajeMostrarLibro(request):
+    mensaje="debe iniciar secion para poder comprar un libro"
+    return render(request,'mostrar-libro.html',{'mensaje':mensaje})
 
 
 

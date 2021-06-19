@@ -391,11 +391,7 @@ header{
 	color: black;
 }
 
-.client-home-vista{
-	top: 80px;
-	position: relative;
-}
-
+/*
 .client-home-vista div{
 	height: 100px;
 	width: 200px;
@@ -405,8 +401,57 @@ header{
 	display: flex;
 	align-items: grid;
 }
+*/
+
+.client-home-vista{
+	top: 80px;
+	margin: 0px 30px;
+	position: relative;
+	display: grid;
+	grid-gap: 80px;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+}
+
+
+.client-home-vista div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+	width: 250px;
+	height: 300px;
+}
+
 
 /* ------------------MODULO ADMIN Y MODULO ROOT -----------------*/
+
+.client-home-vista div form{
+	width:inherit;
+	height:inherit;
+}
+
+.client-home-vista div form input[src]{
+
+	width: 250px;
+	height: 300px;
+}
+
+.client-home-vista div form a{
+	color: #040edf;
+	font-size: large;
+	text-shadow: 1px 4px 7px black;
+	text-align: center;
+}
+
+.buscador-cliente{
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
 
 .opciones-root{
 	top:  80px;
@@ -1466,26 +1511,6 @@ header{
 	color: black;
 }
 
-.client-home-vista{
-	top: 80px;
-	margin: 0px 30px;
-	position: relative;
-	display: grid;
-	grid-gap: 80px;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(3, 1fr);
-}
-
-.client-home-vista div{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid black;
-	width: 250px;
-	height: 300px;
-}
-
-
 /* Comprar o Reservar libro */
 
 
@@ -1790,4 +1815,42 @@ header{
 
 .boton-regresar-editar-perfil form input:hover{
 	color: #0883E3;
+}
+
+/* Ventana Info*/
+.cont{
+	left: 25%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 80px;
+	position: relative;
+	flex-direction: column;
+	width: 50%;
+	text-align: center;
+
+}
+
+.cont h1{
+	font-size: 40px;
+	color: blue;
+	margin: 20px;
+	text-shadow: 1px 4px 12px gainsboro;
+}
+
+.cont p{
+	font-size: 25px;
+}
+
+.msg-info{
+	position: relative;
+	top: 80px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	color: #0883E3;
+	font-size: 60px;
+	margin: 50px;
+	text-shadow: 1px 4px 12px gainsboro;
 }
