@@ -57,6 +57,7 @@
 
 		<p>Precio: <FONT COLOR="green">{{precio}}</FONT></p>
 		
+		
 	</div>
 
 	<div class="comprar-libro-info">
@@ -73,10 +74,15 @@
 	</div>
 
 	<div class="seleccionar-cantidad-y-compra">
-		<form>
+
+		<form action="/comprarLibro/" method="GET">
+			<input type="text" name="id" readonly=""value={{id}} >
+			<input type="text" name="correo" placeholder="Correo">
+			<input type="password" name="contraseña" placeholder="Contraseña">
 			<input type="submit" id="boton-comprar-libro" value="Comprar Libro">
-			<input type="submit" id="boton-reservar-libro" value="Reservar Libro">
 		</form>
+		
+
 	</div>
 
 

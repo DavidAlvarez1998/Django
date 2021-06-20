@@ -17,14 +17,30 @@
 				<img src="{% static 'lph.ico' %}">
 				<h1>Los <b>Libros</b> Hermanos</h1>
 			</div>
+
+			<div class="iniciar-sesion-invitado-libro">
+				<nav>
+					<ul>
+						
+					<form action="/index/" method="GET">
+						<input type="submit" value="Iniciar Sesion">
+					</form>
+					<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
+					</ul>
+				</nav>
+			</div>
+
+
+
 			<li class="buscador-cliente">
 				<form action="/buscarInvitado/" method="GET">
 					<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
 					<input id="btn-search-clietn" type="submit" value="Buscar">
-					<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
 				</form>
 				
 			</li>
+
+			
 			
 		</div>
 		

@@ -1543,6 +1543,7 @@ header{
 
 .comprar-libro-info{
 	top:  80px;
+	width:100%;
 	color: black;
 	text-shadow: 1px 4px 7px white;
 	text-align: center;
@@ -1560,7 +1561,7 @@ header{
 }
 
 .comprar-libro-info p{
-	width: 230px;
+	width:80%;
 	height: 30px;
 	font-size: 20px;
 	margin: 8px 0px;
@@ -1853,4 +1854,57 @@ header{
 	font-size: 60px;
 	margin: 50px;
 	text-shadow: 1px 4px 12px gainsboro;
+}
+
+
+/* Boton info index */
+
+.menu nav ul form{
+	height: 100%;
+	margin: 0px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+
+.menu nav ul form input{
+	color: white;
+	background: transparent;
+	border: none;
+	outline: none;
+	transition: color 300ms;
+	font-size: 18px;
+}
+
+.menu nav ul form input:hover{
+	color: #0883E3;
+}
+
+/* Boton inicio sesión invitado cuando busca libro */
+
+
+.iniciar-sesion-invitado-libro nav ul form{
+	height: 100%;
+	margin: 0px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+
+.iniciar-sesion-invitado-libro nav ul form input{
+	color: white;
+	background: transparent;
+	border: none;
+	outline: none;
+	transition: color 300ms;
+	font-size: 20px;
+
+}
+
+.iniciar-sesion-invitado-libro nav ul form input:hover{
+	color: #0883E3;
 }

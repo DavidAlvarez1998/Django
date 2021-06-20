@@ -362,7 +362,7 @@ def agregarLibro(request):
     if buscar!=None:
         if buscar['Autor']==Autor:
             con=[]
-            for documento in libros.find({'Titulo':Titulo},{'Autor':Autor}):################################################
+            for documento in libros.find({'Titulo':Titulo},{'Autor':Autor}):
                 con.append(documento)
             con=len(con)+1
             libros.update_many({'Titulo':Titulo},{"$set":{'Ejemplares':con}})
@@ -744,7 +744,8 @@ def paginaComprarLibro(request):
     precio=buscar['Precio']
     idioma=buscar['Idioma']
     portada=buscar['Portada']
-    return render(request,'comprar-reservar-libro.html',{'titulo':titulo,'autor':autor,'año':año,'genero':genero,'numeropaginas':numeropaginas,'estado':estado,'precio':precio,'portada':portada,'idioma':idioma,'editorial':editorial})
+    cliente.close()
+    return render(request,'comprar-reservar-libro.html',{'titulo':titulo,'autor':autor,'año':año,'genero':genero,'numeropaginas':numeropaginas,'estado':estado,'precio':precio,'portada':portada,'idioma':idioma,'editorial':editorial,'id':id})
     
 def paginaHomeClient(request):
     return render(request,'home-client.html')
@@ -753,8 +754,82 @@ def infoIndex(request):
      return render(request,'info.html')
     
 def mensajeMostrarLibro(request):
-    mensaje="debe iniciar secion para poder comprar un libro"
-    return render(request,'mostrar-libro.html',{'mensaje':mensaje})
+    return render(request,'mostrar-libro.html',{'mensaje':"debe iniciar secion para poder comprar un libro"})
+
+def comprarLibro(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    id=request.GET['id']
+    libros=db['libro']
+    clientes=db['cliente']
+    id=request.GET['id']
+    correo=request.GET["correo"]
+    contraseña=request.GET["contraseña"]
+    if contraseña=='' or correo=='':
+        cliente.close()
+        return render(request,'home-client.html',{'mensaje':"informacion incompleta"})
+    buscar=clientes.find_one({'correo':correo})
+    if buscar==None:
+        return render(request,'home-client.html',{'mensaje':"tu informacion es incorrecta"})
+    if buscar['contraseña']!=contraseña:
+            return render(request,'home-client.html',{'mensaje':"tu informacion es incorrecta"})
+    idcliente=buscar['_id']
+    nombre=buscar['nombre']
+    apellido=buscar['apellido']
+    telefono=buscar['telefono']
+    nacimiento=buscar['nacimiento']
+    pais=buscar['pais']
+    direccion=buscar['direccion']
+    usuario=buscar['usuario']
+    correo=buscar['correo']
+    contraseña=buscar['contraseña']    
+    ObjectIdistance=ObjectId(id)
+    buscar=libros.find_one({'_id':ObjectIdistance})
+    titulo=buscar['Titulo']
+    autor=buscar['Autor']
+    año=buscar['PublicA']
+    genero=buscar['Genero']
+    numeropaginas=buscar['numeropaginas']
+    editorial=buscar['Editorial']
+    estado=buscar['Estado']
+    precio=buscar['Precio']
+    idioma=buscar['Idioma']
+    portada=buscar['Portada']
+    vendidos=db['vendido']
+    vendidos.insert_one({
+        'Titulo':titulo,
+        'Autor':autor,
+        'PublicA':año,
+        'Genero':genero,
+        'numeropaginas':numeropaginas,
+        'Editorial':editorial,
+        'Idioma':idioma,
+        'Estado':estado,
+        'Precio':precio,
+        'Portada':portada,
+        'idcliente':idcliente,
+        'nombre':nombre,
+        'apellido':apellido,
+        'telefono':telefono,
+        'nacimiento':nacimiento,
+        'pais':pais,
+        'direccion':direccion,
+        'usuario':usuario,
+        'correo':correo,
+        'contraseña':contraseña,
+            })
+    ObjectIdistance=ObjectId(id)
+    libros.delete_one({'_id':ObjectIdistance})
+    con=[]
+    for documento in libros.find({'Titulo':titulo},{'Autor':autor}):
+                con.append(documento)
+    con=len(con)
+    libros.update_many({'Titulo':titulo,'Autor':autor},{"$set":{'Ejemplares':con}})
+    cliente.close()
+    return render(request,'home-client.html',{'mensaje':"libro comprado exitosamente"})
+
+
 
 
 

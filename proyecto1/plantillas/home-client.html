@@ -7,6 +7,8 @@
 	<title>Inicio</title>
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
+
+
 	<!-- Start of  Zendesk Widget script -->
 	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d0eadaee-cf37-4198-a0de-44925a826040"> </script>
 	<!-- End of  Zendesk Widget script -->
@@ -35,6 +37,12 @@
 						<form action="/paginaComprarLibro/" method="GET">
 							<input type="submit" value="Compras y reservas">
 						</form>
+
+						<form action="/index/" method="GET">
+							<input type="submit" value="Cerrar sesión">
+						</form>
+
+
 						<li class="buscador-cliente">
 							<form action="/buscar/" method="GET">
 								<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
