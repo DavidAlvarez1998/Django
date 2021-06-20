@@ -1,0 +1,145 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Compras y reservas</title>
+	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
+	<link  href="{% static 'lph.ico' %}" rel="icon" >
+
+</head>
+<body>
+	<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{% static 'lph.ico' %}">
+				<h1>Los <b>Libros</b> Hermanos</h1>
+			</div>
+
+			<div class="navegador-cliente">
+				<nav>
+					<ul>
+						
+						<form action="/perfil/" method="GET">
+							<input type="submit" value="Perfil">
+						</form>
+						</form>
+						<form action="/paginoticias/" method="GET">
+							<input type="submit" value="Noticias">
+						</form>
+						<form action="/index/" method="GET">
+							<input type="submit" value="Cerrar sesión">
+						</form>
+
+
+						<li class="buscador-cliente">
+							<form action="/buscar/" method="GET">
+								<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
+								<input id="btn-search-clietn" type="submit" value="Buscar">
+							</form>
+							
+							
+
+						</li>
+					</ul>
+					
+				</nav>
+			</div>
+		</div>
+	</header>
+
+	<div class="login-histo">
+		<form action="/librosComprados/" method="GET">
+			<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
+			<h1>Ingresar para consultar historial de compras</h1>
+			<input type="email" placeholder="Correo" name="correo">
+			<input type="password" placeholder="Contraseña"name="contraseña">
+			<input id="send-log" type="submit" value="Ingresar">
+		</form>
+	</div>
+
+	<div class="enun-hist">
+		<h1>Ultimos libros comprados</h1>
+		<br>
+	</div>
+
+	<div class="client-home-vista">
+		
+		<div class="elemeto1">
+			
+			<form >
+				<input src={{portada0}} type="image" disabled="disabled">
+				<a>{{titulo0}}</a><br>
+				<a>{{autor0}}</a><br>
+			</form>
+		</div>
+		
+
+		<div class="elemeto2">
+			<form >
+				<input src={{portada1}} type="image"disabled="disabled">
+				<a>{{titulo1}}</a><br>
+				<a>{{autor1}}</a><br>
+			</form>
+			
+		</div>
+
+		<div class="elemeto3">
+			<form >
+				<input src={{portada2}} type="image"disabled="disabled">
+				<a>{{titulo2}}</a><br>
+				<a>{{autor2}}</a><br>
+			</form>	
+		</div>
+
+		<div class="elemeto4">
+			<form >
+				<input src={{portada3}} type="image"disabled="disabled">
+				<a>{{titulo3}}</a><br>
+				<a>{{autor3}}</a><br>
+			</form>	
+		</div>
+
+		<div class="elemeto5">
+			<form >
+				<input src={{portada4}} type="image"disabled="disabled">
+				<a>{{titulo4}}</a><br>
+				<a>{{autor4}}</a><br>
+			</form>	
+		</div>
+
+		<div class="elemeto6">
+			<form >
+				<input src={{portada5}} type="image"disabled="disabled">
+				<a>{{titulo5}}</a><br>
+				<a>{{autor5}}</a><br>
+			</form>	
+		</div>
+
+		<div class="elemeto7">
+			<form>
+				<input src={{portada6}} type="image"disabled="disabled">
+				<a>{{titulo6}}</a><br>
+				<a>{{autor6}}</a><br>
+			</form>	
+		</div>
+
+		<div class="elemeto8">
+			<form>
+				<input src={{portada7}} type="image"disabled="disabled">
+				<a>{{titulo7}}</a><br>
+				<a>{{autor7}}</a><br>		
+			</form>		
+		</div>
+
+	</div>
+
+	<div class="boton-regresar-editar-perfil">
+		<form action="/paginaHomeClient/" method="GET">
+			<input type="submit" value="REGRESAR">
+		</form>
+	</div>
+				
+</body>
+</html>

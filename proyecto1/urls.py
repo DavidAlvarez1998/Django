@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 #from django.config import settings
 #from django.config.urls.static import static
-from proyecto1.views import index,buscar,registrarCliente,registro,iniciarSecion,perfil,editarPerfil,paginaAgregarlibro,agregarLibro,editarPerfilRoot,editarroot,perfilRoot,crearAdmin,registroAdmin,paginaEditarAdmin,paginaprincipalAdmin,editarPerfilAdmin,paginaEditarLibro,editarlibro,Rellenareditarlibro,buscarInvitado,eliminarlibro,paginaEliminarLibro,rellenarEliminarLibro,paginaComprarLibro,paginaHomeClient,infoIndex,mensajeMostrarLibro,comprarLibro
+from proyecto1.views import index,buscar,registrarCliente,registro,iniciarSecion,perfil,editarPerfil,paginaAgregarlibro,agregarLibro,editarPerfilRoot,editarroot,perfilRoot,crearAdmin,registroAdmin,paginaEditarAdmin,paginaprincipalAdmin,editarPerfilAdmin,paginaEditarLibro,editarlibro,Rellenareditarlibro,buscarInvitado,eliminarlibro,paginaEliminarLibro,rellenarEliminarLibro,paginaComprarLibro,paginaHomeClient,infoIndex,mensajeMostrarLibro,comprarLibro,paginaLibrosComprados,noticias,librosComprados
 
 urlpatterns = [
     #path(url,views.funcion)
@@ -53,6 +53,9 @@ urlpatterns = [
     path('infoIndex/',infoIndex),
     path('mensajeMostrarLibro/',mensajeMostrarLibro),
     path('comprarLibro/',comprarLibro),
+    path('paginaLibrosComprados/',paginaLibrosComprados),
+    path('noticias/',noticias),
+    path('librosComprados/',librosComprados),
     ]
 
 

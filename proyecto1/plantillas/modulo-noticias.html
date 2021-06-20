@@ -1,20 +1,14 @@
 {%load static%}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Inicio</title>
+	<title>Noticias</title>
 	<link  href="{% static '/css/estilos.css' %}" rel="stylesheet" type="text/css">
 	<link  href="{% static 'lph.ico' %}" rel="icon" >
 
-
-	<!-- Start of  Zendesk Widget script -->
-	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d0eadaee-cf37-4198-a0de-44925a826040"> </script>
-	<!-- End of  Zendesk Widget script -->
-
 </head>
-
 <body>
 	<header>
 		<div class="header-content">
@@ -30,9 +24,6 @@
 						<form action="/perfil/" method="GET">
 							<input type="submit" value="Perfil">
 						</form>
-						<form action="/noticias/" method="GET">
-							<input type="submit" value="Noticias">
-						</form>
 						</form>
 						<form action="/paginaLibrosComprados/" method="GET">
 							<input type="submit" value="Compras">
@@ -40,11 +31,16 @@
 						<form action="/index/" method="GET">
 							<input type="submit" value="Cerrar sesión">
 						</form>
+
+
 						<li class="buscador-cliente">
 							<form action="/buscar/" method="GET">
 								<input id="barra-search-client" type="search" placeholder="Busca un libro" name="buscarBD">
 								<input id="btn-search-clietn" type="submit" value="Buscar">
 							</form>
+							
+							
+
 						</li>
 					</ul>
 					<p><FONT COLOR="red">{{mensaje}}</FONT> </p>
@@ -53,23 +49,27 @@
 		</div>
 	</header>
 
+	<div class="enun-hist">
+		<h1>Nuevos libros añadidos a la biblioteca que te pueden gustar</h1>
+		<br>
+	</div>
+
 	<div class="client-home-vista">
 		
 		<div class="elemeto1">
 			
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen0}} type="image">
+				<input src={{portada0}} type="image">
 				<a>{{titulo0}}</a><br>
 				<a>{{autor0}}</a><br>
-				<input type="text" name="id" readonly=""value={{id0}} >
+				<input type="text" name="id" readonly=""value={{id1}} >
 				<input type="submit" value="" disabled="disabled">
-				
 			</form>
 		</div>
 
 		<div class="elemeto2">
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen1}} type="image">
+				<input src={{portada1}} type="image">
 				<a>{{titulo1}}</a><br>
 				<a>{{autor1}}</a><br>
 				<input type="text" name="id" readonly=""value={{id1}} >
@@ -81,7 +81,7 @@
 
 		<div class="elemeto3">
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen2}} type="image">
+				<input src={{portada2}} type="image">
 				<a>{{titulo2}}</a><br>
 				<a>{{autor2}}</a><br>
 				<input type="text" name="id" readonly=""value={{id2}}>
@@ -92,7 +92,7 @@
 
 		<div class="elemeto4">
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen3}} type="image">
+				<input src={{portada3}} type="image">
 				<a>{{titulo3}}</a><br>
 				<a>{{autor3}}</a><br>
 				<input type="text" name="id" readonly=""value={{id3}}>
@@ -103,7 +103,7 @@
 
 		<div class="elemeto5">
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen4}} type="image">
+				<input src={{portada4}} type="image">
 				<a>{{titulo4}}</a><br>
 				<a>{{autor4}}</a><br>
 				<input type="text" name="id" readonly=""value={{id4}}>
@@ -114,7 +114,7 @@
 
 		<div class="elemeto6">
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen5}} type="image">
+				<input src={{portada5}} type="image">
 				<a>{{titulo5}}</a><br>
 				<a>{{autor5}}</a><br>
 				<input type="text" name="id" readonly=""value={{id5}}>
@@ -125,7 +125,7 @@
 
 		<div class="elemeto7">
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen6}} type="image">
+				<input src={{portada6}} type="image">
 				<a>{{titulo6}}</a><br>
 				<a>{{autor6}}</a><br>
 				<input type="text" name="id" readonly=""value={{id6}}>
@@ -136,7 +136,7 @@
 
 		<div class="elemeto8">
 			<form action="/paginaComprarLibro/" method="GET">
-				<input src={{imagen7}} type="image">
+				<input src={{portada7}} type="image">
 				<a>{{titulo7}}</a><br>
 				<a>{{autor7}}</a><br>
 				<input type="text" name="id" readonly=""value={{id7}}>
@@ -146,8 +146,6 @@
 		</div>
 
 	</div>
-										
-
+				
 </body>
 </html>
-

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_+635z42emv*s_da)%#@r880fizk&y@2rmqdl=iskvffs^&z=u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','6abb4b6f6f00.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1','f432c1308219.ngrok.io']
 
 STATICFILES_DIRS=['proyecto1/plantillas/static']
 

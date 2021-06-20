@@ -518,7 +518,7 @@ def registroAdmin(request):
         'contraseña':contraseña,
         })
     cliente.close()
-    return render(request,'index.html') 
+    return render(request,'index.html',{'mensaje',"registro completado, favor de iniciar sesion"}) 
 
 def paginaEditarAdmin(request):
     return render(request,'editar-perfil-admin.html')
@@ -828,6 +828,70 @@ def comprarLibro(request):
     libros.update_many({'Titulo':titulo,'Autor':autor},{"$set":{'Ejemplares':con}})
     cliente.close()
     return render(request,'home-client.html',{'mensaje':"libro comprado exitosamente"})
+
+def paginaLibrosComprados(request):
+    return render(request,'historial.html')
+
+def librosComprados(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    clientes=db['cliente']
+    correo=request.GET['correo']
+    contraseña=request.GET['contraseña']
+    if contraseña=='' or correo=='':
+        cliente.close()
+        return render(request,'historial',{'mensaje':"informacion incompleta"})
+    buscar=clientes.find_one({'correo':correo})
+    if buscar==None:
+        return render(request,'historial.html',{'mensaje':"tu informacion es incorrecta"})
+    if buscar['contraseña']!=contraseña:
+            return render(request,'historial.html',{'mensaje':"tu informacion es incorrecta"})
+    vendidos=db['vendido']
+    titulo=[]
+    autor=[]
+    portada=[]
+    con=0
+    for documento in vendidos.find({'correo':correo}):
+        if con<8:
+            titulo.append(documento['Titulo'])
+            autor.append(documento['Autor'])
+            portada.append(documento['Portada'])
+            con+=1
+    while len(titulo)<8:
+        titulo.append('')
+        autor.append('')
+        portada.append('')
+    cliente.close()
+    return render(request,'historial.html',{'titulo0':titulo[0],'auto0':autor[0],'portada0':portada[0],'titulo1':titulo[1],'autor1':autor[1],'portada1':portada[1],'titulo2':titulo[2],'autor2':autor[2],'portada2':portada[2],'titulo3':titulo[3],'autor3':autor[3],'portada3':portada[3],'titulo4':titulo[4],'autor4':autor[4],'portada4':portada[4],'titulo5':titulo[5],'autor5':autor[5],'portada5':portada[5],'titulo6':titulo[6],'autor6':autor[6],'portada6':portada[6],'titulo7':titulo[7],'autor7':autor[7],'portada7':portada[7]})
+
+
+def noticias(request):
+    cliente = pymongo.MongoClient("mongodb+srv://admin:33sqQMSJRct-Erz@cluster0.nfxzs.mongodb.net/Libreria?retryWrites=true&w=majority")
+    db = cliente.Libreria
+    db=cliente['Libreria']
+    libros=db['libro']
+    con=0
+    titulo=[]
+    autor=[]
+    portada=[]
+    id=[]
+    for documento in libros.find({}):
+        if con<8:
+            titulo.append(documento['Titulo'])
+            autor.append(documento['Autor'])
+            portada.append(documento['Portada'])
+            id.append(documento['_id'])
+            con+=1
+    while len(titulo)<8:
+        titulo.append('')
+        autor.append('')
+        portada.append('')
+        id.append('')
+    cliente.close()
+    return render(request,'modulo-noticias.html',{'titulo0':titulo[0],'autor0':autor[0],'portada0':portada[0],'id0':id[0],'titulo1':titulo[1],'autor1':autor[1],'portada1':portada[1],'id1':id[1],'titulo2':titulo[2],'autor2':autor[2],'portada2':portada[2],'id2':id[2],'titulo03':titulo[3],'autor3':autor[3],'portada3':portada[3],'id3':id[3],'titulo4':titulo[4],'autor4':autor[4],'portada4':portada[4],'id4':id[4],'titulo5':titulo[5],'autor5':autor[5],'portada5':portada[5],'id5':id[5],'titulo6':titulo[6],'autor6':autor[6],'portada6':portada[6],'id6':id[6],'titulo7':titulo[7],'autor7':autor[7],'portada7':portada[7],'id7':id[7]})
+
+
 
 
 
